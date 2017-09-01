@@ -1,0 +1,5 @@
+Instalar en:
+C:\fiestaGalactica\
+
+Busca las imagenes de:
+C:\fiestaGalactica\images
