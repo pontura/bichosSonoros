@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 public class MicRecorder : MonoBehaviour {
 
     public AudioClip clip;
-    public AudioSource audioSource;
+    public Robot robot;
 
     bool isRecording = true;
 
@@ -21,10 +21,9 @@ public class MicRecorder : MonoBehaviour {
     {
       //  SaveAudioClipToDisk(clip, "pontura");
       //  LoadAudioClipFromDisk(audioSource, "pontura");
-        audioSource = GetComponent<AudioSource>();
         //set up recording to last a max of 1 seconds and loop over and over
-        audioSource.clip = Microphone.Start(null, true, 1, 44100);
-        audioSource.Play();
+		robot.audioSource.clip = Microphone.Start(null, true, 1, 44100);
+		robot.audioSource.Play();
         //resize our temporary vector every second
         Invoke("ResizeRecording", 1);
     }
@@ -36,7 +35,7 @@ public class MicRecorder : MonoBehaviour {
             //add the next second of recorded audio to temp vector
             int length = 44100;
             float[] clipData = new float[length];
-            audioSource.clip.GetData(clipData, 0);
+			robot.audioSource.clip.GetData(clipData, 0);
             tempRecording.AddRange(clipData);
             Invoke("ResizeRecording", 1);
         }
@@ -57,7 +56,7 @@ public class MicRecorder : MonoBehaviour {
 
                 Microphone.End(null);
                 float[] clipData = new float[length];
-                audioSource.clip.GetData(clipData, 0);
+				robot.audioSource.clip.GetData(clipData, 0);
 
                 //create a larger vector that will have enough space to hold our temporary
                 //recording, and the last section of the current recording
@@ -72,18 +71,19 @@ public class MicRecorder : MonoBehaviour {
                 }
 
                 recordedClips.Add(fullClip);
-                audioSource.clip = AudioClip.Create("recorded samples", fullClip.Length, 1, 44100, false);
-                audioSource.clip.SetData(fullClip, 0);
-                audioSource.loop = true;
-                audioSource.Play();
+				robot.audioSource.clip = AudioClip.Create("recorded samples", fullClip.Length, 1, 44100, false);
+				robot.audioSource.clip.SetData(fullClip, 0);
+				robot.audioSource.loop = true;
+				robot.audioSource.Play();
+				robot.SetAudioClipLoaded ();
             }
             else
             {
                 //stop audio playback and start new recording...
-                audioSource.Stop();
+				robot.audioSource.Stop();
                 tempRecording.Clear();
                 Microphone.End(null);
-                audioSource.clip = Microphone.Start(null, true, 1, 44100);
+				robot.audioSource.clip = Microphone.Start(null, true, 1, 44100);
                 Invoke("ResizeRecording", 1);
             }
 
@@ -105,12 +105,12 @@ public class MicRecorder : MonoBehaviour {
     {
         if (index < recordedClips.Count)
         {
-            audioSource.Stop();
+			robot.audioSource.Stop();
             int length = recordedClips[index].Length;
-            audioSource.clip = AudioClip.Create("recorded samples", length, 1, 44100, false);
-            audioSource.clip.SetData(recordedClips[index], 0);
-            audioSource.loop = true;
-            audioSource.Play();
+			robot.audioSource.clip = AudioClip.Create("recorded samples", length, 1, 44100, false);
+			robot.audioSource.clip.SetData(recordedClips[index], 0);
+			robot.audioSource.loop = true;
+			robot.audioSource.Play();
         }
     }
 
