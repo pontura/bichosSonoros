@@ -11,7 +11,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: pontura
-  productName: Fiesta Intergalactica
+  productName: bichos
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13333334, g: 0.17254902, b: 0.21176471, a: 1}
@@ -138,7 +138,7 @@ PlayerSettings:
   useHDRDisplay: 0
   applicationIdentifier:
     Android: com.pontura.fiesta
-    Standalone: unity.Ben Kuper.Unity Spout Receiver 64bit
+    Standalone: com.bichos.pontura
     Tizen: com.Company.ProductName
     iOS: com.Company.ProductName
     tvOS: com.Company.ProductName
