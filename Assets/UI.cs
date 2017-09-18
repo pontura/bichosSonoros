@@ -4,38 +4,38 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UI : MonoBehaviour {
-	
-	public Text logText;
-	public Text field;
-	public GameObject masker;
+
+	public enum states
+	{
+		RECORDING,
+		EDITING
+	}
+	public states state;
+	UIRecording uiRecording;
+	UIEditing uiEditing;
 
 	bool isRecording;
 
-	void Start () {
-		Events.Log += Log;
-		SetButton (false);
-		masker.SetActive (true);
+	void Awake () {
+		uiRecording = GetComponent<UIRecording> ();
+		uiEditing = GetComponent<UIEditing> ();
+		ChangeState (state);
 	}
-	public void ToggleSaveButton () {		
-		SetButton (!isRecording);
-		Events.SetRecording (isRecording);
-	}
-	void Log(string _text)
+	public void ChangeState(states state)
 	{
-		logText.text = _text;
-	}
-	void SetButton(bool _isOn)
-	{
-		isRecording = _isOn;
-		if (isRecording) {
-			field.text = "ON";
-			masker.SetActive (true);
-			Events.Log ("Recording...");
-		} else {
-			field.text = "OFF";
-			masker.SetActive (false);
-			Events.Log ("");
+		print ("SetOff (); " + state);
+
+		uiEditing.SetOff ();
+		uiRecording.SetOff ();
+
+		switch (state) {
+			case states.RECORDING:
+				uiRecording.Init ();
+				break;
+			case states.EDITING:
+				uiEditing.Init ();
+				break;
 		}
-		
 	}
+
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Robot : MonoBehaviour {
 
 	public int audioSpectrumValue = 1;
-	AudioSpectrum audioSpectrum;
+	public AudioSpectrum audioSpectrum;
 	public AudioSource audioSource;
 	public GameObject body;
 	public float transformSpeed = 0.5f;
@@ -15,13 +15,19 @@ public class Robot : MonoBehaviour {
 	bool audioExists;
 	int nodeID = 0;
 
-	void Start () {
-		audioSpectrum = GetComponent<AudioSpectrum> ();
+	public void Init(AudioClip audioClip) {
+
+		audioSource.clip = audioClip;
+		audioSource.loop = true;
+		audioSource.Play();
+		SetAudioClipLoaded ();
+
 		audioSource = GetComponent<AudioSource> ();
 		robotParts = GetComponent<RobotParts> ();
 		robotParts.Init (nodes);
+		SetAudioClipLoaded ();
 	}
-	public void SetAudioClipLoaded() {
+	void SetAudioClipLoaded() {
 		audioExists = true;
 		audioSpectrum.Init (this);
 	}

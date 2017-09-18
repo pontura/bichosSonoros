@@ -9,7 +9,6 @@ using UnityEngine.Assertions;
 public class MicRecorder : MonoBehaviour {
 
 	public AudioClip clip;
-	public Robot robot;
 
 	bool isRecording = false;
 
@@ -17,9 +16,11 @@ public class MicRecorder : MonoBehaviour {
 	List<float[]> recordedClips = new List<float[]>();
 
 	public List<AudioClip> audiosRecorded;
+	AudioSource audioSource;
 
 	void Start()
 	{
+		audioSource = GetComponent<AudioSource> ();
 		Events.SetRecording += SetRecording;
 	}
 
@@ -30,7 +31,7 @@ public class MicRecorder : MonoBehaviour {
 			//add the next second of recorded audio to temp vector
 			int length = 44100;
 			float[] clipData = new float[length];
-			robot.audioSource.clip.GetData(clipData, 0);
+			audioSource.clip.GetData(clipData, 0);
 			tempRecording.AddRange(clipData);
 			Invoke("ResizeRecording", 1);
 		}
@@ -45,7 +46,7 @@ public class MicRecorder : MonoBehaviour {
 
 			Microphone.End(null);
 			float[] clipData = new float[length];
-			robot.audioSource.clip.GetData(clipData, 0);
+			audioSource.clip.GetData(clipData, 0);
 
 			float[] fullClip = new float[clipData.Length + tempRecording.Count];
 			for (int i = 0; i < fullClip.Length; i++)
@@ -67,18 +68,15 @@ public class MicRecorder : MonoBehaviour {
 
 			audiosRecorded.Add (newAudioClip);
 
-			robot.audioSource.clip = newAudioClip;
-			robot.audioSource.loop = true;
-			robot.audioSource.Play();
-			robot.SetAudioClipLoaded ();
+			Events.OnAddRobot (newAudioClip);
 
 		}
 		else
 		{
-			robot.audioSource.Stop();
+			audioSource.Stop();
 			tempRecording.Clear();
 			Microphone.End(null);
-			robot.audioSource.clip = Microphone.Start(null, true, 10, 44100);
+			audioSource.clip = Microphone.Start(null, true, 10, 44100);
 			//Invoke("ResizeRecording", 1);
 		}
 	}

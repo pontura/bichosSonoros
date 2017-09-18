@@ -5,10 +5,20 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour {
 
 	public int cameraHeight;
-	public Transform followed;
+	public Robot followed;
 
+	public void Init(Robot _followed)
+	{
+		this.followed = _followed;
+	}
+	public void StopFollowing()
+	{
+		this.followed = null;
+	}
 	void Update () {
-		Vector3 pos = followed.transform.position;
+		if (followed == null)
+			return;
+		Vector3 pos = followed.body.transform.position;
 		pos.y = cameraHeight;
 		transform.position = pos;
 	}
