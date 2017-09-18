@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class UI : MonoBehaviour {
 
+	public AudioClip sampleAudioClip;
 	public enum states
 	{
 		RECORDING,
@@ -20,6 +21,12 @@ public class UI : MonoBehaviour {
 		uiRecording = GetComponent<UIRecording> ();
 		uiEditing = GetComponent<UIEditing> ();
 		ChangeState (state);
+		if (state == states.EDITING)
+			Invoke ("Delayed", 0.1f);
+	}
+	void Delayed()
+	{
+		Events.OnAddRobot (sampleAudioClip);		
 	}
 	public void ChangeState(states state)
 	{

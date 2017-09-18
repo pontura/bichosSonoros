@@ -20,6 +20,7 @@ public class UIEditing : MonoBehaviour {
 	public void Cancel()
 	{
 		GetComponent<UI> ().ChangeState (UI.states.RECORDING);
+		Events.OnDestroyRobots ();
 	}
 
 }

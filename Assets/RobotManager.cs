@@ -10,14 +10,19 @@ public class RobotManager : MonoBehaviour {
 
 	void Start () {
 		Events.OnAddRobot += OnAddRobot;
+		Events.OnDestroyRobots += OnDestroyRobots;
 	}
-
+	Robot newRobot;
 	void OnAddRobot (AudioClip audioClip) {
 		
-		Robot newRobot = Instantiate (robot_to_initialize);
+		newRobot = Instantiate (robot_to_initialize);
 		newRobot.transform.SetParent (container);
 		newRobot.Init (audioClip);
 
 		cameraFollow.Init (newRobot);
+	}
+	void OnDestroyRobots()
+	{
+		Destroy (newRobot.gameObject);
 	}
 }
