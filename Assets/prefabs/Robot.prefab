@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 168602316356804090}
   - component: {fileID: 169284327977613980}
   - component: {fileID: 164992547805196554}
+  - component: {fileID: 166367645238285798}
   m_Layer: 0
   m_Name: Robot
   m_TagString: Untagged
@@ -156,7 +157,8 @@ AudioSource:
   m_GameObject: {fileID: 1057727797740530}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 1f6c7dc4299c742449938101a63408a7,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -239,7 +241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a10b11e4e14cc2c488fdcf39de70fa4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioFXManager: {fileID: 114339241763760602}
   audioSpectrumValue: 0
+  audioSpectrum: {fileID: 114527787904806864}
   audioSource: {fileID: 82681823611777664}
   body: {fileID: 1044566438390190}
   transformSpeed: 0.5
@@ -324,6 +328,20 @@ AudioReverbFilter:
   m_LFReference: 250
   m_ReflectionsDelay: 0
   m_ReverbPreset: 27
+--- !u!166 &166367645238285798
+AudioChorusFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1057727797740530}
+  m_Enabled: 1
+  m_DryMix: 0.5
+  m_WetMix1: 0.5
+  m_WetMix2: 0.5
+  m_WetMix3: 0.5
+  m_Delay: 40
+  m_Rate: 0.8
+  m_Depth: 0.03
 --- !u!168 &168602316356804090
 AudioEchoFilter:
   m_ObjectHideFlags: 1

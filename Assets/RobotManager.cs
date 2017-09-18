@@ -20,6 +20,7 @@ public class RobotManager : MonoBehaviour {
 		newRobot.Init (audioClip);
 
 		cameraFollow.Init (newRobot);
+		Events.OnRobotAdded (newRobot);
 	}
 	void OnDestroyRobots()
 	{

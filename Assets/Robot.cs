@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Robot : MonoBehaviour {
 
+	public AudioFXManager audioFXManager;
+
 	public int audioSpectrumValue = 1;
 	public AudioSpectrum audioSpectrum;
 	public AudioSource audioSource;

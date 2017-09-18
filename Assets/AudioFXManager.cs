@@ -11,10 +11,12 @@ public class AudioFXManager : MonoBehaviour {
 
 	public types type;
 	public enum types
-	{
+	{		
 		DISTORTION,
+		PITCH,
 		LOWPAS,
-		ECHO,
+		ECHO_DELAY,
+		ECHO_RECAY_RATIO,
 		REVERB
 	}
 	void Start () {
@@ -29,10 +31,10 @@ public class AudioFXManager : MonoBehaviour {
 		case types.LOWPAS:
 			lowPass.enabled = isOn;
 			break;
-		case types.ECHO:
+		case types.ECHO_DELAY:
 			echo.enabled = isOn;
 			break;
-		case types.REVERB:
+		case types.ECHO_RECAY_RATIO:
 			reverb.enabled = isOn;
 			break;
 		}
