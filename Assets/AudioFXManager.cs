@@ -8,8 +8,9 @@ public class AudioFXManager : MonoBehaviour {
 	public AudioEchoFilter echo;
 	public AudioLowPassFilter lowPass;
 	public AudioReverbFilter reverb;
+    public AudioChorusFilter chorus;
 
-	public types type;
+    public types type;
 	public enum types
 	{		
 		DISTORTION,
@@ -17,14 +18,21 @@ public class AudioFXManager : MonoBehaviour {
 		LOWPAS,
 		ECHO_DELAY,
 		ECHO_RECAY_RATIO,
-		REVERB
+		REVERB,
+        CHORUS_RATE,
+        CHORUS_DEPTH,
+        REVERB_LEVEL,
+        REVERB_DECAY
 	}
 	void Start () {
 		Events.TurnSoundFX += TurnSoundFX;
 	}
 
 	void TurnSoundFX (types type, bool isOn) {
-		switch (type) {
+
+        print(type +  " ison: " + isOn);
+
+        switch (type) {
 		case types.DISTORTION:
 			distortion.enabled = isOn;
 			break;
@@ -36,7 +44,13 @@ public class AudioFXManager : MonoBehaviour {
 			break;
 		case types.ECHO_RECAY_RATIO:
 			reverb.enabled = isOn;
-			break;
-		}
+            break;
+        case types.CHORUS_DEPTH:
+            chorus.enabled = isOn;
+            break;
+            case types.CHORUS_RATE:
+                chorus.enabled = isOn;
+                break;
+        }
 	}
 }

@@ -277,6 +277,7 @@ MonoBehaviour:
   echo: {fileID: 168602316356804090}
   lowPass: {fileID: 169284327977613980}
   reverb: {fileID: 164992547805196554}
+  chorus: {fileID: 166367645238285798}
   type: 0
 --- !u!114 &114527787904806864
 MonoBehaviour:
@@ -334,7 +335,7 @@ AudioChorusFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1057727797740530}
-  m_Enabled: 1
+  m_Enabled: 0
   m_DryMix: 0.5
   m_WetMix1: 0.5
   m_WetMix2: 0.5
