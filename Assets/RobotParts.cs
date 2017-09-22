@@ -28,7 +28,9 @@ public class RobotParts : MonoBehaviour {
 	{
 		
 		RobotPart robotPart = parts [id];
-		if (value < 1)
+        robotPart.TurnOnParticles();
+
+        if (value < 1)
 			value = 1;
 		Vector3 newScale = new Vector3(value, value, value);
 		robotPart.transform.localScale = Vector3.Lerp(robotPart.transform.localScale,newScale, 0.5f );
@@ -42,10 +44,14 @@ public class RobotParts : MonoBehaviour {
 		if (lastTransformedRobotPart == null)
 			return;
 
-
-		Vector3 newScale = new Vector3(1, 1, 1);
-		lastTransformedRobotPart.transform.localScale = Vector3.Lerp(lastTransformedRobotPart.transform.localScale,newScale, 0.05f );
-	}
+        ResetLastTransformed();
+    }
+    void ResetLastTransformed()
+    {
+        lastTransformedRobotPart.TurnOffParticles();
+        Vector3 newScale = new Vector3(1, 1, 1);
+        lastTransformedRobotPart.transform.localScale = Vector3.Lerp(lastTransformedRobotPart.transform.localScale, newScale, 5 * Time.deltaTime);
+    }
 	void MoveHead(int id, float value)
 	{
 		initialPart.transform.Translate(initialPart.transform.forward * value*Time.deltaTime);

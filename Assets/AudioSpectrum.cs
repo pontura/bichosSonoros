@@ -27,7 +27,7 @@ public class AudioSpectrum : MonoBehaviour
 
 		//a /= spectrum.Length;
 
-		int result = (int)Mathf.Lerp (1, 100, a * 10);
+		int result = (int)Mathf.Lerp (1, 100, (a / spectrum.Length) * 900);
 		robot.audioSpectrumValue = result;
 
 	}

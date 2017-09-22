@@ -6,6 +6,7 @@ public class RobotPart : MonoBehaviour {
 
 	private float speed = 20;
 	public RobotPart parent;
+    public ParticleSystem particles;
 
 	void Update () {
 		if (parent == null)
@@ -16,5 +17,17 @@ public class RobotPart : MonoBehaviour {
 			return;
 		transform.position = Vector3.MoveTowards (transform.position, parent.transform.position, 0.05f * (dist/2));
 	}
-
+    bool isOnPArticles;
+    public void TurnOnParticles()
+    {
+        if (particles == null || isOnPArticles) return;
+        particles.Play();
+        isOnPArticles = true;
+    }
+    public void TurnOffParticles()
+    {
+        if (particles == null || !isOnPArticles) return;
+        particles.Stop();
+        isOnPArticles = false;
+    }
 }
