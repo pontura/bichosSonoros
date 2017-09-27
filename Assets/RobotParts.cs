@@ -6,7 +6,7 @@ public class RobotParts : MonoBehaviour {
 
 	public RobotPart robotPart;
 	public Transform container;
-	private float separation = 1.5f;
+	private float separation = 0.7f;
 	public RobotPart initialPart;
 	public List<RobotPart> parts;
 
@@ -28,7 +28,11 @@ public class RobotParts : MonoBehaviour {
 	{
 		
 		RobotPart robotPart = parts [id];
-        robotPart.TurnOnParticles();
+
+		if(robotPart.anim != null)
+			robotPart.anim ["pingpong"].speed = value / 2;
+		
+		robotPart.TurnOnParticles(value);
 
         if (value < 1)
 			value = 1;
@@ -48,6 +52,9 @@ public class RobotParts : MonoBehaviour {
     }
     void ResetLastTransformed()
     {
+		if (robotPart.anim != null)
+			robotPart.anim ["pingpong"].speed = 1;
+		
         lastTransformedRobotPart.TurnOffParticles();
         Vector3 newScale = new Vector3(1, 1, 1);
         lastTransformedRobotPart.transform.localScale = Vector3.Lerp(lastTransformedRobotPart.transform.localScale, newScale, 5 * Time.deltaTime);

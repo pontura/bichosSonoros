@@ -55,7 +55,8 @@ public class UIEditing : MonoBehaviour {
 	}
 	public void Ok()
 	{
-
+		Events.OnDestroyRobots ();
+		GetComponent<UI> ().ChangeState (UI.states.SENDING);
 	}
 	public void Cancel()
 	{

@@ -7,14 +7,9 @@ public class UIRecording : MonoBehaviour {
 	
 	public GameObject panel;
 
-	public Text logText;
 	public Text field;
 
 	bool isRecording;
-
-	void Start () {
-		Events.Log += Log;
-	} 
 	public void Init() 
 	{		
 		SetButton (false);
@@ -24,16 +19,26 @@ public class UIRecording : MonoBehaviour {
 	{
 		panel.SetActive (false);
 	}
+	public void StartRecording()
+	{
+		SetButton (true);
+		Events.SetRecording (true);
+		Invoke ("DoneRecording", 4);
+	}
+	void DoneRecording()
+	{
+		SetButton (false);
+		Events.SetRecording (false);
+		GetComponent<UI> ().ChangeState (UI.states.EDITING);
+	}
 	public void ToggleSaveButton () {		
+		return;
 		SetButton (!isRecording);
 		Events.SetRecording (isRecording);
 		if(!isRecording)
 			GetComponent<UI> ().ChangeState (UI.states.EDITING);
 	}
-	void Log(string _text)
-	{
-		logText.text = _text;
-	}
+
 	void SetButton(bool _isOn)
 	{
 		isRecording = _isOn;

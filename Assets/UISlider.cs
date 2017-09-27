@@ -38,10 +38,13 @@ public class UISlider : MonoBehaviour {
 	}
 	void SetText()
 	{
-		if(isActive)
+		if (isActive) {
 			field.text = "ON";
-		else
+			slider.interactable = true;
+		} else {
 			field.text = "Off";
+			slider.interactable = false;
+		}
 	}
 
 }

@@ -11,7 +11,7 @@ public class Robot : MonoBehaviour {
 	public AudioSource audioSource;
 	public GameObject body;
 	public float transformSpeed = 0.5f;
-	public float smoothTransform = 80f;
+	public float smoothTransform = 40f;
 	public int nodes = 6;
 	public RobotParts robotParts;
 	bool audioExists;
@@ -22,7 +22,7 @@ public class Robot : MonoBehaviour {
 		audioSource.clip = audioClip;
 		audioSource.loop = true;
 		audioSource.Play();
-		SetAudioClipLoaded ();
+		SetAudioClipLoaded();
 
 		audioSource = GetComponent<AudioSource> ();
 		robotParts = GetComponent<RobotParts> ();
@@ -40,12 +40,8 @@ public class Robot : MonoBehaviour {
 		
 		float currentNormalizedTime = audioSource.time / audioSource.clip.length;
 		int currentNodeID = (int)Mathf.Lerp(0,nodes, currentNormalizedTime);
-		//nodeID++;
-		//if (nodeID > nodes - 2)
-		//	nodeID = 0;
 		float newValue = audioSpectrumValue / smoothTransform;
 		robotParts.TransformPart (currentNodeID, newValue);
 
 	}
-
 }

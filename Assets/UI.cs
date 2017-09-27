@@ -8,19 +8,36 @@ public class UI : MonoBehaviour {
 	public AudioClip sampleAudioClip;
 	public enum states
 	{
+		INTRO,
 		RECORDING,
-		EDITING
+		EDITING,
+		SENDING
 	}
 	public states state;
 	UIRecording uiRecording;
 	UIEditing uiEditing;
+	UIIntro uiIntro;
+	UIEjecting uiSending;
 
 	bool isRecording;
+	public Text LogText;
 
+	void Start()
+	{
+		Events.Log += Log;
+	}
+	void Log(string _text)
+	{
+		LogText.text += ". " + _text;
+	}
 	void Awake () {
+		uiIntro = GetComponent<UIIntro> ();
 		uiRecording = GetComponent<UIRecording> ();
 		uiEditing = GetComponent<UIEditing> ();
-		ChangeState (state);
+		uiSending = GetComponent<UIEjecting> ();
+
+		if (state == states.INTRO)
+			ChangeState (states.INTRO);
 		if (state == states.EDITING)
 			Invoke ("Delayed", 0.1f);
 	}
@@ -30,10 +47,11 @@ public class UI : MonoBehaviour {
 	}
 	public void ChangeState(states state)
 	{
-		print ("SetOff (); " + state);
 
+		uiIntro.SetOff ();
 		uiEditing.SetOff ();
 		uiRecording.SetOff ();
+		uiSending.SetOff ();
 
 		switch (state) {
 			case states.RECORDING:
@@ -41,6 +59,12 @@ public class UI : MonoBehaviour {
 				break;
 			case states.EDITING:
 				uiEditing.Init ();
+				break;
+			case states.INTRO:
+				uiIntro.Init ();
+				break;
+			case states.SENDING:
+				uiSending.Init ();
 				break;
 		}
 	}

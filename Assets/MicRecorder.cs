@@ -8,8 +8,9 @@ using UnityEngine.Assertions;
 
 public class MicRecorder : MonoBehaviour {
 
+	string URL_SERVER = "http://192.168.0.5/bichos/";
 	public AudioClip clip;
-
+	float MicLoudness;
 	bool isRecording = false;
 
 	List<float> tempRecording = new List<float>();
@@ -17,11 +18,13 @@ public class MicRecorder : MonoBehaviour {
 
 	public List<AudioClip> audiosRecorded;
 	AudioSource audioSource;
+	public AudioClip newAudioClip;
 
 	void Start()
 	{
 		audioSource = GetComponent<AudioSource> ();
 		Events.SetRecording += SetRecording;
+		Events.SendRecording += SendRecording;
 	}
 
 	void ResizeRecording()
@@ -35,6 +38,33 @@ public class MicRecorder : MonoBehaviour {
 			tempRecording.AddRange(clipData);
 			Invoke("ResizeRecording", 1);
 		}
+	}
+	void Update()
+	{
+		if (!isRecording)
+			return;
+		MicLoudness = LevelMax ();
+		print ("__" + MicLoudness);
+	}
+	int _sampleWindow = 128;
+
+	//get data from microphone into audioclip
+	float  LevelMax()
+	{
+		float levelMax = 0;
+		float[] waveData = new float[_sampleWindow];
+		int micPosition = Microphone.GetPosition(null)-(_sampleWindow+1); // null means the first microphone
+		if (micPosition < 0) return 0;
+		audioSource.clip.GetData(waveData, micPosition);
+		// Getting a peak on the last 128 samples
+		for (int i = 0; i < _sampleWindow; i++) {
+			float wavePeak = waveData[i] * waveData[i];
+			if (levelMax < wavePeak) {
+				levelMax = wavePeak;
+			}
+			Events.Log ("wavePeak: " + wavePeak);
+		}
+		return levelMax;
 	}
 	void SetRecording(bool isRecording)
 	{
@@ -58,7 +88,7 @@ public class MicRecorder : MonoBehaviour {
 			}
 
 			recordedClips.Add(fullClip);
-			AudioClip newAudioClip = AudioClip.Create("recorded samples", fullClip.Length, 1, 44100, false);
+			newAudioClip = AudioClip.Create("recorded samples", fullClip.Length, 1, 44100, false);
 			newAudioClip.SetData(fullClip, 0);
 
 			if (audiosRecorded.Count > 0) {
@@ -69,6 +99,7 @@ public class MicRecorder : MonoBehaviour {
 			audiosRecorded.Add (newAudioClip);
 
 			Events.OnAddRobot (newAudioClip);
+			SaveAudioClipToDisk (newAudioClip, "newRecordedSound");
 
 		}
 		else
@@ -106,12 +137,16 @@ public class MicRecorder : MonoBehaviour {
 			Debug.Log("File Not Found!");
 		}
 	}
-	public static void SaveAudioClipToDisk(AudioClip audioClip, string filename)
+
+	BinaryFormatter bf;
+	byte[] bytes;
+	string url;
+	public void SaveAudioClipToDisk(AudioClip audioClip, string filename)
 	{
-		Debug.Log("SAVE " + filename);
+		Debug.Log("Save AudioClip To Disk " + filename);
 		//create file
-		BinaryFormatter bf = new BinaryFormatter();
-		string url = Application.dataPath + "/" + filename;
+		bf = new BinaryFormatter();
+		url = Application.persistentDataPath + "/" + filename;
 		FileStream file = File.Create(url);
 
 		//serialize by setting the sample, frequency, samples, and channels to the new AudioClipSample instance
@@ -125,12 +160,15 @@ public class MicRecorder : MonoBehaviour {
 		audioClip.GetData(newSample.sample, 0);
 
 		bf.Serialize(file, newSample);
+
+		using (MemoryStream stream = new MemoryStream())
+		{
+			bf.Serialize(file, newSample);
+			bytes = stream.ToArray();
+		}
+
 		file.Close();
-
-		Debug.Log("done " + url);
 	}
-
-
 
 	public AudioClip Combine(AudioClip clipA, AudioClip clipB)
 	{
@@ -187,31 +225,39 @@ public class MicRecorder : MonoBehaviour {
 
 		return byteArray;
 	}
-	private byte[] MixBuffers(byte[] bufferA, byte[] bufferB)
+	void SendRecording()
 	{
-		byte[] array = new byte[bufferA.Length];
-		for (int i = 0; i < bufferA.Length; i++)
-		{
-			byte byteA = bufferA[i];
-			byte byteB = bufferB[i];
-			byte byteC = (byte)(((int)byteA + (int)byteB >> 1));
-			array[i] = byteC;
-		}
-		return array;
+		UploadFile(url, URL_SERVER + "upload.php");
 	}
-	private float[] byteToFloat(byte[] byteArray)
+	void UploadFile(string localFileName, string uploadURL)
 	{
-		Assert.IsTrue(byteArray.Length % 4 == 0);
-		float[] floatArray = new float[byteArray.Length/4];
-
-		for (int i = 0; i < floatArray.Length; i++)
-		{
-			int offset = 4*i;
-			byte[] byteArrayChunk = new byte[]
-			{byteArray[0 + offset], byteArray[1 + offset], byteArray[2 + offset], byteArray[3 + offset]};
-			floatArray[i] = BitConverter.ToSingle(byteArrayChunk,0);
-		}
-
-		return floatArray;
+		StartCoroutine(UploadFileCo(localFileName, uploadURL));
 	}
+	IEnumerator UploadFileCo(string localFileName, string uploadURL)
+	{
+		Events.Log ("Upload:" + localFileName);
+		WWW localFile = new WWW("file:///" + localFileName);
+		yield return localFile;
+		if (localFile.error == null)
+			Events.Log("Loaded file successfully");
+		else
+		{
+			Events.Log("Open file error: "+localFile.error);
+			yield break; // stop the coroutine here
+		}
+		WWWForm postForm = new WWWForm();
+		// version 1
+		//postForm.AddBinaryData("theFile",localFile.bytes);
+		// version 2
+		postForm.AddField("imageName", localFileName);
+		postForm.AddBinaryData("fileToUpload",localFile.bytes,localFileName,"text/plain");
+
+		WWW upload = new WWW(uploadURL,postForm);        
+		yield return upload;
+		if (upload.error == null)
+			Events.Log("upload done :" + upload.text);
+		else
+			Events.Log("Error during upload: " + upload.error + " url: " + uploadURL);
+	}
+
 }
