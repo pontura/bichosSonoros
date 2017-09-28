@@ -6,14 +6,18 @@ using UnityEngine.UI;
 public class UIRecording : MonoBehaviour {
 	
 	public GameObject panel;
-
+	public Waveform waveform;
 	public Text field;
-
+	public MicRecorder micRecorder;
 	bool isRecording;
+	public GameObject button;
+
 	public void Init() 
 	{		
 		SetButton (false);
 		panel.SetActive (true);
+		waveform.Init ();
+		button.SetActive (true);
 	}
 	public void SetOff()
 	{
@@ -43,11 +47,12 @@ public class UIRecording : MonoBehaviour {
 	{
 		isRecording = _isOn;
 		if (isRecording) {
-			field.text = "ON";
+			field.text = "GRABANDO...";
+			button.SetActive (false);
 			panel.SetActive (true);
 			Events.Log ("Recording...");
 		} else {
-			field.text = "OFF";
+			field.text = "PULSA PARA GRABAR";
 			panel.SetActive (false);
 			Events.Log ("");
 		}

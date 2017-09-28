@@ -15,6 +15,11 @@ public class CameraFollow : MonoBehaviour {
 	{
 		this.followed = null;
 	}
+	public void ResetPosition()
+	{
+		followed = null;
+		transform.position = new Vector3 (0, 400, 0);
+	}
 	void Update () {
 		if (followed == null)
 			return;

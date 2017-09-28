@@ -27,6 +27,9 @@ public class AudioFXManager : MonoBehaviour {
 	void Start () {
 		Events.TurnSoundFX += TurnSoundFX;
 	}
+	void OnDestroy () {
+		Events.TurnSoundFX -= TurnSoundFX;
+	}
 
 	void TurnSoundFX (types type, bool isOn) {
 

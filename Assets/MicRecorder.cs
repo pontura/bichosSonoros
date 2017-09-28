@@ -12,6 +12,7 @@ public class MicRecorder : MonoBehaviour {
 	public AudioClip clip;
 	float MicLoudness;
 	bool isRecording = false;
+	public int value;
 
 	List<float> tempRecording = new List<float>();
 	List<float[]> recordedClips = new List<float[]>();
@@ -26,7 +27,6 @@ public class MicRecorder : MonoBehaviour {
 		Events.SetRecording += SetRecording;
 		Events.SendRecording += SendRecording;
 	}
-
 	void ResizeRecording()
 	{
 		if (isRecording)
@@ -44,7 +44,7 @@ public class MicRecorder : MonoBehaviour {
 		if (!isRecording)
 			return;
 		MicLoudness = LevelMax ();
-		print ("__" + MicLoudness);
+		value = (int)(MicLoudness*100);
 	}
 	int _sampleWindow = 128;
 
@@ -58,16 +58,16 @@ public class MicRecorder : MonoBehaviour {
 		audioSource.clip.GetData(waveData, micPosition);
 		// Getting a peak on the last 128 samples
 		for (int i = 0; i < _sampleWindow; i++) {
-			float wavePeak = waveData[i] * waveData[i];
+			float wavePeak = waveData [i];// * waveData[i];
 			if (levelMax < wavePeak) {
 				levelMax = wavePeak;
 			}
-			Events.Log ("wavePeak: " + wavePeak);
 		}
 		return levelMax;
 	}
-	void SetRecording(bool isRecording)
+	void SetRecording(bool _isRecording)
 	{
+		this.isRecording = _isRecording;
 		Debug.Log(isRecording == true ? "Is Recording" : "Off");
 
 		if (isRecording == false)
