@@ -12,10 +12,19 @@ public class Config : MonoBehaviour
 	public string url;
 	public Vector2 limits = new Vector2 (8, 30);
 
+	public FXData[] data1;
+	public FXData[] data2;
+	public FXData[] data3;
+	public FXData[] data4;
+
 	[Serializable]
 	public class FXData
 	{
+		public AudioFXManager.types type;
 		public float defaultData;
+		public float initialData;
+		public float finalData;
+		public float value;
 	}
 
 	void Start()

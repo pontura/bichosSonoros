@@ -49,12 +49,13 @@ public class UI : MonoBehaviour {
 	{
 
 		uiIntro.SetOff ();
-		uiEditing.SetOff ();
+		//uiEditing.SetOff ();
 		uiRecording.SetOff ();
 		uiSending.SetOff ();
 
 		switch (state) {
 			case states.RECORDING:
+				uiEditing.SetOff ();
 				uiRecording.Init ();
 				break;
 			case states.EDITING:

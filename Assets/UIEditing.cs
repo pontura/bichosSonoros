@@ -6,21 +6,17 @@ public class UIEditing : MonoBehaviour {
 
 	public GameObject panel;
 
-	public GameObject bicho1;
-	public GameObject bicho2;
-	public GameObject bicho3;
-	public GameObject bicho4;
+	public UISlider slider1;
+	public UISlider slider2;
+	public UISlider slider3;
 
+	public CameraFollow camera;
 	Robot robot;
 
 	void Start()
 	{
 		panel.SetActive (false);
 		Events.OnRobotAdded += OnRobotAdded;
-		bicho1.SetActive (false);
-		bicho2.SetActive (false);
-		bicho3.SetActive (false);
-		bicho4.SetActive (false);
 	}
 	void OnRobotAdded(Robot _robot)
 	{
@@ -28,20 +24,36 @@ public class UIEditing : MonoBehaviour {
 	}
 	public void Init() {
 		panel.SetActive (true);
+		Config.FXData[] data;
+
 		switch (Data.Instance.bichoID) {
 		case 1:
-			bicho1.SetActive (true);
+			data = Data.Instance.config.data1;
 			break;
 		case 2:
-			bicho2.SetActive (true);
+			data = Data.Instance.config.data2;
 			break;
 		case 3:
-			bicho3.SetActive (true);
+			data = Data.Instance.config.data3;
 			break;
-		case 4:
-			bicho4.SetActive (true);
+		default:
+			data = Data.Instance.config.data4;
 			break;
 		}
+		slider1.type = data[0].type;
+		slider1.defaultValue = data[0].defaultData;
+		slider1.initialValue = data[0].initialData;
+		slider1.finalValue = data[0].finalData;
+
+		slider2.type = data[1].type;
+		slider2.defaultValue = data[1].defaultData;
+		slider2.initialValue = data[1].initialData;
+		slider2.finalValue = data[1].finalData;
+
+		slider3.type = data[2].type;
+		slider3.defaultValue = data[2].defaultData;
+		slider3.initialValue = data[2].initialData;
+		slider3.finalValue = data[2].finalData;
 	}
 	public void SetOff()
 	{
@@ -49,8 +61,14 @@ public class UIEditing : MonoBehaviour {
 	}
 	public void Ok()
 	{
-		Events.OnDestroyRobots ();
+		SetOff ();
+		camera.Eject ();
+		Invoke ("ResetScreen",5);
 		GetComponent<UI> ().ChangeState (UI.states.SENDING);
+	}
+	void ResetScreen()
+	{
+		Events.OnDestroyRobots ();
 	}
 	public void Cancel()
 	{

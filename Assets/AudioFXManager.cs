@@ -36,6 +36,11 @@ public class AudioFXManager : MonoBehaviour {
         print(type +  " ison: " + isOn);
 
         switch (type) {
+		case types.PITCH:
+			if (!isOn) {
+				GetComponent<AudioSource> ().pitch = 1;
+			}
+			break;
 		case types.DISTORTION:
 			distortion.enabled = isOn;
 			break;

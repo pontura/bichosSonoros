@@ -32,6 +32,9 @@ public class UISlider : MonoBehaviour {
 		isActive = !isActive;
 		Events.TurnSoundFX (type, isActive);
 		SetText ();
+
+		if(isActive)
+			ValueChangeCheck ();
 	}
 	void SetText()
 	{

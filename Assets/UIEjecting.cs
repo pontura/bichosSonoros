@@ -5,10 +5,14 @@ using UnityEngine;
 public class UIEjecting : MonoBehaviour {
 
 	public GameObject panel;
+	void Start()
+	{
+		panel.SetActive (false);
+	}
 
 	public void Init() {
 		panel.SetActive (true);
-		Invoke ("Reset",4);
+		Invoke ("Reset",10);
 		Events.SendRecording ();
 	}
 	public void Reset()
