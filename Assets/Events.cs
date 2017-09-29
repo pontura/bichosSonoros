@@ -6,6 +6,7 @@ public static class Events {
 
 	public static System.Action<Robot> OnRobotAdded = delegate { };
 
+	public static System.Action OnCheckToDestroyRobot = delegate { };
 	public static System.Action OnDestroyRobots = delegate { };
 	public static System.Action<AudioClip> OnAddRobot = delegate { };
 	public static System.Action OnSettingsLoaded = delegate { };
@@ -14,4 +15,6 @@ public static class Events {
 	public static System.Action<bool> SetRecording = delegate { };
 	public static System.Action SendRecording = delegate { };
 	public static System.Action<AudioFXManager.types, bool> TurnSoundFX = delegate { };
+
+	public static System.Action<string> OnNewFile = delegate { };
 }

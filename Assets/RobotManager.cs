@@ -7,10 +7,13 @@ public class RobotManager : MonoBehaviour {
 	public Transform container;
 	public Robot robot_to_initialize;
 	public CameraFollow cameraFollow;
+	public List<Robot> robots;
+	public int totalRobots = 2;
 
 	void Start () {
 		Events.OnAddRobot += OnAddRobot;
 		Events.OnDestroyRobots += OnDestroyRobots;
+		Events.OnCheckToDestroyRobot += OnCheckToDestroyRobot;
 	}
 	Robot newRobot;
 	void OnAddRobot (AudioClip audioClip) {
@@ -21,9 +24,19 @@ public class RobotManager : MonoBehaviour {
 
 		cameraFollow.Init (newRobot);
 		Events.OnRobotAdded (newRobot);
+
+		robots.Add (newRobot);
+	}
+	void OnCheckToDestroyRobot()
+	{
+		if(robots.Count>=totalRobots)
+		{			
+			Destroy (robots[0].gameObject);
+			robots.RemoveAt (0);
+		}
 	}
 	void OnDestroyRobots()
 	{
-		Destroy (newRobot.gameObject);
+		DestroyImmediate (newRobot.gameObject);
 	}
 }

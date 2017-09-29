@@ -33,7 +33,7 @@ public class Robot : MonoBehaviour {
 		audioExists = true;
 		audioSpectrum.Init (this);
 	}
-	void Update()
+	void LateUpdate()
 	{
 		if (!audioExists)
 			return;

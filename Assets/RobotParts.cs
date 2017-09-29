@@ -26,7 +26,10 @@ public class RobotParts : MonoBehaviour {
 	RobotPart lastTransRobotPart;
 	public void TransformPart(int id, float value)
 	{
-		
+		if (parts == null || parts.Count <= id) {
+			Events.Log ("ERROR");
+			return;
+		}
 		RobotPart robotPart = parts [id];
 
 		if(robotPart.anim != null)

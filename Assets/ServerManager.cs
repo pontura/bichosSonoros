@@ -15,13 +15,14 @@ public class ServerManager : MonoBehaviour {
 	}
 	void OnSettingsLoaded()
 	{
+		Events.Log ("settings loaded");
 		URL = Data.Instance.config.url;		
-		Invoke ("Loop", 0.1f);
+		Loop ();
 	}
 	void Loop()
 	{
 		GetAllFiles ();
-		Invoke ("Loop", 3);
+		Invoke ("Loop", 2);
 	}
 	void GetAllFiles()
 	{
@@ -47,15 +48,14 @@ public class ServerManager : MonoBehaviour {
 		foreach (string imageName in imageData) {
 			if (imageName.Length > 1) {
 				string file = (URL + "sounds/" + imageName);
-				StartCoroutine(LoadSprite(file, imageName));
+				StartCoroutine(LoadItem(file, imageName));
 			}
 		}
 	}
-	public IEnumerator LoadSprite(string absoluteImagePath, string imageName)
+	public IEnumerator LoadItem(string absoluteImagePath, string imageName)
 	{
-		//	Events.Log("LoadSprite " + absoluteImagePath);
-
-		if (!fileWasLoaded (imageName)) {
+		Debug.Log (absoluteImagePath);
+		//if (!fileWasLoaded (imageName)) {
 
 			itemsLoaded.Add (imageName);
 
@@ -71,16 +71,16 @@ public class ServerManager : MonoBehaviour {
 
 			print (imageName + " ___  " + localFile.url);
 
-			//Events.OnNewFile (localFile);
+			Events.OnNewFile(imageName);
 
 			if (Data.Instance.build != Data.builds.DEBUG) {
 				Debug.Log("delete " + imageName);
 				var url = URL + "delete.php?imageName=" + imageName;
 				WWW www = new WWW (url);
 			}
-		} else {
-			yield return null;
-		}
+	//	} else {
+		//	yield return null;
+		//}
 	}
 	bool fileWasLoaded(string imageName)
 	{

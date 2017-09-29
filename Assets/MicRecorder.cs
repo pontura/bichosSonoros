@@ -15,9 +15,9 @@ public class MicRecorder : MonoBehaviour {
 	public int value;
 
 	List<float> tempRecording = new List<float>();
-	List<float[]> recordedClips = new List<float[]>();
+//	List<float[]> recordedClips = new List<float[]>();
 
-	public List<AudioClip> audiosRecorded;
+//	public List<AudioClip> audiosRecorded;
 	AudioSource audioSource;
 	public AudioClip newAudioClip;
 
@@ -87,16 +87,16 @@ public class MicRecorder : MonoBehaviour {
 					fullClip[i] = clipData[i - tempRecording.Count];
 			}
 
-			recordedClips.Add(fullClip);
+		//	recordedClips.Add(fullClip);
 			newAudioClip = AudioClip.Create("recorded samples", fullClip.Length, 1, 44100, false);
 			newAudioClip.SetData(fullClip, 0);
 
-			if (audiosRecorded.Count > 0) {
-				newAudioClip = Combine (audiosRecorded [0], newAudioClip);
-				audiosRecorded.RemoveAt (0);
-			}
+		//	if (audiosRecorded.Count > 0) {
+			//	newAudioClip = Combine (audiosRecorded [0], newAudioClip);
+			//	audiosRecorded.RemoveAt (0);
+			//}
 
-			audiosRecorded.Add (newAudioClip);
+			//audiosRecorded.Add (newAudioClip);
 
 			Events.OnAddRobot (newAudioClip);
 			SaveAudioClipToDisk (newAudioClip, "newRecordedSound");

@@ -6,5 +6,5 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/scenes/Game.unity
-    guid: a6a2bb4b37ea578488a7eae8f0ee966a
+    path: Assets/scenes/Tablets.unity
+    guid: 00000000000000000000000000000000

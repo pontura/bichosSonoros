@@ -64,10 +64,10 @@ public class UIEditing : MonoBehaviour {
 		SetOff ();
 		camera.Eject ();
 		Invoke ("ResetScreen",5);
-		GetComponent<UI> ().ChangeState (UI.states.SENDING);
 	}
 	void ResetScreen()
 	{
+		GetComponent<UI> ().ChangeState (UI.states.SENDING);
 		Events.OnDestroyRobots ();
 	}
 	public void Cancel()
