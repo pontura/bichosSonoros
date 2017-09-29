@@ -15,19 +15,20 @@ public class UIEditing : MonoBehaviour {
 
 	void Start()
 	{
+		panel.SetActive (false);
 		Events.OnRobotAdded += OnRobotAdded;
-		bicho1.SetActive (true);
-		bicho2.SetActive (false);
-		bicho3.SetActive (false);
-		bicho4.SetActive (false);
-	}
-	public void BichoClicked(int id)
-	{
 		bicho1.SetActive (false);
 		bicho2.SetActive (false);
 		bicho3.SetActive (false);
 		bicho4.SetActive (false);
-		switch (id) {
+	}
+	void OnRobotAdded(Robot _robot)
+	{
+		this.robot = _robot; 
+	}
+	public void Init() {
+		panel.SetActive (true);
+		switch (Data.Instance.bichoID) {
 		case 1:
 			bicho1.SetActive (true);
 			break;
@@ -41,13 +42,6 @@ public class UIEditing : MonoBehaviour {
 			bicho4.SetActive (true);
 			break;
 		}
-	}
-	void OnRobotAdded(Robot _robot)
-	{
-		this.robot = _robot; 
-	}
-	public void Init() {
-		panel.SetActive (true);
 	}
 	public void SetOff()
 	{

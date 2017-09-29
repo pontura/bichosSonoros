@@ -18,6 +18,7 @@ public class Data : MonoBehaviour
 
 	[HideInInspector]
 	public Config config;
+	public int bichoID;
 
     public static Data Instance
     {
@@ -30,27 +31,21 @@ public class Data : MonoBehaviour
             return mInstance;
         }
     }
-    public string currentLevel;
-    public void LoadLevel(string aLevelName)
-    {
-        this.currentLevel = aLevelName;
-        SceneManager.LoadScene(aLevelName);
-    }
     void Awake()
     {
-		QualitySettings.vSyncCount = 1;
+		config = GetComponent<Config> ();
 
-        if (!mInstance)
-            mInstance = this;
-        else
-        {
-            Destroy(this.gameObject);
-            return;
-        }
+		if(PlayerPrefs.GetString("URL_SERVER") != "")
+			Data.Instance.config.URL_SERVER = PlayerPrefs.GetString("URL_SERVER");
+
+		bichoID = 1;
+		if(PlayerPrefs.GetInt("bichoID") != 0)
+			bichoID = PlayerPrefs.GetInt("bichoID");
+
+		mInstance = this;        
        
         DontDestroyOnLoad(this.gameObject);
 
-		config = GetComponent<Config> ();
     }
 
 }

@@ -13,7 +13,7 @@ public class UIEjecting : MonoBehaviour {
 	}
 	public void Reset()
 	{
-		GetComponent<UI> ().ChangeState (UI.states.INTRO);
+		GetComponent<UI> ().ChangeState (UI.states.RECORDING);
 		SetOff ();
 	}
 	public void SetOff()

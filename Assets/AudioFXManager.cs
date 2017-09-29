@@ -46,14 +46,23 @@ public class AudioFXManager : MonoBehaviour {
 			echo.enabled = isOn;
 			break;
 		case types.ECHO_RECAY_RATIO:
-			reverb.enabled = isOn;
+			echo.enabled = isOn;
             break;
         case types.CHORUS_DEPTH:
             chorus.enabled = isOn;
             break;
-            case types.CHORUS_RATE:
-                chorus.enabled = isOn;
-                break;
+        case types.CHORUS_RATE:
+            chorus.enabled = isOn;
+            break;
+		case types.REVERB:
+			reverb.enabled = isOn;
+			break;
+		case types.REVERB_DECAY:
+			reverb.enabled = isOn;
+			break;
+		case types.REVERB_LEVEL:
+			reverb.enabled = isOn;
+			break;
         }
 	}
 }

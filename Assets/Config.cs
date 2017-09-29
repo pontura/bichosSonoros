@@ -8,8 +8,15 @@ using SimpleJSON;
 
 public class Config : MonoBehaviour
 {
+	public string URL_SERVER = "http://192.168.0.5/bichos/";
 	public string url;
 	public Vector2 limits = new Vector2 (8, 30);
+
+	[Serializable]
+	public class FXData
+	{
+		public float defaultData;
+	}
 
 	void Start()
 	{

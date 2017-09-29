@@ -8,7 +8,7 @@ using UnityEngine.Assertions;
 
 public class MicRecorder : MonoBehaviour {
 
-	string URL_SERVER = "http://192.168.0.5/bichos/";
+
 	public AudioClip clip;
 	float MicLoudness;
 	bool isRecording = false;
@@ -227,7 +227,7 @@ public class MicRecorder : MonoBehaviour {
 	}
 	void SendRecording()
 	{
-		UploadFile(url, URL_SERVER + "upload.php");
+		UploadFile(url, Data.Instance.config.URL_SERVER+ "upload.php");
 	}
 	void UploadFile(string localFileName, string uploadURL)
 	{
