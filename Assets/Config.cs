@@ -12,6 +12,16 @@ public class Config : MonoBehaviour
 	public string url;
 	public Vector2 limits = new Vector2 (8, 30);
 
+	public bicho bicho1;
+	public bicho bicho2;
+	public bicho bicho3;
+	public bicho bicho4;
+
+	[Serializable]
+	public class bicho
+	{
+		public Color[] colors;
+	}
 	public FXData[] data1;
 	public FXData[] data2;
 	public FXData[] data3;
@@ -26,6 +36,10 @@ public class Config : MonoBehaviour
 		public float finalData;
 		public float value;
 	}
+
+	public float value1;
+	public float value2;
+	public float value3;
 
 	void Start()
 	{
@@ -48,5 +62,15 @@ public class Config : MonoBehaviour
 		url = content[0]["url"];
 		Events.Log (url);
 		Events.OnSettingsLoaded ();
+	}
+	public bicho GetBicho(int id)
+	{
+		switch (id) {
+		case 1: return bicho1;
+		case 2: return bicho2;
+		case 3: return bicho3;
+		default: return bicho4;
+		}
+
 	}
 }

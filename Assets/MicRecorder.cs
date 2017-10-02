@@ -98,8 +98,8 @@ public class MicRecorder : MonoBehaviour {
 
 			//audiosRecorded.Add (newAudioClip);
 
-			Events.OnAddRobot (newAudioClip);
-			SaveAudioClipToDisk (newAudioClip, "newRecordedSound");
+			Events.OnAddRobot (newAudioClip, Data.Instance.bichoID, new Vector3(Data.Instance.config.value1,Data.Instance.config.value2,Data.Instance.config.value3));
+			SaveAudioClipToDisk (newAudioClip, Data.Instance.bichoID + "x" + Data.Instance.config.value1 + "x"+ Data.Instance.config.value2 + "x"+ Data.Instance.config.value3);
 
 		}
 		else

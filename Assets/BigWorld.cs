@@ -23,12 +23,11 @@ public class BigWorld : MonoBehaviour {
 	public Text field;
 
 	void Awake () {
-		Events.OnAddRobot (defaultAudioClip);
 		Events.OnNewFile += OnNewFile;
 		Events.Log += Log;
 	}
 	void Start() {
-		Events.OnAddRobot (defaultAudioClip);
+		Events.OnAddRobot (defaultAudioClip, 1, Vector3.zero);
 	}
 	void Log(string text)
 	{
@@ -37,11 +36,11 @@ public class BigWorld : MonoBehaviour {
 	public void OnNewFile(string filename)
 	{
 		Events.Log("OnNewFile");
-		string nerwFileURL = "C:/wamp/www/bichos/sounds/" + filename;
-		LoadAudioClipFromDisk (nerwFileURL);
+		LoadAudioClipFromDisk ("C:/wamp/www/bichos/sounds/", filename);
 	}
-	public void LoadAudioClipFromDisk(string filename)
+	public void LoadAudioClipFromDisk(string url, string onlyname)
 	{
+		string filename = url + onlyname;
 		Events.OnCheckToDestroyRobot ();
 		Events.Log("cargo: " + clips.Count);
 		if (File.Exists(filename))
@@ -53,7 +52,16 @@ public class BigWorld : MonoBehaviour {
 			AudioClip newClip = AudioClip.Create(filename, clipSample.samples, clipSample.channels, clipSample.frequency, false);
 			newClip.SetData(clipSample.sample, 0);
 			clips.Add(newClip);
-			Events.OnAddRobot (newClip);
+			string[] data = onlyname.Split ("x"[0]);
+
+			foreach (string a in data) {
+				print ("::: " + a);
+			}
+			int bichoID = int.Parse(data [0]);
+			float value1 = float.Parse(data [1]);
+			float value2 = float.Parse(data [2]);
+			float value3 = float.Parse(data [3]);
+			Events.OnAddRobot (newClip, bichoID, new Vector3(value1,value2,value3));
 		}
 		else
 		{

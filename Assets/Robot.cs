@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Robot : MonoBehaviour {
 
 	public AudioFXManager audioFXManager;
-
+	public int id;
 	public int audioSpectrumValue = 1;
 	public AudioSpectrum audioSpectrum;
 	public AudioSource audioSource;
@@ -17,17 +18,22 @@ public class Robot : MonoBehaviour {
 	bool audioExists;
 	int nodeID = 0;
 
-	public void Init(AudioClip audioClip) {
+	public void Init(AudioClip audioClip, int id, Vector3 values) {
 
+		this.id = id;
 		audioSource.clip = audioClip;
-		audioSource.loop = true;
+
 		audioSource.Play();
 		SetAudioClipLoaded();
 
 		audioSource = GetComponent<AudioSource> ();
 		robotParts = GetComponent<RobotParts> ();
-		robotParts.Init (nodes);
+		robotParts.Init (nodes, id);
 		SetAudioClipLoaded ();
+		if (SceneManager.GetActiveScene ().name == "Tablets")
+			audioSource.loop = true;
+		else
+			LoopAudio ();
 	}
 	void SetAudioClipLoaded() {
 		audioExists = true;
@@ -43,5 +49,11 @@ public class Robot : MonoBehaviour {
 		float newValue = audioSpectrumValue / smoothTransform;
 		robotParts.TransformPart (currentNodeID, newValue);
 
+	}
+	void LoopAudio()
+	{
+		print ("LOOP");
+		Invoke ("LoopAudio", Random.Range (6, 12));
+		audioSource.Play ();
 	}
 }

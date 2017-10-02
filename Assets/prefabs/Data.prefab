@@ -69,6 +69,19 @@ MonoBehaviour:
   URL_SERVER: http://192.168.0.5/bichos/
   url: 
   limits: {x: 8, y: 30}
+  bicho1:
+    colors:
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0.68275833, a: 1}
+  bicho2:
+    colors:
+    - {r: 0.98620677, g: 1, b: 0, a: 1}
+  bicho3:
+    colors:
+    - {r: 0.2287019, g: 0.8088235, b: 0, a: 1}
+  bicho4:
+    colors:
+    - {r: 0.439122, g: 0.72467345, b: 0.9632353, a: 1}
   data1:
   - type: 0
     defaultData: 0
@@ -77,8 +90,8 @@ MonoBehaviour:
     value: 0
   - type: 1
     defaultData: 0.5
-    initialData: -0.1
-    finalData: 1.9
+    initialData: -2
+    finalData: 2
     value: 0
   - type: 2
     defaultData: 3000

@@ -61,6 +61,14 @@ public class UIEditing : MonoBehaviour {
 	}
 	public void Ok()
 	{
+		
+		if(slider1.isActive)
+			Data.Instance.config.value1 = slider1.value;
+		if(slider2.isActive)
+			Data.Instance.config.value2 = slider2.value;
+		if(slider3.isActive)
+			Data.Instance.config.value3 = slider3.value;
+
 		SetOff ();
 		camera.Eject ();
 		Invoke ("ResetScreen",5);

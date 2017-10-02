@@ -35,15 +35,6 @@ public class UI : MonoBehaviour {
 		uiRecording = GetComponent<UIRecording> ();
 		uiEditing = GetComponent<UIEditing> ();
 		uiSending = GetComponent<UIEjecting> ();
-
-		if (state == states.INTRO)
-			ChangeState (states.INTRO);
-		if (state == states.EDITING)
-			Invoke ("Delayed", 0.1f);
-	}
-	void Delayed()
-	{
-		Events.OnAddRobot (sampleAudioClip);		
 	}
 	public void ChangeState(states state)
 	{

@@ -10,7 +10,7 @@ public class RobotParts : MonoBehaviour {
 	public RobotPart initialPart;
 	public List<RobotPart> parts;
 
-	public void Init(int nodes) {
+	public void Init(int nodes, int id) {
 		RobotPart nextParentRobotPart = initialPart;
 		for(int a=0; a<nodes-1; a++)
 		{
@@ -19,8 +19,10 @@ public class RobotParts : MonoBehaviour {
 			newRobotPart.transform.localPosition = new Vector3(0,0,a*separation*-1);
 			newRobotPart.parent = nextParentRobotPart;
 			nextParentRobotPart = newRobotPart;
+			newRobotPart.Init (id);
 			parts.Add (newRobotPart);
 		}
+		initialPart.Init (id);
 	}
 	RobotPart lastTransformedRobotPart;
 	RobotPart lastTransRobotPart;
