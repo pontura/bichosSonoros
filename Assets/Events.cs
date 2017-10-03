@@ -6,6 +6,10 @@ public static class Events {
 
 	public static System.Action<Robot> OnRobotAdded = delegate { };
 
+	public static System.Action<Robot> OnDestroyRobot = delegate { };
+
+	public static System.Action<Robot> OnCameraFollow = delegate { };
+
 	public static System.Action OnCheckToDestroyRobot = delegate { };
 	public static System.Action OnDestroyRobots = delegate { };
 	public static System.Action<AudioClip, int, Vector3> OnAddRobot = delegate { };

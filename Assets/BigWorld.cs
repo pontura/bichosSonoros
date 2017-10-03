@@ -41,7 +41,7 @@ public class BigWorld : MonoBehaviour {
 	public void LoadAudioClipFromDisk(string url, string onlyname)
 	{
 		string filename = url + onlyname;
-		Events.OnCheckToDestroyRobot ();
+		//Events.OnCheckToDestroyRobot ();
 		Events.Log("cargo: " + clips.Count);
 		if (File.Exists(filename))
 		{

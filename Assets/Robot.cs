@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class Robot : MonoBehaviour {
 
+	public GameObject bicho1Head;
+	public GameObject bicho2Head;
+	public GameObject bicho3Head;
+	public GameObject bicho4Head;
+
 	public AudioFXManager audioFXManager;
 	public int id;
 	public int audioSpectrumValue = 1;
@@ -18,22 +23,50 @@ public class Robot : MonoBehaviour {
 	bool audioExists;
 	int nodeID = 0;
 
-	public void Init(AudioClip audioClip, int id, Vector3 values) {
+	public void Init(AudioClip audioClip, int id, Vector3 values, Vector3 pos) {
+		
+		bicho1Head.SetActive (false);
+		bicho2Head.SetActive (false);
+		bicho3Head.SetActive (false);
+		bicho4Head.SetActive (false);
 
+		switch (id) {
+		case 1:
+			bicho1Head.SetActive (true);
+			break;
+		case 2:
+			bicho2Head.SetActive (true);
+			break;
+		case 3:
+			bicho3Head.SetActive (true);
+			break;
+		case 4:
+			bicho4Head.SetActive (true);
+			break;
+
+		}
 		this.id = id;
 		audioSource.clip = audioClip;
 
 		audioSource.Play();
 		SetAudioClipLoaded();
 
+		body.transform.position = pos;
+
 		audioSource = GetComponent<AudioSource> ();
 		robotParts = GetComponent<RobotParts> ();
-		robotParts.Init (nodes, id);
+		robotParts.Init (nodes, id, pos);
 		SetAudioClipLoaded ();
 		if (SceneManager.GetActiveScene ().name == "Tablets")
 			audioSource.loop = true;
 		else
 			LoopAudio ();
+
+		Invoke ("OnDestroy", Random.Range(120,300));
+	}
+	void OnDestroy()
+	{
+		Events.OnDestroyRobot (this);
 	}
 	void SetAudioClipLoaded() {
 		audioExists = true;
@@ -45,7 +78,7 @@ public class Robot : MonoBehaviour {
 			return;
 		
 		float currentNormalizedTime = audioSource.time / audioSource.clip.length;
-		int currentNodeID = (int)Mathf.Lerp(0,nodes, currentNormalizedTime);
+		int currentNodeID = (int)Mathf.Lerp(0,nodes-1, currentNormalizedTime);
 		float newValue = audioSpectrumValue / smoothTransform;
 		robotParts.TransformPart (currentNodeID, newValue);
 
@@ -53,7 +86,8 @@ public class Robot : MonoBehaviour {
 	void LoopAudio()
 	{
 		print ("LOOP");
-		Invoke ("LoopAudio", Random.Range (6, 12));
+		Invoke ("LoopAudio", Random.Range (8, 20));
 		audioSource.Play ();
+		Events.OnCameraFollow (this);
 	}
 }
