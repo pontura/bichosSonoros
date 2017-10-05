@@ -14,7 +14,6 @@ public class RobotPart : MonoBehaviour {
 
 	public void Init(int bichoID)
 	{
-		print ("Bicho id:_ " + bichoID);
 		anim = GetComponent<Animation> ();
 		spriteRenderer.color = Data.Instance.config.GetBicho(bichoID).colors [0];
 		trail.startColor = Data.Instance.config.GetBicho(bichoID).colors [0];

@@ -137,7 +137,7 @@ PlayerSettings:
   protectGraphicsMemory: 0
   useHDRDisplay: 0
   applicationIdentifier:
-    Android: com.pontura.fiesta
+    Android: com.pontura.bichos
     Standalone: com.bichos.pontura
     Tizen: com.Company.ProductName
     iOS: com.Company.ProductName

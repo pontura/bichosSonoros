@@ -24,27 +24,42 @@ public class Robot : MonoBehaviour {
 	int nodeID = 0;
 
 	public void Init(AudioClip audioClip, int id, Vector3 values, Vector3 pos) {
-		
+
+	
 		bicho1Head.SetActive (false);
 		bicho2Head.SetActive (false);
 		bicho3Head.SetActive (false);
 		bicho4Head.SetActive (false);
 
+		Config.FXData[] fxData = null;
+
 		switch (id) {
 		case 1:
 			bicho1Head.SetActive (true);
+			fxData = Data.Instance.config.data1;
 			break;
 		case 2:
 			bicho2Head.SetActive (true);
+			fxData = Data.Instance.config.data2;
 			break;
 		case 3:
 			bicho3Head.SetActive (true);
+			fxData = Data.Instance.config.data3;
 			break;
 		case 4:
 			bicho4Head.SetActive (true);
+			fxData = Data.Instance.config.data4;
 			break;
-
 		}
+		if (fxData != null) {
+			int fxID = 0;
+			foreach (Config.FXData data in fxData) {
+				if (values [fxID] != 0)	
+					audioFXManager.ChangeFXValue (data.type, values [fxID]);
+				fxID++;
+			}
+		}
+
 		this.id = id;
 		audioSource.clip = audioClip;
 
@@ -55,8 +70,11 @@ public class Robot : MonoBehaviour {
 
 		audioSource = GetComponent<AudioSource> ();
 		robotParts = GetComponent<RobotParts> ();
+
 		robotParts.Init (nodes, id, pos);
+
 		SetAudioClipLoaded ();
+
 		if (SceneManager.GetActiveScene ().name == "Tablets")
 			audioSource.loop = true;
 		else
@@ -85,7 +103,6 @@ public class Robot : MonoBehaviour {
 	}
 	void LoopAudio()
 	{
-		print ("LOOP");
 		Invoke ("LoopAudio", Random.Range (8, 20));
 		audioSource.Play ();
 		Events.OnCameraFollow (this);

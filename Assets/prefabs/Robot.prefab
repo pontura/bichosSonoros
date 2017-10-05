@@ -793,6 +793,7 @@ MonoBehaviour:
   parent: {fileID: 0}
   particles: {fileID: 0}
   anim: {fileID: 0}
+  distance: 0.02
   spriteRenderer: {fileID: 212060252741105788}
   trail: {fileID: 96156318167484314}
 --- !u!114 &114339241763760602
@@ -806,6 +807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f892f77f87d97aa4baab16f7a2fef216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 82681823611777664}
   distortion: {fileID: 170334870170349396}
   echo: {fileID: 168602316356804090}
   lowPass: {fileID: 169284327977613980}
