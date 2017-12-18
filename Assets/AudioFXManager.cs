@@ -74,6 +74,7 @@ public class AudioFXManager : MonoBehaviour {
 
 	public void ChangeFXValue( types type, float value)
 	{
+		value = Mathf.Abs (value);
 		switch(type)
 		{
 		case AudioFXManager.types.DISTORTION:

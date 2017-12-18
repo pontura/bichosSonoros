@@ -21,7 +21,7 @@ public class CameraFollow : MonoBehaviour {
 	void ChangeZoom()
 	{
 		newSize = robotManager.robots.Count * 2;
-		newSize += Random.Range (0, 32);
+		newSize += Random.Range (2, 38);
 		Invoke ("ChangeZoom", Random.Range (5, 10));
 	}
 	void OnCameraFollow(Robot robot)

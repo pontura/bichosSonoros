@@ -80,11 +80,15 @@ public class Robot : MonoBehaviour {
 		else
 			LoopAudio ();
 
-		Invoke ("OnDestroy", Random.Range(120,300));
+		Invoke ("CheckOnDestroy", Random.Range(120,300));
 	}
-	void OnDestroy()
+	void CheckOnDestroy()
 	{
-		Events.OnDestroyRobot (this);
+		if (World.Instance.GetComponent<RobotManager> ().robots.Count > 1) {
+			Events.OnDestroyRobot (this);
+		} else {
+			Invoke ("CheckOnDestroy", 10);
+		}
 	}
 	void SetAudioClipLoaded() {
 		audioExists = true;

@@ -7,9 +7,10 @@ public class World : MonoBehaviour {
 	public Camera worldCamera;
 	public GameObject background;
 	int size =25;
+	public static World Instance;
 
 	void Start () {
-		
+		Instance = this;
 	}
 	
 	// Update is called once per frame

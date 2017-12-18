@@ -15,10 +15,23 @@ public class RobotPart : MonoBehaviour {
 	public void Init(int bichoID)
 	{
 		anim = GetComponent<Animation> ();
-		spriteRenderer.color = Data.Instance.config.GetBicho(bichoID).colors [0];
-		trail.startColor = Data.Instance.config.GetBicho(bichoID).colors [0];
-		trail.endColor = Data.Instance.config.GetBicho(bichoID).colors [0];
-		trail.material.color =  Data.Instance.config.GetBicho(bichoID).colors [0];
+
+		if(anim != null)
+			anim.Play ("bicho" + bichoID);
+		
+		Color color = Data.Instance.config.GetBicho (bichoID).colors [0];
+		trail.startColor = color;
+		trail.endColor = color;
+		trail.material.color =  color;
+
+		float f = ((float)Random.Range (0, 10) - 5) / 20;
+		print ("F: " + f);
+		color.r += ((float)Random.Range (0, 10) - 5) / 20;
+		color.g += ((float)Random.Range (0, 10) - 5) / 20;
+		color.b += ((float)Random.Range (0, 10) - 5) / 20;
+
+		spriteRenderer.color =color;
+
 
 		if (particles != null) {
 			var main = particles.main;

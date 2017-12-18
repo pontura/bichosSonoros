@@ -60,7 +60,7 @@ public class Waveform : MonoBehaviour {
 		timer += Time.deltaTime;
 
 		Vector3 pos =  pointer.transform.localPosition;
-		pos.z = micRecorder.value;
+		pos.z = micRecorder.value/4;
 		pos.x = initialPos + (timer * moveInX / secs);
 		pointer.transform.localPosition = pos;
 

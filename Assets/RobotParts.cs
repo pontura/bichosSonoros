@@ -66,6 +66,11 @@ public class RobotParts : MonoBehaviour {
     }
 	void MoveHead(int id, float value)
 	{
+		Vector3 pos = initialPart.transform.position;
+		pos.x /= 1.001f;
+		pos.z /= 1.001f;
+		initialPart.transform.position = pos;
+
 		initialPart.transform.Translate(initialPart.transform.forward * value*Time.deltaTime);
 		float newRotationDriveMode = initialPart.gameObject.transform.localEulerAngles.y + (value/10) *(id-3);
 		initialPart.gameObject.transform.localEulerAngles = new Vector3 (0,newRotationDriveMode , 0);

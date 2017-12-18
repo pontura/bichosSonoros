@@ -12,7 +12,7 @@ public class UIEjecting : MonoBehaviour {
 
 	public void Init() {
 		panel.SetActive (true);
-		Invoke ("Reset",5);
+		Invoke ("Reset",3);
 		Events.SendRecording ();
 	}
 	public void Reset()

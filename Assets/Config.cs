@@ -48,6 +48,7 @@ public class Config : MonoBehaviour
 	IEnumerator LoadData()
 	{
 		string directory = "file://" + Application.dataPath + "/../" + "settings.json";
+		Events.Log (directory);
 		WWW www = new WWW(directory);
 		yield return www;
 		LoadDataromServer( www.text);
@@ -60,7 +61,8 @@ public class Config : MonoBehaviour
 	private void fillArray(JSONNode content)
 	{
 		url = content[0]["url"];
-		Events.Log (url);
+		URL_SERVER = url;
+		//Events.Log (url);
 		Events.OnSettingsLoaded ();
 	}
 	public bicho GetBicho(int id)

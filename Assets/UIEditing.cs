@@ -71,7 +71,7 @@ public class UIEditing : MonoBehaviour {
 
 		SetOff ();
 		camera.Eject ();
-		Invoke ("ResetScreen",5);
+		Invoke ("ResetScreen",7);
 	}
 	void ResetScreen()
 	{

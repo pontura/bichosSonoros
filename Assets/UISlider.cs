@@ -16,7 +16,8 @@ public class UISlider : MonoBehaviour {
 	public Image bgImage;
 	public float value;
 
-	void Start () {
+	void OnEnable () {
+		isActive = true;
 		uiEditing = GetComponentInParent<UIEditing> ();
 		slider = GetComponent<Slider> ();
 		slider.value = defaultValue;
@@ -47,7 +48,7 @@ public class UISlider : MonoBehaviour {
 		} else {
 			bgImage.enabled = false;
 			field.text = "Off";
-			field.color = Color.red;
+			field.color = Color.white;
 			slider.interactable = false;
 		}
 	}

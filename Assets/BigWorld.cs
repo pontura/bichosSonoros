@@ -23,6 +23,7 @@ public class BigWorld : MonoBehaviour {
 	public Text field;
 
 	void Awake () {
+		Cursor.visible = false;
 		Events.OnNewFile += OnNewFile;
 		Events.Log += Log;
 	}
@@ -35,21 +36,22 @@ public class BigWorld : MonoBehaviour {
 	}
 	public void OnNewFile(string filename)
 	{
-		Events.Log("OnNewFile");
-		LoadAudioClipFromDisk ("C:/wamp/www/bichos/sounds/", filename);
+		Events.Log("OnNewFile" + filename);
+		LoadAudioClipFromDisk ("sounds/", filename);
 	}
 	public void LoadAudioClipFromDisk(string url, string onlyname)
 	{
 		string filename = url + onlyname;
 		//Events.OnCheckToDestroyRobot ();
-		Events.Log("cargo: " + clips.Count);
+		Debug.Log("cargo filename: " + filename);
 		if (File.Exists(filename))
 		{
 			BinaryFormatter bf = new BinaryFormatter();
 			FileStream file = File.Open(filename, FileMode.Open);
 			AudioClipSample clipSample = (AudioClipSample)bf.Deserialize(file);
 			file.Close();
-			AudioClip newClip = AudioClip.Create(filename, clipSample.samples, clipSample.channels, clipSample.frequency, false);
+			string newName = "a" + UnityEngine.Random.Range (1, 10000).ToString();
+			AudioClip newClip = AudioClip.Create(newName, clipSample.samples, clipSample.channels, clipSample.frequency, false);
 			newClip.SetData(clipSample.sample, 0);
 			clips.Add(newClip);
 			string[] data = onlyname.Split ("x"[0]);
@@ -65,7 +67,7 @@ public class BigWorld : MonoBehaviour {
 		}
 		else
 		{
-			Debug.Log("File Not Found!");
+			Debug.Log("File Not Found!: " + filename);
 		}
 	}
 }
