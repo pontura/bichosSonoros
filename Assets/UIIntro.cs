@@ -6,18 +6,21 @@ using UnityEngine.UI;
 public class UIIntro : MonoBehaviour {
 
 	public GameObject panel;
-	public InputField inputField;
+
 	public Text startingButtonField;
+	private UI context;
 
 	void Start()
 	{
-		panel.SetActive (true);
-		inputField.text = Data.Instance.config.URL_SERVER;
+//		panel.SetActive (true);
 		startingButtonField.text = "TABLET " + Data.Instance.bichoID.ToString();
 	}
-	public void Init() {
+
+	public void Init(UI ctx) {
 		panel.SetActive (true);
+		this.context = ctx;	
 	}
+
 	public void StartDefault()
 	{
 		GetComponent<UI> ().ChangeState (UI.states.RECORDING);
@@ -26,7 +29,6 @@ public class UIIntro : MonoBehaviour {
 	{
 		Data.Instance.bichoID = bichoID;
 		GetComponent<UI> ().ChangeState (UI.states.RECORDING);
-		PlayerPrefs.SetString ("URL_SERVER", inputField.text);
 		PlayerPrefs.SetInt ("bichoID", bichoID);
 	}
 	public void SetOff () {

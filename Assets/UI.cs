@@ -6,18 +6,22 @@ using UnityEngine.UI;
 public class UI : MonoBehaviour {
 
 	public AudioClip sampleAudioClip;
+
+	public states state;
 	public enum states
 	{
+		CONFIG,
 		INTRO,
 		RECORDING,
 		EDITING,
 		SENDING
 	}
-	public states state;
+
 	UIRecording uiRecording;
 	UIEditing uiEditing;
 	UIIntro uiIntro;
 	UIEjecting uiSending;
+	UIConfig uiConfig;
 
 	bool isRecording;
 	public Text LogText;
@@ -26,48 +30,60 @@ public class UI : MonoBehaviour {
 	{
 		Events.Log += Log;
 	}
+
 	void Log(string _text)
 	{
 		LogText.text += ". " + _text;
 	}
+
 	void Awake () {
+		uiConfig = GetComponent<UIConfig> ();
+
 		uiIntro = GetComponent<UIIntro> ();
 		uiRecording = GetComponent<UIRecording> ();
 		uiEditing = GetComponent<UIEditing> ();
 		uiSending = GetComponent<UIEjecting> ();
 
-		if (state == states.INTRO)
-			ChangeState (states.INTRO);
-		if (state == states.EDITING)
-			Invoke ("Delayed", 0.1f);
+		ChangeState (states.CONFIG);
+
 	}
 	void Delayed()
 	{
 		Events.OnAddRobot (sampleAudioClip);		
 	}
+
+
 	public void ChangeState(states state)
 	{
-
-		uiIntro.SetOff ();
-		//uiEditing.SetOff ();
-		uiRecording.SetOff ();
-		uiSending.SetOff ();
-
+		setAllOff ();
 		switch (state) {
-			case states.RECORDING:
-				uiEditing.SetOff ();
-				uiRecording.Init ();
-				break;
-			case states.EDITING:
-				uiEditing.Init ();
-				break;
+			case states.CONFIG:				
+			uiConfig.Init (this);
+				
+			break;
 			case states.INTRO:
-				uiIntro.Init ();
-				break;
-			case states.SENDING:
-				uiSending.Init ();
-				break;
+				uiIntro.Init (this);
+			break;
+
+//			case states.RECORDING:
+//				uiEditing.SetOff ();
+//				uiRecording.Init ();
+//				break;
+//			case states.EDITING:
+//				uiEditing.Init ();
+//				break;
+//			case states.SENDING:
+//				uiSending.Init ();
+//				break;
 		}
 	}
 
+	private void setAllOff(){
+		uiConfig.SetOff ();
+		uiIntro.SetOff ();
+		uiRecording.SetOff ();
+		uiEditing.SetOff ();
+		uiSending.SetOff ();
+
+	}
 }
