@@ -13,10 +13,11 @@ public class UIIntro : MonoBehaviour {
 	void Start()
 	{
 //		panel.SetActive (true);
-		startingButtonField.text = "TABLET " + Data.Instance.bichoID.ToString();
+
 	}
 
 	public void Init(UI ctx) {
+		
 		panel.SetActive (true);
 		this.context = ctx;	
 	}
@@ -25,11 +26,14 @@ public class UIIntro : MonoBehaviour {
 	{
 		GetComponent<UI> ().ChangeState (UI.states.RECORDING);
 	}
+
 	public void Clicked(int bichoID)
 	{
 		Data.Instance.bichoID = bichoID;
-		GetComponent<UI> ().ChangeState (UI.states.RECORDING);
+//		GetComponent<UI> ().ChangeState (UI.states.RECORDING);
 		PlayerPrefs.SetInt ("bichoID", bichoID);
+		startingButtonField.text = "TABLET " + Data.Instance.bichoID.ToString();
+
 	}
 	public void SetOff () {
 		panel.SetActive (false);
