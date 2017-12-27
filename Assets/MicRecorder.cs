@@ -98,8 +98,8 @@ public class MicRecorder : MonoBehaviour {
 
 			//audiosRecorded.Add (newAudioClip);
 
-			Events.OnAddRobot (newAudioClip);
-			SaveAudioClipToDisk (newAudioClip, "newRecordedSound");
+			Events.OnAddRobot (newAudioClip, Data.Instance.bichoID, new Vector3(0,0,0));
+			SaveAudioClipToDisk (newAudioClip, "demo");
 
 		}
 		else
@@ -235,6 +235,7 @@ public class MicRecorder : MonoBehaviour {
 	}
 	IEnumerator UploadFileCo(string localFileName, string uploadURL)
 	{
+		
 		Events.Log ("Upload:" + localFileName);
 		WWW localFile = new WWW("file:///" + localFileName);
 		yield return localFile;
@@ -249,7 +250,8 @@ public class MicRecorder : MonoBehaviour {
 		// version 1
 		//postForm.AddBinaryData("theFile",localFile.bytes);
 		// version 2
-		postForm.AddField("imageName", localFileName);
+		string newName = Data.Instance.bichoID + "x" + Data.Instance.config.value1 + "x" + Data.Instance.config.value2 + "x" + Data.Instance.config.value3;
+		postForm.AddField("imageName", newName);
 		postForm.AddBinaryData("fileToUpload",localFile.bytes,localFileName,"text/plain");
 
 		WWW upload = new WWW(uploadURL,postForm);        

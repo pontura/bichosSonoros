@@ -61,9 +61,17 @@ public class UIEditing : MonoBehaviour {
 	}
 	public void Ok()
 	{
+		
+		if(slider1.isActive)
+			Data.Instance.config.value1 = slider1.value;
+		if(slider2.isActive)
+			Data.Instance.config.value2 = slider2.value;
+		if(slider3.isActive)
+			Data.Instance.config.value3 = slider3.value;
+
 		SetOff ();
 		camera.Eject ();
-		Invoke ("ResetScreen",5);
+		Invoke ("ResetScreen",7);
 	}
 	void ResetScreen()
 	{
@@ -79,44 +87,7 @@ public class UIEditing : MonoBehaviour {
 	{
 		if (robot == null)
 			return;
-		switch(type)
-		{
-		case AudioFXManager.types.DISTORTION:
-			robot.audioFXManager.distortion.enabled = true;
-			robot.audioFXManager.distortion.distortionLevel = value;
-			break;
-		case AudioFXManager.types.PITCH:
-			robot.audioSource.pitch = value;
-			break;
-		case AudioFXManager.types.LOWPAS:
-			robot.audioFXManager.lowPass.enabled = true;
-			robot.audioFXManager.lowPass.cutoffFrequency = value;
-			break;
-		case AudioFXManager.types.ECHO_DELAY:
-			robot.audioFXManager.echo.enabled = true;
-			robot.audioFXManager.echo.delay = value;
-			break;
-		case AudioFXManager.types.ECHO_RECAY_RATIO:
-			robot.audioFXManager.echo.enabled = true;
-			robot.audioFXManager.echo.decayRatio =  value;
-			break;
-        case AudioFXManager.types.CHORUS_DEPTH:
-            robot.audioFXManager.chorus.enabled = true;
-            robot.audioFXManager.chorus.depth = value;
-            break;
-        case AudioFXManager.types.CHORUS_RATE:
-            robot.audioFXManager.chorus.enabled = true;
-            robot.audioFXManager.chorus.rate = value;
-            break;
-        case AudioFXManager.types.REVERB_DECAY:
-            robot.audioFXManager.reverb.enabled = true;
-            robot.audioFXManager.reverb.decayTime = value;
-            break;
-        case AudioFXManager.types.REVERB_LEVEL:
-            robot.audioFXManager.reverb.enabled = true;
-            robot.audioFXManager.reverb.reverbLevel = value;
-            break;
-        }
+		robot.audioFXManager.ChangeFXValue (type, value);
 	}
 
 }

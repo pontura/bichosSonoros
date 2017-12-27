@@ -10,12 +10,14 @@ public class UISlider : MonoBehaviour {
 	public float initialValue;
 	public float finalValue;
 	public Text field;
-	bool isActive;
+	public bool isActive;
 	Slider slider;
 	UIEditing uiEditing;
 	public Image bgImage;
+	public float value;
 
-	void Start () {
+	void OnEnable () {
+		isActive = true;
 		uiEditing = GetComponentInParent<UIEditing> ();
 		slider = GetComponent<Slider> ();
 		slider.value = defaultValue;
@@ -24,8 +26,8 @@ public class UISlider : MonoBehaviour {
 	}
 	void ValueChangeCheck()
 	{
-		float newValue = Mathf.Lerp(initialValue, finalValue, slider.value);
-		uiEditing.ChangeFXValue(type, newValue);
+		value = Mathf.Lerp(initialValue, finalValue, slider.value);
+		uiEditing.ChangeFXValue(type, value);
 	}
 	public void Clicked()
 	{
@@ -46,7 +48,7 @@ public class UISlider : MonoBehaviour {
 		} else {
 			bgImage.enabled = false;
 			field.text = "Off";
-			field.color = Color.red;
+			field.color = Color.white;
 			slider.interactable = false;
 		}
 	}

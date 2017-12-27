@@ -14,7 +14,9 @@ public class AudioSpectrum : MonoBehaviour
 			return;
 		float[] spectrum = new float[256];
 
-		AudioListener.GetSpectrumData(spectrum, 0, FFTWindow.Rectangular);
+		robot.audioSource.GetSpectrumData(spectrum, 0, FFTWindow.BlackmanHarris);
+
+		//AudioListener.GetSpectrumData(spectrum, 0, FFTWindow.Rectangular);
 		float a = 0;
 		for (int i = 1; i < spectrum.Length - 1; i++)
 		{

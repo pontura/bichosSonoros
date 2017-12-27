@@ -33,7 +33,7 @@ public class UI : MonoBehaviour {
 
 	void Log(string _text)
 	{
-		LogText.text += ". " + _text;
+//		LogText.text += ". " + _text;
 	}
 
 	void Awake () {

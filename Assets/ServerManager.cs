@@ -15,7 +15,7 @@ public class ServerManager : MonoBehaviour {
 	}
 	void OnSettingsLoaded()
 	{
-		Events.Log ("settings loaded");
+		//Events.Log ("settings loaded");
 		URL = Data.Instance.config.url;		
 		Loop ();
 	}
@@ -44,7 +44,7 @@ public class ServerManager : MonoBehaviour {
 	void ParseData(string data)
 	{
 		//Events.Log("Data Server Received");
-		string[] imageData = data.Split ("-"[0]);
+		string[] imageData = data.Split ("_"[0]);
 		foreach (string imageName in imageData) {
 			if (imageName.Length > 1) {
 				string file = (URL + "sounds/" + imageName);

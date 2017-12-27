@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AudioFXManager : MonoBehaviour {
 
+	public AudioSource audioSource;
 	public AudioDistortionFilter distortion;
 	public AudioEchoFilter echo;
 	public AudioLowPassFilter lowPass;
@@ -31,7 +32,7 @@ public class AudioFXManager : MonoBehaviour {
 		Events.TurnSoundFX -= TurnSoundFX;
 	}
 
-	void TurnSoundFX (types type, bool isOn) {
+	public void TurnSoundFX (types type, bool isOn) {
 
         print(type +  " ison: " + isOn);
 
@@ -69,5 +70,48 @@ public class AudioFXManager : MonoBehaviour {
 			reverb.enabled = isOn;
 			break;
         }
+	}
+
+	public void ChangeFXValue( types type, float value)
+	{
+		value = Mathf.Abs (value);
+		switch(type)
+		{
+		case AudioFXManager.types.DISTORTION:
+			distortion.enabled = true;
+			distortion.distortionLevel = value;
+			break;
+		case AudioFXManager.types.PITCH:
+			audioSource.pitch = value;
+			break;
+		case AudioFXManager.types.LOWPAS:
+			lowPass.enabled = true;
+			lowPass.cutoffFrequency = value;
+			break;
+		case AudioFXManager.types.ECHO_DELAY:
+			echo.enabled = true;
+			echo.delay = value;
+			break;
+		case AudioFXManager.types.ECHO_RECAY_RATIO:
+			echo.enabled = true;
+			echo.decayRatio =  value;
+			break;
+		case AudioFXManager.types.CHORUS_DEPTH:
+			chorus.enabled = true;
+			chorus.depth = value;
+			break;
+		case AudioFXManager.types.CHORUS_RATE:
+			chorus.enabled = true;
+			chorus.rate = value;
+			break;
+		case AudioFXManager.types.REVERB_DECAY:
+			reverb.enabled = true;
+			reverb.decayTime = value;
+			break;
+		case AudioFXManager.types.REVERB_LEVEL:
+			reverb.enabled = true;
+			reverb.reverbLevel = value;
+			break;
+		}
 	}
 }
