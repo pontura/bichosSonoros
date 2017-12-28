@@ -31,19 +31,14 @@ public class Data : MonoBehaviour
             return mInstance;
         }
     }
+
     void Awake()
     {
 		config = GetComponent<Config> ();
-
-		if(PlayerPrefs.GetString("URL_SERVER") != "")
-			Data.Instance.config.URL_SERVER = PlayerPrefs.GetString("URL_SERVER");
-
 		bichoID = 1;
 		if(PlayerPrefs.GetInt("bichoID") != 0)
 			bichoID = PlayerPrefs.GetInt("bichoID");
-
-		mInstance = this;        
-       
+		mInstance = this;               
         DontDestroyOnLoad(this.gameObject);
 
     }

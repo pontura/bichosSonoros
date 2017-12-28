@@ -8,9 +8,11 @@ using SimpleJSON;
 
 public class Config : MonoBehaviour
 {
-	public string URL_SERVER = "http://192.168.0.5/bichos/";
-	public string url;
+	public string URL_SERVER = "";
+
 	public Vector2 limits = new Vector2 (8, 30);
+
+
 
 	public bicho bicho1;
 	public bicho bicho2;
@@ -42,28 +44,31 @@ public class Config : MonoBehaviour
 	public float value2;
 	public float value3;
 
+
 	void Start()
 	{
-		StartCoroutine (LoadData ());
+//		StartCoroutine (LoadData ());
+		LoadData();
 	}
-	IEnumerator LoadData()
+
+//	IEnumerator
+	void LoadData()
 	{
-		string directory = "file://" + Application.dataPath + "/../" + "settings.json";
-		Events.Log (directory);
-		WWW www = new WWW(directory);
-		yield return www;
-		LoadDataromServer( www.text);
+		string settingsUrl = "file://" + Application.dataPath + "/../" + "settings.json";
+		WWW www = new WWW(settingsUrl);
+//		yield return www;
+		LoadSettings(www.text);
 	}
-	public void LoadDataromServer(string json_data)
+		
+	public void LoadSettings(string json_data)
 	{
 		var Json = SimpleJSON.JSON.Parse(json_data);
 		fillArray(Json);
 	}
+
 	private void fillArray(JSONNode content)
-	{
-		url = content[0]["url"];
-		URL_SERVER = url;
-		//Events.Log (url);
+	{		
+		URL_SERVER = content["server"]["url"];
 		Events.OnSettingsLoaded ();
 	}
 	public bicho GetBicho(int id)

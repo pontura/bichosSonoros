@@ -16,7 +16,7 @@ public class ServerManager : MonoBehaviour {
 	void OnSettingsLoaded()
 	{
 		//Events.Log ("settings loaded");
-		URL = Data.Instance.config.url;		
+		URL = Data.Instance.config.URL_SERVER;		
 		Loop ();
 	}
 	void Loop()
