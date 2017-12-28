@@ -22,6 +22,7 @@ public class Config : MonoBehaviour
 	{
 		public Color[] colors;
 	}
+
 	public FXData[] data1;
 	public FXData[] data2;
 	public FXData[] data3;

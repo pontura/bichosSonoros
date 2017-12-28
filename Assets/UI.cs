@@ -49,7 +49,7 @@ public class UI : MonoBehaviour {
 	}
 	void Delayed()
 	{
-		Events.OnAddRobot (sampleAudioClip);		
+//		Events.OnAddRobot (sampleAudioClip);		
 	}
 
 

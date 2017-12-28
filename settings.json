@@ -1,6 +1,6 @@
 [
 	{
 		//url:"localhost/bichos/",
-		url:"http://192.168.0.5/bichos/"
+		"url":"http://127.0.0.1/bichos/"
 	}
 ]
