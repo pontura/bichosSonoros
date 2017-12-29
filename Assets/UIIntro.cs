@@ -24,10 +24,7 @@ public class UIIntro : MonoBehaviour {
 	}
 	public void Clicked(int bichoID)
 	{
-		Data.Instance.bichoID = bichoID;
-		GetComponent<UI> ().ChangeState (UI.states.RECORDING);
-		PlayerPrefs.SetString ("URL_SERVER", inputField.text);
-		PlayerPrefs.SetInt ("bichoID", bichoID);
+		Events.OnAddPreviewRobot (bichoID);
 	}
 	public void SetOff () {
 		panel.SetActive (false);

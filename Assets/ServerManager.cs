@@ -36,7 +36,7 @@ public class ServerManager : MonoBehaviour {
 		yield return www;
 		if (www.error == null)
 		{
-			ParseData ( www.data);
+			ParseData ( www.text);
 		} else {
 			Debug.Log("WWW Error: "+ www.error);
 		}    

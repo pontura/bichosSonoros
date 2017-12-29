@@ -18,7 +18,7 @@ public class Robot : MonoBehaviour {
 	public GameObject body;
 	public float transformSpeed = 0.5f;
 	public float smoothTransform = 40f;
-	public int nodes = 6;
+	public int nodes = 8;
 	public RobotParts robotParts;
 	bool audioExists;
 	int nodeID = 0;
