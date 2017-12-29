@@ -10,7 +10,6 @@ public class UIRecording : MonoBehaviour {
 	public GameObject button;
 	public Text label;
 
-//	public MicRecorder micRecorder;
 	bool isRecording;
 	private GameController context;
 
@@ -41,31 +40,16 @@ public class UIRecording : MonoBehaviour {
 	{
 		SetButton (false);
 		Events.SetRecording (false);
-//		GetComponent<GameController> ().ChangeState (GameController.states.EDITING);
 	}
 
-
-//	public void ToggleSaveButton () {		
-//		return;
-//		SetButton (!isRecording);
-//		Events.SetRecording (isRecording);
-//		if(!isRecording)
-//			GetComponent<GameController> ().ChangeState (GameController.states.EDITING);
-//	}
 
 	void SetButton(bool _isOn)
 	{
 		isRecording = _isOn;
 		if (isRecording) {
 			label.text = "GRABANDO...";
-//			button.SetActive (false);
-//			panel.SetActive (true);
-//			Events.Log ("Recording...");
 		} else {
 			label.text = "PULSA PARA GRABAR";
-//			panel.SetActive (false);
-//			Events.Log ("");
 		}
-
 	}
 }
