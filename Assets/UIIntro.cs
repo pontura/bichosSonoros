@@ -13,6 +13,7 @@ public class UIIntro : MonoBehaviour {
 	void Start()
 	{
 //		panel.SetActive (true);
+		Events.OnBichoSelected += Clicked;
 
 	}
 
@@ -31,8 +32,9 @@ public class UIIntro : MonoBehaviour {
 	{
 		Data.Instance.bichoID = bichoID;
 //		GetComponent<UI> ().ChangeState (UI.states.RECORDING);
+		Debug.Log("onSubmit: "+ bichoID);
 		PlayerPrefs.SetInt ("bichoID", bichoID);
-		startingButtonField.text = "TABLET " + Data.Instance.bichoID.ToString();
+//		startingButtonField.text = "TABLET " + Data.Instance.bichoID.ToString();
 
 	}
 	public void SetOff () {

@@ -72,7 +72,8 @@ public class Config : MonoBehaviour
 	private void getDataFromJson(JSONNode content)
 	{		
 		URL_SERVER = content["server"]["url"];
-//		Events.OnSettingsLoaded ();
+		Debug.Log ("getDataFromJson" + content["server"]["url"]);
+		Events.OnSettingsLoaded ();
 
 	}
 

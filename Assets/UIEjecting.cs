@@ -17,7 +17,7 @@ public class UIEjecting : MonoBehaviour {
 	}
 	public void Reset()
 	{
-		GetComponent<UI> ().ChangeState (UI.states.RECORDING);
+		GetComponent<GameController> ().ChangeState (GameController.states.RECORDING);
 		SetOff ();
 	}
 	public void SetOff()

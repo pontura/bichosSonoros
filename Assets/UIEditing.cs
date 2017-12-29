@@ -75,12 +75,12 @@ public class UIEditing : MonoBehaviour {
 	}
 	void ResetScreen()
 	{
-		GetComponent<UI> ().ChangeState (UI.states.SENDING);
+		GetComponent<GameController> ().ChangeState (GameController.states.SENDING);
 		Events.OnDestroyRobots ();
 	}
 	public void Cancel()
 	{
-		GetComponent<UI> ().ChangeState (UI.states.RECORDING);
+		GetComponent<GameController> ().ChangeState (GameController.states.RECORDING);
 		Events.OnDestroyRobots ();
 	}
 	public void ChangeFXValue( AudioFXManager.types type, float value)

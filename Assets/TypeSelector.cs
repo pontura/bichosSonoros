@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TypeSelector : MonoBehaviour {
+	public UIIntro controller;
 	public Button button;
 
 	// Use this for initialization
@@ -17,10 +18,19 @@ public class TypeSelector : MonoBehaviour {
 			c.colorMultiplier = 1.0f;
 			b.colors = c;
 			((Text) b.GetComponentInChildren<Text>()).text =  Data.Instance.config.GetBicho (i).name;
+			b.name = i.ToString ();
+			b.onClick.AddListener(() => { ButtonClicked(b); });
+		
 //			b.GetComponent<Text> ().text = Data.Instance.config.GetBicho (i).name;
 		}			
 	}
-	
+
+	void ButtonClicked(Button i){
+		Debug.Log (i.name);
+		Events.OnBichoSelected (int.Parse(i.name));
+	}
+
+
 	// Update is called once per frame
 	void Update () {
 		

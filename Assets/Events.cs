@@ -21,4 +21,5 @@ public static class Events {
 	public static System.Action<AudioFXManager.types, bool> TurnSoundFX = delegate { };
 
 	public static System.Action<string> OnNewFile = delegate { };
+	public static System.Action<int> OnBichoSelected = delegate { };
 }

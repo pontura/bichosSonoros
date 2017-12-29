@@ -33,14 +33,14 @@ public class UIRecording : MonoBehaviour {
 	{
 		SetButton (false);
 		Events.SetRecording (false);
-		GetComponent<UI> ().ChangeState (UI.states.EDITING);
+		GetComponent<GameController> ().ChangeState (GameController.states.EDITING);
 	}
 	public void ToggleSaveButton () {		
 		return;
 		SetButton (!isRecording);
 		Events.SetRecording (isRecording);
 		if(!isRecording)
-			GetComponent<UI> ().ChangeState (UI.states.EDITING);
+			GetComponent<GameController> ().ChangeState (GameController.states.EDITING);
 	}
 
 	void SetButton(bool _isOn)
