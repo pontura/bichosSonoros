@@ -4,9 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIConfig : MonoBehaviour {
-	public InputField inputField;
+	// en el patron State, el estado guarda una refe al contexto (el que maneja los estados)
+	// https://sourcemaking.com/design_patterns/state
+	private GameController context;
+
 	public GameObject panel;
-	private UI context;
+
+	public InputField inputField;
 
 	void Start () {
 		panel.SetActive (true);
@@ -18,21 +22,20 @@ public class UIConfig : MonoBehaviour {
 
 	void onSettingsLoaded(){
 		// el setting de la url del server lo saco del json
+		// entonces si actualizo la app con testFairy me actualiza el setting también (no tengo que configurar 1 por 1)
 		inputField.text = Data.Instance.config.URL_SERVER;
 	}
 
 	public void onSubmit(string arg0){
-//		PlayerPrefs.SetString ("URL_SERVER", inputField.text);
-//		Debug.Log (inputField.text);
-
-		context.ChangeState (UI.states.INTRO);
+		context.ChangeState (GameController.states.INTRO);
 	}
+
 	// Update is called once per frame
 	void Update () {
 		
 	}
 
-	public void Init(UI ctx) {
+	public void Init(GameController ctx) {
 		panel.SetActive (true);
 		this.context = ctx;	
 	}

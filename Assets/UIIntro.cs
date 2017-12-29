@@ -6,18 +6,16 @@ using UnityEngine.UI;
 public class UIIntro : MonoBehaviour {
 
 	public GameObject panel;
-
-	public Text startingButtonField;
-	private UI context;
+	private GameController context;
 
 	void Start()
 	{
-//		panel.SetActive (true);
+		panel.SetActive (true);
 		Events.OnBichoSelected += Clicked;
 
 	}
 
-	public void Init(UI ctx) {
+	public void Init(GameController ctx) {
 		
 		panel.SetActive (true);
 		this.context = ctx;	
@@ -25,15 +23,16 @@ public class UIIntro : MonoBehaviour {
 
 	public void StartDefault()
 	{
-		GetComponent<UI> ().ChangeState (UI.states.RECORDING);
+		GetComponent<GameController> ().ChangeState (GameController.states.RECORDING);
 	}
 
 	public void Clicked(int bichoID)
 	{
 		Data.Instance.bichoID = bichoID;
-//		GetComponent<UI> ().ChangeState (UI.states.RECORDING);
-		Debug.Log("onSubmit: "+ bichoID);
 		PlayerPrefs.SetInt ("bichoID", bichoID);
+		context.ChangeState (GameController.states.RECORDING);
+
+//		GetComponent<UI> ().ChangeState (UI.states.RECORDING);
 //		startingButtonField.text = "TABLET " + Data.Instance.bichoID.ToString();
 
 	}

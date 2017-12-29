@@ -8,16 +8,13 @@ using UnityEngine.Assertions;
 
 public class MicRecorder : MonoBehaviour {
 
-
 	public AudioClip clip;
+
 	float MicLoudness;
 	bool isRecording = false;
 	public int value;
 
 	List<float> tempRecording = new List<float>();
-//	List<float[]> recordedClips = new List<float[]>();
-
-//	public List<AudioClip> audiosRecorded;
 	AudioSource audioSource;
 	public AudioClip newAudioClip;
 
@@ -27,6 +24,7 @@ public class MicRecorder : MonoBehaviour {
 		Events.SetRecording += SetRecording;
 		Events.SendRecording += SendRecording;
 	}
+
 	void ResizeRecording()
 	{
 		if (isRecording)
@@ -39,6 +37,7 @@ public class MicRecorder : MonoBehaviour {
 			Invoke("ResizeRecording", 1);
 		}
 	}
+
 	void Update()
 	{
 		if (!isRecording)
@@ -46,6 +45,7 @@ public class MicRecorder : MonoBehaviour {
 		MicLoudness = LevelMax ();
 		value = (int)(MicLoudness*100);
 	}
+
 	int _sampleWindow = 128;
 
 	//get data from microphone into audioclip
@@ -65,6 +65,7 @@ public class MicRecorder : MonoBehaviour {
 		}
 		return levelMax;
 	}
+
 	void SetRecording(bool _isRecording)
 	{
 		this.isRecording = _isRecording;
@@ -87,20 +88,12 @@ public class MicRecorder : MonoBehaviour {
 					fullClip[i] = clipData[i - tempRecording.Count];
 			}
 
-		//	recordedClips.Add(fullClip);
 			newAudioClip = AudioClip.Create("recorded samples", fullClip.Length, 1, 44100, false);
 			newAudioClip.SetData(fullClip, 0);
 
-		//	if (audiosRecorded.Count > 0) {
-			//	newAudioClip = Combine (audiosRecorded [0], newAudioClip);
-			//	audiosRecorded.RemoveAt (0);
-			//}
-
-			//audiosRecorded.Add (newAudioClip);
 
 			Events.OnAddRobot (newAudioClip, Data.Instance.bichoID, new Vector3(0,0,0));
 			SaveAudioClipToDisk (newAudioClip, "demo");
-
 		}
 		else
 		{
@@ -108,7 +101,6 @@ public class MicRecorder : MonoBehaviour {
 			tempRecording.Clear();
 			Microphone.End(null);
 			audioSource.clip = Microphone.Start(null, true, 10, 44100);
-			//Invoke("ResizeRecording", 1);
 		}
 	}
 
