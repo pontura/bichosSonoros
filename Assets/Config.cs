@@ -50,7 +50,7 @@ public class Config : MonoBehaviour
 
 
 	void Start()
-	{
+	{		
 		StartCoroutine(LoadData());
 	}
 
@@ -76,6 +76,7 @@ public class Config : MonoBehaviour
 		Events.OnSettingsLoaded ();
 
 	}
+
 
 	public Bicho GetBicho(int id)
 	{

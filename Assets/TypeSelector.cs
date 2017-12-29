@@ -20,14 +20,13 @@ public class TypeSelector : MonoBehaviour {
 			((Text) b.GetComponentInChildren<Text>()).text =  Data.Instance.config.GetBicho (i).name;
 			b.name = i.ToString ();
 			b.onClick.AddListener(() => { ButtonClicked(b); });
-		
-//			b.GetComponent<Text> ().text = Data.Instance.config.GetBicho (i).name;
 		}			
 	}
 
 	void ButtonClicked(Button i){
-		Debug.Log (i.name);
-		Events.OnBichoSelected (int.Parse(i.name));
+		Debug.Log ("TypeSelector: " + i.name);
+		Data.Instance.bichoID = int.Parse (i.name);
+		Events.OnBichoSelected (Data.Instance.bichoID);
 	}
 
 

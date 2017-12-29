@@ -18,6 +18,7 @@ public class Data : MonoBehaviour
 
 	[HideInInspector]
 	public Config config;
+	[HideInInspector]
 	public int bichoID;
 
     public static Data Instance
@@ -39,8 +40,10 @@ public class Data : MonoBehaviour
 		if(PlayerPrefs.GetInt("bichoID") != 0)
 			bichoID = PlayerPrefs.GetInt("bichoID");
 		mInstance = this;               
+
         DontDestroyOnLoad(this.gameObject);
 
     }
+
 
 }

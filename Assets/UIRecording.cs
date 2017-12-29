@@ -20,6 +20,7 @@ public class UIRecording : MonoBehaviour {
 	public void Init(GameController context) 
 	{	
 		panel.SetActive (true);	
+		button.GetComponent<UIButton> ().Init ();
 		SetButton (false);
 		waveform.Init ();	
 	}

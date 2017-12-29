@@ -11,31 +11,21 @@ public class UIIntro : MonoBehaviour {
 	void Start()
 	{
 		panel.SetActive (true);
-		Events.OnBichoSelected += Clicked;
+		Events.OnBichoSelected += onBichoSelected;
 
 	}
 
-	public void Init(GameController ctx) {
-		
+	public void Init(GameController ctx) {		
 		panel.SetActive (true);
 		this.context = ctx;	
 	}
 
-	public void StartDefault()
+	private void onBichoSelected(int bichoId)
 	{
-		GetComponent<GameController> ().ChangeState (GameController.states.RECORDING);
-	}
-
-	public void Clicked(int bichoID)
-	{
-		Data.Instance.bichoID = bichoID;
-		PlayerPrefs.SetInt ("bichoID", bichoID);
+		Debug.Log ("UIintro: " + bichoId);
 		context.ChangeState (GameController.states.RECORDING);
-
-//		GetComponent<UI> ().ChangeState (UI.states.RECORDING);
-//		startingButtonField.text = "TABLET " + Data.Instance.bichoID.ToString();
-
 	}
+
 	public void SetOff () {
 		panel.SetActive (false);
 	}
