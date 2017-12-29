@@ -7,25 +7,22 @@ public class UIRecording : MonoBehaviour {
 	
 	public GameObject panel;
 	public Waveform waveform;
-
-	public MicRecorder micRecorder;
-	bool isRecording;
 	public GameObject button;
+	public Text label;
+
+//	public MicRecorder micRecorder;
+	bool isRecording;
 	private GameController context;
-	private Text field;
 
 	public void Awake()
 	{
-		
-
 	}
+
 	public void Init(GameController context) 
 	{	
 		panel.SetActive (true);	
 		SetButton (false);
-		waveform.Init ();
-		button.SetActive (true);
-		field = button.GetComponent<Text> ();
+		waveform.Init ();	
 	}
 
 	public void SetOff()
@@ -34,11 +31,13 @@ public class UIRecording : MonoBehaviour {
 	}
 	public void StartRecording()
 	{
+		if (isRecording)
+			return;
 		SetButton (true);
 		Events.SetRecording (true);
 		Invoke ("DoneRecording", 4);
 	}
-	void DoneRecording()
+	public void DoneRecording()
 	{
 		SetButton (false);
 		Events.SetRecording (false);
@@ -46,24 +45,24 @@ public class UIRecording : MonoBehaviour {
 	}
 
 
-	public void ToggleSaveButton () {		
+//	public void ToggleSaveButton () {		
 //		return;
-		SetButton (!isRecording);
-		Events.SetRecording (isRecording);
+//		SetButton (!isRecording);
+//		Events.SetRecording (isRecording);
 //		if(!isRecording)
 //			GetComponent<GameController> ().ChangeState (GameController.states.EDITING);
-	}
+//	}
 
 	void SetButton(bool _isOn)
 	{
 		isRecording = _isOn;
 		if (isRecording) {
-			field.text = "GRABANDO...";
+			label.text = "GRABANDO...";
 //			button.SetActive (false);
 //			panel.SetActive (true);
 //			Events.Log ("Recording...");
 		} else {
-			field.text = "PULSA PARA GRABAR";
+			label.text = "PULSA PARA GRABAR";
 //			panel.SetActive (false);
 //			Events.Log ("");
 		}
