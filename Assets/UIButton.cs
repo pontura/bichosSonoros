@@ -6,11 +6,17 @@ using UnityEngine.UI;
 public class UIButton : MonoBehaviour {
 
 	public Button b;
+	public Text t;
 	// Use this for initialization
 	void Start () {
-		b.colors.normalColor = Data.Instance.config.GetBicho (Data.Instance.bichoID).colors[0];
-		b.colors.highlightedColor = Data.Instance.config.GetBicho (Data.Instance.bichoID).colors[1];
-		b.colors.colorMultiplier = 1.0f;
+		ColorBlock c = new ColorBlock ();
+		c.normalColor = Data.Instance.config.GetBicho(Data.Instance.bichoID).colors[0];
+		c.highlightedColor = Data.Instance.config.GetBicho(Data.Instance.bichoID).colors[1];
+		c.pressedColor = Data.Instance.config.GetBicho (Data.Instance.bichoID).colors [1];
+		c.colorMultiplier = 1.0f;
+		b.colors = c;
+
+		t.color = c.normalColor;
 	}
 	
 	// Update is called once per frame
