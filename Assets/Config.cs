@@ -10,19 +10,23 @@ public class Config : MonoBehaviour
 {
 	public string URL_SERVER = "";
 
+
 	public Vector2 limits = new Vector2 (8, 30);
 
 
+//	[HideInInspector]
+	public Bicho A;
+	public Bicho B;
+	public Bicho C;
+	public Bicho D;
 
-	public bicho bicho1;
-	public bicho bicho2;
-	public bicho bicho3;
-	public bicho bicho4;
+//	public Bicho[] types = {A, B, C, D};
 
 	[Serializable]
-	public class bicho
+	public class Bicho
 	{
 		public Color[] colors;
+		public string name;
 	}
 
 	public FXData[] data1;
@@ -47,37 +51,40 @@ public class Config : MonoBehaviour
 
 	void Start()
 	{
-//		StartCoroutine (LoadData ());
-		LoadData();
+		StartCoroutine(LoadData());
 	}
 
-//	IEnumerator
-	void LoadData()
+
+	IEnumerator LoadData()
 	{
 		string settingsUrl = "file://" + Application.dataPath + "/../" + "settings.json";
 		WWW www = new WWW(settingsUrl);
-//		yield return www;
+		yield return www;
 		LoadSettings(www.text);
 	}
 		
 	public void LoadSettings(string json_data)
 	{
 		var Json = SimpleJSON.JSON.Parse(json_data);
-		fillArray(Json);
+		getDataFromJson(Json);
 	}
 
-	private void fillArray(JSONNode content)
+	private void getDataFromJson(JSONNode content)
 	{		
 		URL_SERVER = content["server"]["url"];
-		Events.OnSettingsLoaded ();
+//		Events.OnSettingsLoaded ();
+
 	}
-	public bicho GetBicho(int id)
+
+	public Bicho GetBicho(int id)
 	{
 		switch (id) {
-		case 1: return bicho1;
-		case 2: return bicho2;
-		case 3: return bicho3;
-		default: return bicho4;
+			case 0: return A;
+			case 1: return B;
+			case 2: return C;
+			case 3: return D;
+		default:
+			return A;
 		}
 
 	}

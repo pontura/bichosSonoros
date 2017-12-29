@@ -12,6 +12,7 @@ public class ServerManager : MonoBehaviour {
 	void Awake()
 	{
 		Events.OnSettingsLoaded += OnSettingsLoaded;
+		Debug.Log (this + " awake()");
 	}
 	void OnSettingsLoaded()
 	{

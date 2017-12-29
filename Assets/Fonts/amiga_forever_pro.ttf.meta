@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: d50bba5f4a3b6451883099f4df40c794
+timeCreated: 1514524486
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Amiga Forever Pro
+  fontNames:
+  - Amiga Forever Pro
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
