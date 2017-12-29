@@ -6018,6 +6018,7 @@ GameObject:
   - component: {fileID: 1342916436}
   - component: {fileID: 1342916435}
   - component: {fileID: 1342916438}
+  - component: {fileID: 1342916439}
   m_Layer: 5
   m_Name: recButton
   m_TagString: Untagged
@@ -6082,18 +6083,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1342916436}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 300302372}
-        m_MethodName: StartRecording
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1342916436
@@ -6176,6 +6166,19 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &1342916439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1342916433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 361ee4a8d020642bea451e7fe2fcbe55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  b: {fileID: 1342916435}
+  t: {fileID: 109691117}
 --- !u!1001 &1376437314
 Prefab:
   m_ObjectHideFlags: 0
@@ -8072,7 +8075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sampleAudioClip: {fileID: 0}
-  state: 2
+  state: 1
   config: {fileID: 170033670}
   intro: {fileID: 1511422646}
   recording: {fileID: 300302370}
