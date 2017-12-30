@@ -217,6 +217,7 @@ public class MicRecorder : MonoBehaviour {
 
 		return byteArray;
 	}
+
 	void SendRecording()
 	{
 		UploadFile(url, Data.Instance.config.URL_SERVER+ "upload.php");
@@ -225,6 +226,7 @@ public class MicRecorder : MonoBehaviour {
 	{
 		StartCoroutine(UploadFileCo(localFileName, uploadURL));
 	}
+
 	IEnumerator UploadFileCo(string localFileName, string uploadURL)
 	{
 		

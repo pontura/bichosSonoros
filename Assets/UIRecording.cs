@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIRecording : MonoBehaviour {
-	
+	private GameController context;
+
 	public GameObject panel;
 	public Waveform waveform;
 	public GameObject button;
 	public Text label;
 
 	bool isRecording;
-	private GameController context;
 
 	public void Awake()
 	{
@@ -29,6 +29,7 @@ public class UIRecording : MonoBehaviour {
 	{
 		panel.SetActive (false);
 	}
+
 	public void StartRecording()
 	{
 		if (isRecording)
@@ -37,13 +38,15 @@ public class UIRecording : MonoBehaviour {
 		Events.SetRecording (true);
 		Invoke ("DoneRecording", 4);
 	}
+
 	public void DoneRecording()
 	{
+		if (!isRecording) // ya se acabo
+			return;
 		SetButton (false);
 		Events.SetRecording (false);
 	}
-
-
+		
 	void SetButton(bool _isOn)
 	{
 		isRecording = _isOn;

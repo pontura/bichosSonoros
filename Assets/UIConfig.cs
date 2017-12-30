@@ -15,6 +15,7 @@ public class UIConfig : MonoBehaviour {
 	void Start () {
 		panel.SetActive (true);
 		Events.OnSettingsLoaded += onSettingsLoaded;
+
 		var se = new InputField.SubmitEvent ();
 		se.AddListener (onSubmit);
 		inputField.onEndEdit = se;
@@ -25,6 +26,7 @@ public class UIConfig : MonoBehaviour {
 		// entonces si actualizo la app con testFairy me actualiza el setting también (no tengo que configurar 1 por 1)
 		inputField.text = Data.Instance.config.URL_SERVER;
 	}
+
 
 	public void onSubmit(string arg0){
 		context.ChangeState (GameController.states.INTRO);
