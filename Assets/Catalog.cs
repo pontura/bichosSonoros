@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Catalog : MonoBehaviour
 {
+	public GameObject parent;
 	public Button button;
 	// Use this for initialization
 	void Start ()
@@ -16,7 +17,7 @@ public class Catalog : MonoBehaviour
 		c.colorMultiplier = 1.0f;
 
 		for (int i = 0; i < 4; i++) {
-			Button b = Instantiate (button, this.transform);
+			Button b = Instantiate (button, Vector3.zero, Quaternion.identity, parent.transform);
 			b.colors = c;
 			((Text)b.GetComponentInChildren<Text> ()).text = i.ToString();
 			b.name = i.ToString ();
