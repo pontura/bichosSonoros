@@ -720,8 +720,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a646580e0575d4c7490477a81466f581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  container: {fileID: 76985100}
-  robot_to_initialize: {fileID: 1749448805}
+  container: {fileID: 775329535}
+  robot_to_initialize: {fileID: 114067073146204934, guid: d4a197c71ad122648a41f0f8050bd9fd,
+    type: 2}
   cameraFollow: {fileID: 460379257}
   robots: []
   totalRobots: 2
@@ -7631,12 +7632,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1738817452}
---- !u!114 &1749448805 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114067073146204934, guid: d4a197c71ad122648a41f0f8050bd9fd,
-    type: 2}
-  m_PrefabInternal: {fileID: 2028373918}
-  m_Script: {fileID: 11500000, guid: a10b11e4e14cc2c488fdcf39de70fa4c, type: 3}
 --- !u!1 &1799213009
 GameObject:
   m_ObjectHideFlags: 0
