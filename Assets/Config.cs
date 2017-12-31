@@ -77,6 +77,10 @@ public class Config : MonoBehaviour
 
 	}
 
+	public Bicho GetCurrentBicho()
+	{
+		return GetBicho (Data.Instance.bichoID);
+	}
 
 	public Bicho GetBicho(int id)
 	{
