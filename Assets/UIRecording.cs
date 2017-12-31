@@ -12,6 +12,10 @@ public class UIRecording : MonoBehaviour {
 	public GameObject button;
 	public Text label;
 
+	int currentSamples = 0;
+	int currentSampleSelected = -1;
+	int maxSamples = 4;
+
 	bool isRecording;
 
 	public void Awake()
@@ -35,9 +39,12 @@ public class UIRecording : MonoBehaviour {
 	{
 		if (isRecording)
 			return;
+		if (currentSamples >= maxSamples)
+			return; // no puedo grabar mas audios
 		SetButton (true);
 		Events.SetRecording (true);
-		catalogButtons.turnButtonOn (0);
+		catalogButtons.turnButtonOn (currentSamples++);
+		Debug.Log (currentSamples);
 		Invoke ("DoneRecording", 4);
 	}
 

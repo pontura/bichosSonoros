@@ -25,7 +25,7 @@ public class RobotPart : MonoBehaviour {
 		trail.material.color =  color;
 
 		float f = ((float)Random.Range (0, 10) - 5) / 20;
-		print ("F: " + f);
+//		print ("F: " + f);
 		color.r += ((float)Random.Range (0, 10) - 5) / 20;
 		color.g += ((float)Random.Range (0, 10) - 5) / 20;
 		color.b += ((float)Random.Range (0, 10) - 5) / 20;
