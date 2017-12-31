@@ -11,60 +11,20 @@ public class MicRecorder : MonoBehaviour {
 	float MicLoudness;
 	bool isRecording = false;
 	public int value;
-
-	List<float> tempRecording = new List<float>();
 	AudioSource audioSource;
 
 	AudioClip newAudioClip;
-	List<AudioClip> audioClips;
 
 	void Start()
 	{
 		audioSource = GetComponent<AudioSource> ();
-		Events.SetRecording += SetRecording;
+		Events.OnSetRecording += SetRecording;
 		Events.SendRecording += SendRecording;
-		audioClips = new List<AudioClip> ();
-	}
-
-	void ResizeRecording()
-	{
-		if (isRecording)
-		{
-			//add the next second of recorded audio to temp vector
-			int length = 44100;
-			float[] clipData = new float[length];
-			audioSource.clip.GetData(clipData, 0);
-			tempRecording.AddRange(clipData);
-			Invoke("ResizeRecording", 1);
-		}
 	}
 
 	void Update()
 	{
-		if (!isRecording)
-			return;
-		MicLoudness = LevelMax ();
-		value = (int)(MicLoudness*100);
-	}
-
-	int _sampleWindow = 128;
-
-	//get data from microphone into audioclip
-	float  LevelMax()
-	{
-		float levelMax = 0;
-		float[] waveData = new float[_sampleWindow];
-		int micPosition = Microphone.GetPosition(null)-(_sampleWindow+1); // null means the first microphone
-		if (micPosition < 0) return 0;
-		audioSource.clip.GetData(waveData, micPosition);
-		// Getting a peak on the last 128 samples
-		for (int i = 0; i < _sampleWindow; i++) {
-			float wavePeak = waveData [i];// * waveData[i];
-			if (levelMax < wavePeak) {
-				levelMax = wavePeak;
-			}
-		}
-		return levelMax;
+	
 	}
 
 	void SetRecording(bool _isRecording)
@@ -80,22 +40,9 @@ public class MicRecorder : MonoBehaviour {
 			float[] clipData = new float[length];
 			audioSource.clip.GetData(clipData, 0); 		// me guardo lo que estaba en el audioSource
 
-//			float[] fullClip = new float[clipData.Length + tempRecording.Count];
-//			for (int i = 0; i < fullClip.Length; i++)
-//			{
-//				if (i < tempRecording.Count)
-//					fullClip[i] = tempRecording[i];
-//				else
-//					fullClip[i] = clipData[i - tempRecording.Count];
-//			}
-
-//			newAudioClip = AudioClip.Create("recorded samples", fullClip.Length, 1, 44100, false);
-//			newAudioClip.SetData(fullClip, 0);
-
 			newAudioClip = AudioClip.Create("recorded samples", clipData.Length, 1, 44100, false);
 			newAudioClip.SetData(clipData, 0);
 
-			audioClips.Add (newAudioClip);
 			SaveAudioClipToDisk (newAudioClip, "demo");
 
 			Events.OnNewAudioClip (newAudioClip);
@@ -104,11 +51,14 @@ public class MicRecorder : MonoBehaviour {
 		else
 		{
 			audioSource.Stop();
-			tempRecording.Clear();
 			Microphone.End(null);
 			audioSource.clip = Microphone.Start(null, true, 10, 44100);
 		}
 	}
+
+
+
+
 
 	public static void LoadAudioClipFromDisk(AudioSource audioSource, string filename)
 	{

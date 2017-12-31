@@ -23,7 +23,7 @@ public class Waveform : MonoBehaviour {
 
 	void Start () {		
 		micRecorder = GetComponent<MicRecorder> ();
-		Events.SetRecording += SetRecording;
+		Events.OnSetRecording += SetRecording;
 		panel.gameObject.SetActive (false);
 	}
 

@@ -12,6 +12,7 @@ public class TabletRobotManager : MonoBehaviour {
 	Robot newRobot;
 
 	void Start () {
+		Events.OnSetRecording += OnSetRecording;
 		Events.OnCreateNewRobot += OnCreateNewRobot;
 		Events.OnDestroyRobots += OnDestroyRobots;
 		Events.OnCheckToDestroyRobot += OnCheckToDestroyRobot;
@@ -25,30 +26,40 @@ public class TabletRobotManager : MonoBehaviour {
 		newRobot.transform.SetParent (container);
 
 		Vector3 pos = Vector3.zero;
-		if (robots.Count > 1) {
-			foreach (Robot robot in robots)
-				pos += robot.body.transform.position;
-			pos /= robots.Count;
-		}
-		pos += new Vector3 (Random.Range (0, 10) - 5, 0, Random.Range (0, 10) - 5);
-
+//		if (robots.Count > 0) {
+//			foreach (Robot robot in robots)
+//				pos += robot.body.transform.position;
+//			pos /= robots.Count;
+//		}
+//		pos += new Vector3 (Random.Range (0, 10) - 5, 0, Random.Range (0, 10) - 5);
+//
 		newRobot.Init (audioClip, Data.Instance.bichoID, nodeID, values, pos);
 
 		cameraFollow.Init (newRobot);
 		robots.Add (newRobot);
-	
 		Events.OnRobotAdded (newRobot);
-
 	}
 
 	public void OnShowRobot(int nodeID)
 	{
-		Debug.Log (nodeID);
 		foreach (Robot r in robots) {
 			r.gameObject.SetActive (false);
 			if(r.nodeID == nodeID)r.gameObject.SetActive (true);
 		}
 	}
+
+	void OnSetRecording (bool recording)
+	{
+		if(recording) StopPlayback ();
+	}
+
+	void StopPlayback()
+	{
+		foreach (Robot r in robots) {
+			r.gameObject.SetActive (false);
+		}
+	}
+
 	void OnCheckToDestroyRobot()
 	{
 		if(robots.Count>=totalRobots)
@@ -57,11 +68,13 @@ public class TabletRobotManager : MonoBehaviour {
 			robots.RemoveAt (0);
 		}
 	}
+
 	void OnDestroyRobot(Robot robot)
 	{
 		robots.Remove (robot);
 		Destroy (robot.gameObject);
 	}
+
 	void OnDestroyRobots()
 	{
 		DestroyImmediate (newRobot.gameObject);

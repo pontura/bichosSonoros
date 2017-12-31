@@ -44,7 +44,7 @@ public class UIRecording : MonoBehaviour {
 		if (currentSamples >= maxSamples)
 			return; // no puedo grabar mas audios
 		SetButton (true);
-		Events.SetRecording (true);
+		Events.OnSetRecording (true);
 		Invoke ("DoneRecording", 4);
 	}
 
@@ -53,7 +53,8 @@ public class UIRecording : MonoBehaviour {
 		if (!isRecording) // ya se acabo
 			return;
 		SetButton (false);
-		Events.SetRecording (false);
+		Events.OnSetRecording (false);
+
 	}
 		
 	void SetButton(bool _isOn)
@@ -68,7 +69,6 @@ public class UIRecording : MonoBehaviour {
 
 	void OnNewAudioClip(AudioClip ac)
 	{	
-//		robots.OnShowRobot (currentSamples);	
 		catalogButtons.turnButtonOn(currentSamples);
 		Events.OnCreateNewRobot(ac, Data.Instance.bichoID, currentSamples, Vector3.zero);
 		Events.OnShowRobot (currentSamples);
