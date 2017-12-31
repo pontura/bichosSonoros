@@ -8,7 +8,7 @@ using UnityEngine.Assertions;
 
 public class MicRecorder : MonoBehaviour {
 
-	public AudioClip clip;
+//	public AudioClip clip; // por si quiero cargar un audio externo.
 
 	float MicLoudness;
 	bool isRecording = false;
@@ -16,13 +16,16 @@ public class MicRecorder : MonoBehaviour {
 
 	List<float> tempRecording = new List<float>();
 	AudioSource audioSource;
-	public AudioClip newAudioClip;
+
+	AudioClip newAudioClip;
+	List<AudioClip> audioClips;
 
 	void Start()
 	{
 		audioSource = GetComponent<AudioSource> ();
 		Events.SetRecording += SetRecording;
 		Events.SendRecording += SendRecording;
+		audioClips = new List<AudioClip> ();
 	}
 
 	void ResizeRecording()
@@ -69,15 +72,17 @@ public class MicRecorder : MonoBehaviour {
 	void SetRecording(bool _isRecording)
 	{
 		this.isRecording = _isRecording;
-		Debug.Log(isRecording == true ? "Is Recording" : "Off");
+
+//		Debug.Log(isRecording == true ? "Is Recording" : "Off");
 
 		if (isRecording == false)
 		{
-			int length = Microphone.GetPosition(null);
-
+		
+			int length = Microphone.GetPosition(null);	// se acabó la grabación, cuanto duro?
 			Microphone.End(null);
+
 			float[] clipData = new float[length];
-			audioSource.clip.GetData(clipData, 0);
+			audioSource.clip.GetData(clipData, 0); // me guardo lo que estaba en el audioSource
 
 			float[] fullClip = new float[clipData.Length + tempRecording.Count];
 			for (int i = 0; i < fullClip.Length; i++)
@@ -90,6 +95,8 @@ public class MicRecorder : MonoBehaviour {
 
 			newAudioClip = AudioClip.Create("recorded samples", fullClip.Length, 1, 44100, false);
 			newAudioClip.SetData(fullClip, 0);
+
+			audioClips.Add (newAudioClip);
 
 
 			Events.OnAddRobot (newAudioClip, Data.Instance.bichoID, new Vector3(0,0,0));

@@ -44,7 +44,6 @@ public class UIRecording : MonoBehaviour {
 		SetButton (true);
 		Events.SetRecording (true);
 		catalogButtons.turnButtonOn (currentSamples++);
-		Debug.Log (currentSamples);
 		Invoke ("DoneRecording", 4);
 	}
 
