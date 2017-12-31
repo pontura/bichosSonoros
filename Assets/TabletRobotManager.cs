@@ -9,18 +9,19 @@ public class TabletRobotManager : MonoBehaviour {
 	public CameraFollow cameraFollow;
 	public List<Robot> robots;
 	public int totalRobots = 2;
+	Robot newRobot;
 
 	void Start () {
-		Events.OnAddRobot += OnAddRobot;
+		Events.OnCreateNewRobot += OnCreateNewRobot;
 		Events.OnDestroyRobots += OnDestroyRobots;
 		Events.OnCheckToDestroyRobot += OnCheckToDestroyRobot;
 		Events.OnDestroyRobot += OnDestroyRobot;
+		Events.OnShowRobot += OnShowRobot;
 	}
-	Robot newRobot;
-	void OnAddRobot (AudioClip audioClip, int id, Vector3 values) {
-		Debug.Log (audioClip);
 
-		int bichoID = id;
+	void OnCreateNewRobot (AudioClip audioClip, int type, int nodeID, Vector3 values) {
+
+//		int bichoID = id;
 		newRobot = Instantiate (robot_to_initialize);
 		newRobot.transform.SetParent (container);
 
@@ -32,14 +33,22 @@ public class TabletRobotManager : MonoBehaviour {
 		}
 		pos += new Vector3 (Random.Range (0, 10) - 5, 0, Random.Range (0, 10) - 5);
 
-		newRobot.Init (audioClip, bichoID, values, pos);
+		newRobot.Init (audioClip, Data.Instance.bichoID, nodeID, values, pos);
 
 		cameraFollow.Init (newRobot);
+		robots.Add (newRobot);
+	
 		Events.OnRobotAdded (newRobot);
 
-		robots.Add (newRobot);
+	}
 
-
+	public void OnShowRobot(int nodeID)
+	{
+		Debug.Log (nodeID);
+		foreach (Robot r in robots) {
+			r.gameObject.SetActive (false);
+			if(r.nodeID == nodeID)r.gameObject.SetActive (true);
+		}
 	}
 	void OnCheckToDestroyRobot()
 	{

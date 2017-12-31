@@ -21,11 +21,12 @@ public class Robot : MonoBehaviour {
 	public int nodes = 6;
 	public RobotParts robotParts;
 	bool audioExists;
-	int nodeID = 0;
+	public int nodeID = 0;
 
-	public void Init(AudioClip audioClip, int id, Vector3 values, Vector3 pos) {
+	public void Init(AudioClip audioClip, int type, int nodeID, Vector3 values, Vector3 pos) {
 
-	
+		this.nodeID = nodeID;
+
 		bicho1Head.SetActive (false);
 		bicho2Head.SetActive (false);
 		bicho3Head.SetActive (false);
@@ -33,7 +34,7 @@ public class Robot : MonoBehaviour {
 
 		Config.FXData[] fxData = null;
 
-		switch (id) {
+		switch (type) {
 		case 1:
 			bicho1Head.SetActive (true);
 			fxData = Data.Instance.config.data1;
@@ -60,7 +61,7 @@ public class Robot : MonoBehaviour {
 			}
 		}
 
-		this.id = id;
+		this.id = type;
 		audioSource.clip = audioClip;
 
 		audioSource.Play();
@@ -71,7 +72,7 @@ public class Robot : MonoBehaviour {
 		audioSource = GetComponent<AudioSource> ();
 		robotParts = GetComponent<RobotParts> ();
 
-		robotParts.Init (nodes, id, pos);
+		robotParts.Init (nodes, type, pos);
 
 		SetAudioClipLoaded ();
 

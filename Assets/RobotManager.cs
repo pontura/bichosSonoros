@@ -8,15 +8,18 @@ public class RobotManager : MonoBehaviour {
 	public Robot robot_to_initialize;
 	public CameraFollow cameraFollow;
 	public List<Robot> robots;
-	public int totalRobots = 2;
+//	[SerializeField]
+	public int totalRobots = 4;
 
 	void Start () {
-		Events.OnAddRobot += OnAddRobot;
+//		Events.OnCreateNewRobot += OnAddRobot;
+		Events.OnDestroyRobot += OnDestroyRobot;
 		Events.OnDestroyRobots += OnDestroyRobots;
 		Events.OnCheckToDestroyRobot += OnCheckToDestroyRobot;
-		Events.OnDestroyRobot += OnDestroyRobot;
 	}
+
 	Robot newRobot;
+
 	void OnAddRobot (AudioClip audioClip, int id, Vector3 values) {
 
 		int bichoID = id;
@@ -31,18 +34,16 @@ public class RobotManager : MonoBehaviour {
 		}
 		pos += new Vector3 (Random.Range (0, 10) - 5, 0, Random.Range (0, 10) - 5);
 
-		newRobot.Init (audioClip, bichoID, values, pos);
+//		newRobot.Init (audioClip, bichoID, values, pos);
 
 		cameraFollow.Init (newRobot);
 		Events.OnRobotAdded (newRobot);
-
 		robots.Add (newRobot);
-
 
 	}
 	void OnCheckToDestroyRobot()
 	{
-		if(robots.Count>=totalRobots)
+	if(robots.Count>=totalRobots)
 		{			
 			Destroy (robots[0].gameObject);
 			robots.RemoveAt (0);

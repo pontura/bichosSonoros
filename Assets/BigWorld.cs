@@ -28,7 +28,7 @@ public class BigWorld : MonoBehaviour {
 		Events.Log += Log;
 	}
 	void Start() {
-		Events.OnAddRobot (defaultAudioClip, 1, Vector3.zero);
+//		Events.OnCreateNewRobot (defaultAudioClip, 1, Vector3.zero);
 	}
 	void Log(string text)
 	{
@@ -63,7 +63,7 @@ public class BigWorld : MonoBehaviour {
 			float value1 = float.Parse(data [1]);
 			float value2 = float.Parse(data [2]);
 			float value3 = float.Parse(data [3]);
-			Events.OnAddRobot (newClip, bichoID, new Vector3(value1,value2,value3));
+//			Events.OnCreateNewRobot (newClip, bichoID, new Vector3(value1,value2,value3));
 		}
 		else
 		{

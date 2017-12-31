@@ -11,9 +11,10 @@ public class UIRecording : MonoBehaviour {
 	public Waveform waveform;
 	public GameObject button;
 	public Text label;
+	public TabletRobotManager robots;
 
 	int currentSamples = 0;
-	int currentSampleSelected = -1;
+//	int currentSampleSelected = -1;
 	int maxSamples = 4;
 
 	bool isRecording;
@@ -28,6 +29,7 @@ public class UIRecording : MonoBehaviour {
 		button.GetComponent<UIButton> ().Init ();
 		SetButton (false);
 		waveform.Init ();	
+		Events.OnNewAudioClip += OnNewAudioClip;
 	}
 
 	public void SetOff()
@@ -43,7 +45,7 @@ public class UIRecording : MonoBehaviour {
 			return; // no puedo grabar mas audios
 		SetButton (true);
 		Events.SetRecording (true);
-		catalogButtons.turnButtonOn (currentSamples++);
+
 		Invoke ("DoneRecording", 4);
 	}
 
@@ -63,5 +65,14 @@ public class UIRecording : MonoBehaviour {
 		} else {
 			label.text = "PULSA PARA GRABAR";
 		}
+	}
+
+	void OnNewAudioClip(AudioClip ac)
+	{	
+//		robots.OnShowRobot (currentSamples);	
+		catalogButtons.turnButtonOn(currentSamples);
+		Events.OnCreateNewRobot(ac, Data.Instance.bichoID, currentSamples, Vector3.zero);
+		Events.OnShowRobot (currentSamples);
+		currentSamples++;
 	}
 }

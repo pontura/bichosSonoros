@@ -8,8 +8,6 @@ using UnityEngine.Assertions;
 
 public class MicRecorder : MonoBehaviour {
 
-//	public AudioClip clip; // por si quiero cargar un audio externo.
-
 	float MicLoudness;
 	bool isRecording = false;
 	public int value;
@@ -72,9 +70,7 @@ public class MicRecorder : MonoBehaviour {
 	void SetRecording(bool _isRecording)
 	{
 		this.isRecording = _isRecording;
-
-//		Debug.Log(isRecording == true ? "Is Recording" : "Off");
-
+	
 		if (isRecording == false)
 		{
 		
@@ -97,9 +93,9 @@ public class MicRecorder : MonoBehaviour {
 			newAudioClip.SetData(fullClip, 0);
 
 			audioClips.Add (newAudioClip);
+			Events.OnNewAudioClip (newAudioClip);
 
-
-			Events.OnAddRobot (newAudioClip, Data.Instance.bichoID, new Vector3(0,0,0));
+//			Events.OnCreateNewRobot (newAudioClip, Data.Instance.bichoID, new Vector3(0,0,0));
 			SaveAudioClipToDisk (newAudioClip, "demo");
 		}
 		else

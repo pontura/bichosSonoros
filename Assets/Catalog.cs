@@ -26,23 +26,30 @@ public class Catalog : MonoBehaviour
 			b.onClick.AddListener (() => {
 				ButtonClicked (b);
 			});
-//			https://issuetracker.unity3d.com/issues/ui-button-doesnt-change-to-disabled-color-when-it-gets-disabled-by-toggle
+			//https://issuetracker.unity3d.com/issues/ui-button-doesnt-change-to-disabled-color-when-it-gets-disabled-by-toggle
 			b.interactable = false;
 		}			
+
+		Events.OnShowRobot += OnShowRobot;
 	}
 
 	public void turnButtonOn(int i)
 	{
-		Debug.Log (parent);
-		Debug.Log (parent.transform.Find(i.ToString()));
+//		Debug.Log (parent);
+//		Debug.Log (parent.transform.Find(i.ToString()));
 		Button b = parent.transform.Find(i.ToString()).gameObject.GetComponent<Button>();
 		b.interactable = true;
 	}
-	void ButtonClicked (Button i)
-	{
-			
 
-//		Events.OnBichoSelected (Data.Instance.bichoID);
+	void ButtonClicked (Button i)
+	{			
+		Events.OnShowRobot (int.Parse(i.name));
+	}
+
+	void OnShowRobot(int i)
+	{
+		Button b = parent.transform.Find(i.ToString()).gameObject.GetComponent<Button>();
+		b.Select ();
 	}
 
 	// Update is called once per frame
