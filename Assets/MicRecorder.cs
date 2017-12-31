@@ -71,32 +71,35 @@ public class MicRecorder : MonoBehaviour {
 	{
 		this.isRecording = _isRecording;
 	
-		if (isRecording == false)
+		if (!isRecording)	
 		{
 		
 			int length = Microphone.GetPosition(null);	// se acabó la grabación, cuanto duro?
-			Microphone.End(null);
+			Microphone.End(null);						// apaga el mic
 
 			float[] clipData = new float[length];
-			audioSource.clip.GetData(clipData, 0); // me guardo lo que estaba en el audioSource
+			audioSource.clip.GetData(clipData, 0); 		// me guardo lo que estaba en el audioSource
 
-			float[] fullClip = new float[clipData.Length + tempRecording.Count];
-			for (int i = 0; i < fullClip.Length; i++)
-			{
-				if (i < tempRecording.Count)
-					fullClip[i] = tempRecording[i];
-				else
-					fullClip[i] = clipData[i - tempRecording.Count];
-			}
+//			float[] fullClip = new float[clipData.Length + tempRecording.Count];
+//			for (int i = 0; i < fullClip.Length; i++)
+//			{
+//				if (i < tempRecording.Count)
+//					fullClip[i] = tempRecording[i];
+//				else
+//					fullClip[i] = clipData[i - tempRecording.Count];
+//			}
 
-			newAudioClip = AudioClip.Create("recorded samples", fullClip.Length, 1, 44100, false);
-			newAudioClip.SetData(fullClip, 0);
+//			newAudioClip = AudioClip.Create("recorded samples", fullClip.Length, 1, 44100, false);
+//			newAudioClip.SetData(fullClip, 0);
+
+			newAudioClip = AudioClip.Create("recorded samples", clipData.Length, 1, 44100, false);
+			newAudioClip.SetData(clipData, 0);
 
 			audioClips.Add (newAudioClip);
+			SaveAudioClipToDisk (newAudioClip, "demo");
+
 			Events.OnNewAudioClip (newAudioClip);
 
-//			Events.OnCreateNewRobot (newAudioClip, Data.Instance.bichoID, new Vector3(0,0,0));
-			SaveAudioClipToDisk (newAudioClip, "demo");
 		}
 		else
 		{

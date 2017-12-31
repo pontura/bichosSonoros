@@ -35,8 +35,6 @@ public class Catalog : MonoBehaviour
 
 	public void turnButtonOn(int i)
 	{
-//		Debug.Log (parent);
-//		Debug.Log (parent.transform.Find(i.ToString()));
 		Button b = parent.transform.Find(i.ToString()).gameObject.GetComponent<Button>();
 		b.interactable = true;
 	}
@@ -52,7 +50,6 @@ public class Catalog : MonoBehaviour
 		b.Select ();
 	}
 
-	// Update is called once per frame
 	void Update ()
 	{
 		

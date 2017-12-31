@@ -45,7 +45,6 @@ public class UIRecording : MonoBehaviour {
 			return; // no puedo grabar mas audios
 		SetButton (true);
 		Events.SetRecording (true);
-
 		Invoke ("DoneRecording", 4);
 	}
 
