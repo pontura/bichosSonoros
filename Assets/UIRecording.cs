@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIRecording : MonoBehaviour {
 	private GameController context;
 
+	public Catalog catalogButtons;
 	public GameObject panel;
 	public Waveform waveform;
 	public GameObject button;
@@ -36,6 +37,7 @@ public class UIRecording : MonoBehaviour {
 			return;
 		SetButton (true);
 		Events.SetRecording (true);
+		catalogButtons.turnButtonOn (0);
 		Invoke ("DoneRecording", 4);
 	}
 

@@ -14,6 +14,8 @@ public class Catalog : MonoBehaviour
 		c.normalColor = Data.Instance.config.GetCurrentBicho().colors [0];
 		c.highlightedColor = Data.Instance.config.GetCurrentBicho().colors [1];
 		c.pressedColor = Data.Instance.config.GetCurrentBicho().colors [1];
+		c.disabledColor = Color.grey;
+
 		c.colorMultiplier = 1.0f;
 
 		for (int i = 0; i < 4; i++) {
@@ -24,14 +26,22 @@ public class Catalog : MonoBehaviour
 			b.onClick.AddListener (() => {
 				ButtonClicked (b);
 			});
-//			b.enabled = false;
+//			https://issuetracker.unity3d.com/issues/ui-button-doesnt-change-to-disabled-color-when-it-gets-disabled-by-toggle
+			b.interactable = false;
 		}			
 	}
 
+	public void turnButtonOn(int i)
+	{
+		Debug.Log (parent);
+		Debug.Log (parent.transform.Find(i.ToString()));
+		Button b = parent.transform.Find(i.ToString()).gameObject.GetComponent<Button>();
+		b.interactable = true;
+	}
 	void ButtonClicked (Button i)
 	{
-//		Debug.Log ("TypeSelector: " + i.name);
-//		Data.Instance.bichoID = int.Parse (i.name);
+			
+
 //		Events.OnBichoSelected (Data.Instance.bichoID);
 	}
 
