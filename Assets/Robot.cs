@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class Robot : MonoBehaviour {
 
@@ -52,11 +53,15 @@ public class Robot : MonoBehaviour {
 	public void setPitch(float value)
 	{
 		audioValues[0] = value;
-		Debug.Log ("pitch: " + value);
 	}
+
 	public void setStart(float value)
 	{
 		audioValues[1] = value;
+		Debug.Log ((int) (audioValues [1] * audioSource.clip.samples));
+		Debug.Log (audioSource.clip.samples);
+		audioSource.timeSamples = (int)(audioValues [1] * audioSource.clip.samples);
+		audioSource.Play ();
 	}
 
 	public void setEnd(float value)
@@ -66,8 +71,18 @@ public class Robot : MonoBehaviour {
 
 	public void SetActive(bool active)
 	{
+		Debug.Log ("Play");
+
 		gameObject.SetActive (active);
+//		audioSource.timeSamples = (int) (audioValues [1] * audioSource.clip.samples * 44100);
+//		Debug.Log (audioSource.timeSamples);
 		audioSource.Play ();
+
+//		audioSource.timeSamples
+
+
+
+
 	}
 
 	void CheckOnDestroy()
