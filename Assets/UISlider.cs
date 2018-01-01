@@ -27,7 +27,7 @@ public class UISlider : MonoBehaviour {
 	void ValueChangeCheck()
 	{
 		value = Mathf.Lerp(initialValue, finalValue, slider.value);
-		uiEditing.ChangeFXValue(type, value);
+//		uiEditing.ChangeFXValue(type, value);
 	}
 	public void Clicked()
 	{

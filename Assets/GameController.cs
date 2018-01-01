@@ -26,7 +26,8 @@ public class GameController : MonoBehaviour {
 	public GameObject recording;
 	UIRecording uiRecording;
 
-	UIEditing uiEditing;
+
+
 	UIEjecting uiSending;
 
 	bool isRecording;
@@ -41,7 +42,7 @@ public class GameController : MonoBehaviour {
 		uiConfig = config.GetComponent<UIConfig> ();
 		uiIntro = intro.GetComponent<UIIntro> ();
 		uiRecording = recording.GetComponent<UIRecording> ();
-		uiEditing = GetComponent<UIEditing> ();
+
 		uiSending = GetComponent<UIEjecting> ();
 //		ChangeState (states.CONFIG);
 
@@ -67,9 +68,7 @@ public class GameController : MonoBehaviour {
 			case states.RECORDING:
 				uiRecording.Init (this);
 				break;
-//			case states.EDITING:
-//				uiEditing.Init ();
-//				break;
+	
 //			case states.SENDING:
 //				uiSending.Init ();
 //				break;
@@ -80,7 +79,6 @@ public class GameController : MonoBehaviour {
 		uiConfig.SetOff ();
 		uiIntro.SetOff ();
 		uiRecording.SetOff ();
-		uiEditing.SetOff ();
 		uiSending.SetOff ();
 
 	}

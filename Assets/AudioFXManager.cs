@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioFXManager : MonoBehaviour {
 
-	public AudioSource audioSource;
+//	public AudioSource audioSource;
 	public AudioDistortionFilter distortion;
 	public AudioEchoFilter echo;
 	public AudioLowPassFilter lowPass;
@@ -81,8 +81,8 @@ public class AudioFXManager : MonoBehaviour {
 			distortion.enabled = true;
 			distortion.distortionLevel = value;
 			break;
-		case AudioFXManager.types.PITCH:
-			audioSource.pitch = value;
+//		case AudioFXManager.types.PITCH:
+//			audioSource.pitch = value;
 			break;
 		case AudioFXManager.types.LOWPAS:
 			lowPass.enabled = true;

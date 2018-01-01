@@ -26,15 +26,8 @@ public class TabletRobotManager : MonoBehaviour {
 		newRobot.transform.SetParent (container);
 
 		Vector3 pos = Vector3.zero;
-//		if (robots.Count > 0) {
-//			foreach (Robot robot in robots)
-//				pos += robot.body.transform.position;
-//			pos /= robots.Count;
-//		}
-//		pos += new Vector3 (Random.Range (0, 10) - 5, 0, Random.Range (0, 10) - 5);
-//
-		newRobot.Init (audioClip, Data.Instance.bichoID, nodeID, values, pos);
 
+		newRobot.Init (audioClip, Data.Instance.bichoID, nodeID, values, pos);
 		cameraFollow.Init (newRobot);
 		robots.Add (newRobot);
 		Events.OnRobotAdded (newRobot);

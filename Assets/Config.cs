@@ -28,22 +28,6 @@ public class Config : MonoBehaviour
 		public Color[] colors;
 		public string name;
 	}
-
-	public FXData[] data1;
-	public FXData[] data2;
-	public FXData[] data3;
-	public FXData[] data4;
-
-	[Serializable]
-	public class FXData
-	{
-		public AudioFXManager.types type;
-		public float defaultData;
-		public float initialData;
-		public float finalData;
-		public float value;
-	}
-
 	public float value1;
 	public float value2;
 	public float value3;

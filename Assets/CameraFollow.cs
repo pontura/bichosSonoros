@@ -10,7 +10,7 @@ public class CameraFollow : MonoBehaviour {
 	bool ejecting;
 	float zoomSpeed = 100;
 	public float newSize = 30;
-	public RobotManager robotManager;
+//	public RobotManager robotManager;
 
 	void Start()
 	{
@@ -20,7 +20,7 @@ public class CameraFollow : MonoBehaviour {
 	}
 	void ChangeZoom()
 	{
-		newSize = robotManager.robots.Count * 2;
+//		newSize = robotManager.robots.Count * 2;
 		newSize += Random.Range (2, 38);
 		Invoke ("ChangeZoom", Random.Range (5, 10));
 	}
