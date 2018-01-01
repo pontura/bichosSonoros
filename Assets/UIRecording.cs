@@ -52,6 +52,7 @@ public class UIRecording : MonoBehaviour {
 	{
 		if (!isRecording) // ya se acabo
 			return;
+		CancelInvoke ("DoneRecording");
 		SetButton (false);
 		Events.OnSetRecording (false);
 
