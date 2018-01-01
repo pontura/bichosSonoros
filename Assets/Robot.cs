@@ -22,11 +22,11 @@ public class Robot : MonoBehaviour {
 	public int nodes = 6;
 	bool audioExists;
 
-	private Vector3 audioValues; 
+	private Vector3 audioValues;
 
 	public void Awake()
 	{
-		
+		audioValues = new Vector3(1.0f, 0.0f, 1.0f); 
 	}
 
 	public void Init(AudioClip audioClip, int type, int nodeID, Vector3 values, Vector3 pos) {
@@ -44,7 +44,8 @@ public class Robot : MonoBehaviour {
 		robotParts = GetComponent<RobotParts> ();
 		robotParts.Init (nodes, type, pos);
 
-		SetAudioClipLoaded ();
+		audioExists = true;
+		audioSpectrum.Init (this);
 
 	}
 
@@ -77,10 +78,7 @@ public class Robot : MonoBehaviour {
 			Invoke ("CheckOnDestroy", 10);
 		}
 	}
-	void SetAudioClipLoaded() {
-		audioExists = true;
-		audioSpectrum.Init (this);
-	}
+
 
 	void LateUpdate()
 	{
@@ -91,6 +89,8 @@ public class Robot : MonoBehaviour {
 		int currentNodeID = (int)Mathf.Lerp(0,nodes-1, currentNormalizedTime);
 		float newValue = audioSpectrumValue / smoothTransform;
 		robotParts.TransformPart (currentNodeID, newValue);
+
+		audioSource.pitch = audioValues [0];
 
 	}
 	void LoopAudio()

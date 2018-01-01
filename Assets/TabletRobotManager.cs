@@ -23,7 +23,7 @@ public class TabletRobotManager : MonoBehaviour {
 
 	void OnCreateNewRobot (AudioClip audioClip, int type, int nodeID, Vector3 values) {
 
-		currentRobotSelected++;
+		currentRobotSelected = nodeID;
 		newRobot = Instantiate (robot_to_initialize);
 		newRobot.transform.SetParent (container);
 
