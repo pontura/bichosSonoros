@@ -67,22 +67,14 @@ public class Robot : MonoBehaviour {
 	public void setEnd(float value)
 	{
 		audioValues[2] = value;
+		audioSource.Play ();
 	}
 
 	public void SetActive(bool active)
 	{
 		Debug.Log ("Play");
-
 		gameObject.SetActive (active);
-//		audioSource.timeSamples = (int) (audioValues [1] * audioSource.clip.samples * 44100);
-//		Debug.Log (audioSource.timeSamples);
 		audioSource.Play ();
-
-//		audioSource.timeSamples
-
-
-
-
 	}
 
 	void CheckOnDestroy()
@@ -106,6 +98,10 @@ public class Robot : MonoBehaviour {
 		robotParts.TransformPart (currentNodeID, newValue);
 
 		audioSource.pitch = audioValues [0];
+
+		if (audioSource.timeSamples >= audioValues [2] * audioSource.clip.samples) {
+			audioSource.Stop ();
+		}
 
 	}
 	void LoopAudio()

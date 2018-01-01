@@ -42,14 +42,17 @@ public class UIEditing : MonoBehaviour {
 		robotManager.getActiveRobot ().setPitch (pitch.value);
 
 	}
+
 	public void OnStartChange(Slider sampleStart)
 	{
 		robotManager.getActiveRobot ().setStart (sampleStart.value);
 	}
-	public void OnEndChange(float pitch)
-	{
 
+	public void OnEndChange(Slider sampleEnd)
+	{
+		robotManager.getActiveRobot ().setEnd (sampleEnd.value);
 	}
+
 	public void Init() {
 		panel.SetActive (true);
 	}
