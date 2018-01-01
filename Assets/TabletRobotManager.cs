@@ -41,6 +41,14 @@ public class TabletRobotManager : MonoBehaviour {
 		}
 	}
 
+	public Robot getActiveRobot()
+	{
+		foreach (Robot r in robots) {
+			return (r.isActiveAndEnabled) ? r : null; 
+		}
+		return null;
+	}
+
 	void OnSetRecording (bool recording)
 	{
 		if(recording) StopPlayback ();

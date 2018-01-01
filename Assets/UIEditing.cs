@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIEditing : MonoBehaviour {
 
 	public GameObject panel;
-	public Robot robot;
+	public TabletRobotManager robotManager;
 
 	void Start()
 	{
@@ -18,11 +18,15 @@ public class UIEditing : MonoBehaviour {
 	{
 //		this.robot = _robot;
 
+		panel.SetActive (true);
+
 	}
 
-	public void OnPitchChange(float pitch)
+	public void OnPitchChange(Slider pitch)
 	{
-		robot.setPitch (pitch);
+		Debug.Log (pitch.value);
+		robotManager.getActiveRobot ().setPitch (pitch.value);
+//		robot.setPitch (pitch);
 	}
 	public void OnStartChange(float pitch)
 	{

@@ -60,6 +60,7 @@ public class Robot : MonoBehaviour {
 	public void setPitch(float value)
 	{
 		audioValues[0] = value;
+		Debug.Log ("pitch: " + value);
 	}
 	public void setStart(float value)
 	{
