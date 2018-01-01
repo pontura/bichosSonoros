@@ -14,7 +14,6 @@ public class UIRecording : MonoBehaviour {
 	public TabletRobotManager robots;
 
 	int currentSamples = 0;
-//	int currentSampleSelected = -1;
 	int maxSamples = 4;
 
 	bool isRecording;
@@ -72,7 +71,7 @@ public class UIRecording : MonoBehaviour {
 	{	
 		catalogButtons.turnButtonOn(currentSamples);
 		Events.OnCreateNewRobot(ac, Data.Instance.bichoID, currentSamples, Vector3.zero);
-		Events.OnShowRobot (currentSamples);
+//		Events.OnShowRobot (currentSamples);
 		currentSamples++;
 	}
 }

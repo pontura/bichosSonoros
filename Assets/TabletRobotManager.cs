@@ -10,6 +10,7 @@ public class TabletRobotManager : MonoBehaviour {
 	public List<Robot> robots;
 	public int totalRobots = 2;
 	Robot newRobot;
+	int currentRobotSelected = -1;
 
 	void Start () {
 		Events.OnSetRecording += OnSetRecording;
@@ -22,6 +23,7 @@ public class TabletRobotManager : MonoBehaviour {
 
 	void OnCreateNewRobot (AudioClip audioClip, int type, int nodeID, Vector3 values) {
 
+		currentRobotSelected++;
 		newRobot = Instantiate (robot_to_initialize);
 		newRobot.transform.SetParent (container);
 
@@ -31,22 +33,26 @@ public class TabletRobotManager : MonoBehaviour {
 		cameraFollow.Init (newRobot);
 		robots.Add (newRobot);
 		Events.OnRobotAdded (newRobot);
+		Events.OnShowRobot (currentRobotSelected);
 	}
 
 	public void OnShowRobot(int nodeID)
 	{
+		currentRobotSelected = nodeID;
 		foreach (Robot r in robots) {
-			r.gameObject.SetActive (false);
-			if(r.nodeID == nodeID)r.gameObject.SetActive (true);
+			r.SetActive (false);
+			if(r.nodeID == nodeID)r.SetActive (true);
 		}
 	}
 
 	public Robot getActiveRobot()
 	{
+		
+		Robot activeRobot = null;
 		foreach (Robot r in robots) {
-			return (r.isActiveAndEnabled) ? r : null; 
+			activeRobot = (r.nodeID == currentRobotSelected) ? r : activeRobot; 
 		}
-		return null;
+		return activeRobot;
 	}
 
 	void OnSetRecording (bool recording)

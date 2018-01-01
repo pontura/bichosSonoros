@@ -24,7 +24,10 @@ public class Robot : MonoBehaviour {
 
 	private Vector3 audioValues; 
 
-
+	public void Awake()
+	{
+		
+	}
 
 	public void Init(AudioClip audioClip, int type, int nodeID, Vector3 values, Vector3 pos) {
 
@@ -38,23 +41,11 @@ public class Robot : MonoBehaviour {
 		Head.SetActive (true);
 	
 
-
-
-//		audioSource.Play();
-//		SetAudioClipLoaded();
-
-
 		robotParts = GetComponent<RobotParts> ();
 		robotParts.Init (nodes, type, pos);
 
 		SetAudioClipLoaded ();
 
-//		if (SceneManager.GetActiveScene ().name == "Tablets")
-//			audioSource.loop = true;
-//		else
-//			LoopAudio ();
-
-//		Invoke ("CheckOnDestroy", Random.Range(120,300));
 	}
 
 	public void setPitch(float value)
@@ -70,6 +61,12 @@ public class Robot : MonoBehaviour {
 	public void setEnd(float value)
 	{
 		audioValues[2] = value;
+	}
+
+	public void SetActive(bool active)
+	{
+		gameObject.SetActive (active);
+		audioSource.Play ();
 	}
 
 	void CheckOnDestroy()
