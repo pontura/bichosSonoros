@@ -116,10 +116,14 @@ public class Robot : MonoBehaviour {
 
 	public void SendToServer()
 	{
-	
+		NetManager.SaveAudioClipToDisk (audioSource.clip, "demo");
+		Invoke ("load", 3);
 	}
 
-
+	void load()
+	{
+		NetManager.LoadAudioClipFromDisk (audioSource, "demo");
+	}
 	void LoopAudio()
 	{
 		Invoke ("LoopAudio", Random.Range (8, 20));

@@ -16,9 +16,11 @@ public class NetManager : MonoBehaviour {
 	void Update () {
 		
 	}
+
 	public static void LoadAudioClipFromDisk(AudioSource audioSource, string filename)
 	{
-		if (File.Exists(Application.persistentDataPath + "/" + filename))
+		
+		if (File.Exists(Path.Combine(Application.dataPath, filename))) //Application.persistentDataPath + "/" + filename
 		{
 			//deserialize local binary file to AudioClipSample
 			BinaryFormatter bf = new BinaryFormatter();
@@ -35,6 +37,7 @@ public class NetManager : MonoBehaviour {
 			//set to the AudioSource
 			audioSource.clip = newClip;
 			audioSource.Play();
+			Debug.Log("File Exists...");
 		}
 		else
 		{
@@ -42,16 +45,18 @@ public class NetManager : MonoBehaviour {
 		}
 	}
 
-	BinaryFormatter bf;
-	byte[] bytes;
-	string url;
 
-	public void SaveAudioClipToDisk(AudioClip audioClip, string filename)
+	public static void SaveAudioClipToDisk(AudioClip audioClip, string filename)
 	{
+		BinaryFormatter bf;
+		byte[] bytes;
+		string url;
+
 		Debug.Log("Save AudioClip To Disk " + filename);
 		//create file
 		bf = new BinaryFormatter();
 		url = Application.persistentDataPath + "/" + filename;
+		url = Path.Combine(Application.dataPath, filename);
 		FileStream file = File.Create(url);
 
 		//serialize by setting the sample, frequency, samples, and channels to the new AudioClipSample instance
@@ -72,6 +77,7 @@ public class NetManager : MonoBehaviour {
 			bytes = stream.ToArray();
 		}
 
+		Debug.Log (file.Length);
 		file.Close();
 	}
 
@@ -133,8 +139,9 @@ public class NetManager : MonoBehaviour {
 
 	void SendRecording()
 	{
-		UploadFile(url, Data.Instance.config.URL_SERVER+ "upload.php");
+//		UploadFile(url, Data.Instance.config.URL_SERVER+ "upload.php");
 	}
+
 	void UploadFile(string localFileName, string uploadURL)
 	{
 		StartCoroutine(UploadFileCo(localFileName, uploadURL));

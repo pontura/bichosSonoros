@@ -392,6 +392,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114067073146204934, guid: d4a197c71ad122648a41f0f8050bd9fd,
+        type: 2}
+      propertyPath: net
+      value: 
+      objectReference: {fileID: 76985105}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d4a197c71ad122648a41f0f8050bd9fd, type: 2}
   m_IsPrefabParent: 0
@@ -5389,7 +5394,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1569899581}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1173088509}
+        m_MethodName: SendRobot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1569899580}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1569899581

@@ -768,6 +768,7 @@ MonoBehaviour:
   type: 0
   nodeID: 0
   audioSource: {fileID: 82681823611777664}
+  net: {fileID: 0}
   audioSpectrumValue: 0
   audioSpectrum: {fileID: 114339228966017860}
   body: {fileID: 1044566438390190}
