@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class UIEjecting : MonoBehaviour {
 
-	public GameObject panel;
+//	public GameObject panel;
 	void Start()
 	{
-		panel.SetActive (false);
+//		panel.SetActive (false);
 	}
 
 	public void Init() {
-		panel.SetActive (true);
+//		panel.SetActive (true);
 		Invoke ("Reset",3);
 		Events.SendRecording ();
 	}
@@ -22,7 +22,7 @@ public class UIEjecting : MonoBehaviour {
 	}
 	public void SetOff()
 	{
-		panel.SetActive (false);
+//		panel.SetActive (false);
 	}
 
 }
