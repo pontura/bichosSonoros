@@ -71,7 +71,6 @@ public class UIRecording : MonoBehaviour {
 	{	
 		catalogButtons.turnButtonOn(currentSamples);
 		Events.OnCreateNewRobot(ac, Data.Instance.bichoID, currentSamples, Vector3.zero);
-//		Events.OnShowRobot (currentSamples);
 		currentSamples++;
 	}
 }

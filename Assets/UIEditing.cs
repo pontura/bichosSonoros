@@ -64,6 +64,10 @@ public class UIEditing : MonoBehaviour {
 		panel.SetActive (false);
 	}
 		
+	public void SendRobot(Button b)
+	{
+		robotManager.getActiveRobot ().SendToServer ();
+	}
 }
 
 //honorino 173

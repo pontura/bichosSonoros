@@ -113,6 +113,13 @@ public class Robot : MonoBehaviour {
 		}
 
 	}
+
+	public void SendToServer()
+	{
+	
+	}
+
+
 	void LoopAudio()
 	{
 		Invoke ("LoopAudio", Random.Range (8, 20));
