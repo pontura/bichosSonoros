@@ -22,7 +22,7 @@ public class Robot : MonoBehaviour {
 	public float smoothTransform = 40f;
 	public int nodes = 6;
 	bool audioExists;
-
+	bool looped;
 	private Vector3 audioValues;
 
 	public void Awake()
@@ -37,8 +37,7 @@ public class Robot : MonoBehaviour {
 		this.nodeID = nodeID;
 		this.audioValues = values;
 		body.transform.position = pos;
-
-
+		looped = false;
 		Head.SetActive (true);
 	
 
@@ -68,6 +67,11 @@ public class Robot : MonoBehaviour {
 	{
 		audioValues[2] = value;
 		audioSource.Play ();
+	}
+
+	public void setLoop(bool loop)
+	{
+		this.looped = loop;
 	}
 
 	public void SetActive(bool active)
@@ -100,7 +104,12 @@ public class Robot : MonoBehaviour {
 		audioSource.pitch = audioValues [0];
 
 		if (audioSource.timeSamples >= audioValues [2] * audioSource.clip.samples) {
-			audioSource.Stop ();
+			if (looped) {
+				Debug.Log ("replay");
+				audioSource.Play ();
+			} else {
+				audioSource.Stop ();
+			}
 		}
 
 	}

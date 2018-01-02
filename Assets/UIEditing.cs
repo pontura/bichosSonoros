@@ -32,15 +32,12 @@ public class UIEditing : MonoBehaviour {
 	void OnShowRobot(int robot)
 	{
 		panel.SetActive (true);
+		// RECALL
 	}
 
 	public void OnPitchChange(Slider pitch)
 	{
-//		Debug.Log (pitch.value);
-//		Debug.Log (robotManager.getActiveRobot ());
-//		Debug.Log (pitch);
 		robotManager.getActiveRobot ().setPitch (pitch.value);
-
 	}
 
 	public void OnStartChange(Slider sampleStart)
@@ -51,6 +48,11 @@ public class UIEditing : MonoBehaviour {
 	public void OnEndChange(Slider sampleEnd)
 	{
 		robotManager.getActiveRobot ().setEnd (sampleEnd.value);
+	}
+
+	public void OnLoop(Toggle loop)
+	{		
+		robotManager.getActiveRobot ().setLoop (loop.isOn);
 	}
 
 	public void Init() {
