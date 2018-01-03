@@ -57,8 +57,8 @@ public class Robot : MonoBehaviour {
 	public void setStart(float value)
 	{
 		audioValues[1] = value;
-		Debug.Log ((int) (audioValues [1] * audioSource.clip.samples));
-		Debug.Log (audioSource.clip.samples);
+//		Debug.Log ((int) (audioValues [1] * audioSource.clip.samples));
+//		Debug.Log (audioSource.clip.samples);
 		audioSource.timeSamples = (int)(audioValues [1] * audioSource.clip.samples);
 		audioSource.Play ();
 	}
@@ -76,7 +76,7 @@ public class Robot : MonoBehaviour {
 
 	public void SetActive(bool active)
 	{
-		Debug.Log ("Play");
+//		Debug.Log ("Play");
 		gameObject.SetActive (active);
 		audioSource.Play ();
 	}
@@ -105,7 +105,7 @@ public class Robot : MonoBehaviour {
 
 		if (audioSource.timeSamples >= audioValues [2] * audioSource.clip.samples) {
 			if (looped) {
-				Debug.Log ("replay");
+//				Debug.Log ("replay");
 				audioSource.Play ();
 			} else {
 				audioSource.Stop ();
@@ -120,5 +120,25 @@ public class Robot : MonoBehaviour {
 		Invoke ("LoopAudio", Random.Range (8, 20));
 		audioSource.Play ();
 		Events.OnCameraFollow (this);
+	}
+
+	public string pitch
+	{
+		get { return audioValues [0].ToString ("#.00"); }
+	}
+
+	public string inSample
+	{
+		get { return audioValues [1].ToString ("#.00"); }
+	}
+
+	public string outSample
+	{
+		get { return audioValues[2].ToString("#.00");}
+	}
+
+	public string loop
+	{	
+		get { return looped ? "y" : "n"; }
 	}
 }

@@ -98,19 +98,18 @@ public class TabletRobotManager : MonoBehaviour {
 		if (!canSend)
 			return;
 		canSend = false;
-		currentRecording = SystemInfo.deviceUniqueIdentifier + "_" + r.type + "_" + r.nodeID;
+		currentRecording = SystemInfo.deviceUniqueIdentifier + "_" + r.type + "_" + r.nodeID + "_" + r.pitch + "_" + r.inSample + "_" + r.outSample + "_" + r.loop;
 		NetManager.SaveAudioClipToDisk (r.audioSource.clip, currentRecording);
 		Invoke ("send", 3);
 	}
 
 	void send()
 	{
-		//		NetManager.LoadAudioClipFromDisk (audioSource, currentRecording);
 		net.SendRecording(currentRecording);
 		canSend = true;
+		// TODO avisarle al usuario que ya se mandó...
 
-		Invoke ("load", 3);
-
+//		Invoke ("load", 3);  // for testing pourposes
 	}
 
 	void load(){

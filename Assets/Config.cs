@@ -13,14 +13,10 @@ public class Config : MonoBehaviour
 
 	public Vector2 limits = new Vector2 (8, 30);
 
-
-//	[HideInInspector]
 	public Bicho A;
 	public Bicho B;
 	public Bicho C;
 	public Bicho D;
-
-//	public Bicho[] types = {A, B, C, D};
 
 	[Serializable]
 	public class Bicho
@@ -37,17 +33,9 @@ public class Config : MonoBehaviour
 	void Start()
 	{		
 		StartCoroutine(LoadSettings());
-//		LoadSettings();
 	}
 
 
-//	IEnumerator LoadData()
-//	{
-//		string settingsUrl = "file://" + Application.dataPath + "/../" + "settings.json";
-//		WWW www = new WWW(settingsUrl);
-//		yield return www;
-//		LoadSettings(www.text);
-//	}
 		
 	IEnumerator LoadSettings()
 	{
