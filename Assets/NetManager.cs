@@ -20,11 +20,11 @@ public class NetManager : MonoBehaviour {
 	public void LoadAudioClipFromDisk(AudioSource audioSource, string filename)
 	{
 		
-		if (File.Exists(Path.Combine(Application.dataPath, filename))) //Application.persistentDataPath + "/" + filename
+		if (File.Exists(filename)) //Application.persistentDataPath + "/" + filename
 		{
 			//deserialize local binary file to AudioClipSample
 			BinaryFormatter bf = new BinaryFormatter();
-			FileStream file = File.Open(Application.dataPath + "/" + filename, FileMode.Open);
+			FileStream file = File.Open(filename, FileMode.Open);
 			AudioClipSample clipSample = (AudioClipSample)bf.Deserialize(file);
 			file.Close();
 
@@ -48,15 +48,26 @@ public class NetManager : MonoBehaviour {
 
 	public static void SaveAudioClipToDisk(AudioClip audioClip, string filename)
 	{
+		string url;
+
+		#if UNITY_ANDROID
+		url = Path.Combine(Application.persistentDataPath, filename);
+		#else
+		url = Path.Combine(Application.dataPath, filename);
+		#endif
+
 		BinaryFormatter bf;
 		byte[] bytes;
-		string url;
+
+
+		//save files in android
+		// https://forum.unity.com/threads/help-with-access-write-files-on-android.72819/
 
 		Debug.Log("Save AudioClip To Disk " + filename);
 		//create file
 		bf = new BinaryFormatter();
-//		url = Application.persistentDataPath + "/" + filename;
-		url = Path.Combine(Application.dataPath, filename);
+
+
 		FileStream file = File.Create(url);
 
 		//serialize by setting the sample, frequency, samples, and channels to the new AudioClipSample instance
@@ -139,37 +150,39 @@ public class NetManager : MonoBehaviour {
 
 	public void SendRecording(string filename)
 	{
-		if (File.Exists (Path.Combine (Application.dataPath, filename))) {
-			string file = Path.Combine (Application.dataPath, filename);
-			UploadFile(file, Data.Instance.config.URL_SERVER+ "upload.php");
+		string url;
+		#if UNITY_ANDROID
+		url = Path.Combine(Application.persistentDataPath, filename);
+		#else
+		url = Path.Combine(Application.dataPath, filename);
+		#endif
+
+		if (File.Exists (url)) {
+			StartCoroutine(UploadFileCo(url, Data.Instance.config.URL_SERVER+ "upload.php"));
+
+//			UploadFile(url, Data.Instance.config.URL_SERVER+ "upload.php");
 		};
+			
 
 //		string url = File.Exists (Path.Combine (Application.dataPath, filename));
 //		NetManager.UploadFile(url, Data.Instance.config.URL_SERVER+ "upload.php");
 	
 	}
 
-	void UploadFile(string localFileName, string uploadURL)
-	{
-		StartCoroutine(UploadFileCo(localFileName, uploadURL));
-	}
-
-
-//	void UploadFile(string uploadURL)
-//	{
-//		StartCoroutine(UploadFileCo(uploadURL));
-//	}
 
 	IEnumerator UploadFileCo(string filename, string uploadURL)
 	{
-		WWW localFile = new WWW("file:///"+filename);
-		Debug.Log (localFile.url);
+		WWW localFile = new WWW("file://"+ filename);  // le quite una / a file porque filename ya trae una
 		yield return localFile;
+
 		WWWForm postForm = new WWWForm();
 		postForm.AddBinaryData("file", localFile.bytes, filename, "text/plain");
-		Debug.Log (uploadURL);
+
 		WWW upload = new WWW(uploadURL, postForm);
+		Debug.Log (localFile.url);
+		Debug.Log (uploadURL);
 		yield return upload;
+
 		if (upload.error == null)
 		{
 			Debug.Log(upload.text);

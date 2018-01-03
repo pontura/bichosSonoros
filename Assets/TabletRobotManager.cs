@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using System.IO;
+using System;
 public class TabletRobotManager : MonoBehaviour {
 
 	public Transform container;
@@ -112,8 +114,15 @@ public class TabletRobotManager : MonoBehaviour {
 	}
 
 	void load(){
-		
-		net.LoadAudioClipFromDisk (getActiveRobot().audioSource, currentRecording);
+		string url;
+
+		#if UNITY_ANDROID
+			url = Path.Combine(Application.persistentDataPath, currentRecording);
+		#else
+			url = "./../../server/"+currentRecording;
+		#endif
+
+		net.LoadAudioClipFromDisk (getActiveRobot().audioSource, url );
 		getActiveRobot().audioSource.Play ();
 	}
 }
