@@ -17,7 +17,7 @@ public class NetManager : MonoBehaviour {
 		
 	}
 
-	public static void LoadAudioClipFromDisk(AudioSource audioSource, string filename)
+	public void LoadAudioClipFromDisk(AudioSource audioSource, string filename)
 	{
 		
 		if (File.Exists(Path.Combine(Application.dataPath, filename))) //Application.persistentDataPath + "/" + filename
@@ -55,7 +55,7 @@ public class NetManager : MonoBehaviour {
 		Debug.Log("Save AudioClip To Disk " + filename);
 		//create file
 		bf = new BinaryFormatter();
-		url = Application.persistentDataPath + "/" + filename;
+//		url = Application.persistentDataPath + "/" + filename;
 		url = Path.Combine(Application.dataPath, filename);
 		FileStream file = File.Create(url);
 
@@ -166,7 +166,7 @@ public class NetManager : MonoBehaviour {
 		Debug.Log (localFile.url);
 		yield return localFile;
 		WWWForm postForm = new WWWForm();
-		postForm.AddBinaryData("file", localFile.bytes, filename);
+		postForm.AddBinaryData("file", localFile.bytes, filename, "text/plain");
 		Debug.Log (uploadURL);
 		WWW upload = new WWW(uploadURL, postForm);
 		yield return upload;

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Audio;
 public class TabletRobotManager : MonoBehaviour {
 
 	public Transform container;
@@ -98,15 +98,22 @@ public class TabletRobotManager : MonoBehaviour {
 		canSend = false;
 		currentRecording = SystemInfo.deviceUniqueIdentifier + "_" + r.type + "_" + r.nodeID;
 		NetManager.SaveAudioClipToDisk (r.audioSource.clip, currentRecording);
-		Invoke ("load", 3);
+		Invoke ("send", 3);
 	}
 
-	void load()
+	void send()
 	{
 		//		NetManager.LoadAudioClipFromDisk (audioSource, currentRecording);
 		net.SendRecording(currentRecording);
 		canSend = true;
 
+		Invoke ("load", 3);
 
+	}
+
+	void load(){
+		
+		net.LoadAudioClipFromDisk (getActiveRobot().audioSource, currentRecording);
+		getActiveRobot().audioSource.Play ();
 	}
 }
