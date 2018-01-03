@@ -11,6 +11,7 @@ public class TabletRobotManager : MonoBehaviour {
 	public int totalRobots = 2;
 	Robot newRobot;
 	int currentRobotSelected = -1;
+	public NetManager net;
 
 	void Start () {
 		Events.OnSetRecording += OnSetRecording;
@@ -85,5 +86,27 @@ public class TabletRobotManager : MonoBehaviour {
 	void OnDestroyRobots()
 	{
 		DestroyImmediate (newRobot.gameObject);
+	}
+
+	string currentRecording = "";
+	bool canSend = true;
+	public void SendToServer()
+	{		
+		Robot r = getActiveRobot ();
+		if (!canSend)
+			return;
+		canSend = false;
+		currentRecording = SystemInfo.deviceUniqueIdentifier + "_" + r.type + "_" + r.nodeID;
+		NetManager.SaveAudioClipToDisk (r.audioSource.clip, currentRecording);
+		Invoke ("load", 3);
+	}
+
+	void load()
+	{
+		//		NetManager.LoadAudioClipFromDisk (audioSource, currentRecording);
+		net.SendRecording(currentRecording);
+		canSend = true;
+
+
 	}
 }

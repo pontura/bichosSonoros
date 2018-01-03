@@ -631,6 +631,7 @@ MonoBehaviour:
   cameraFollow: {fileID: 460379257}
   robots: []
   totalRobots: 2
+  net: {fileID: 76985105}
 --- !u!82 &76985102
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5966,7 +5967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sampleAudioClip: {fileID: 0}
-  state: 1
+  state: 0
   config: {fileID: 170033670}
   intro: {fileID: 1511422646}
   recording: {fileID: 300302370}

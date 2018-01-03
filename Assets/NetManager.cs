@@ -137,9 +137,16 @@ public class NetManager : MonoBehaviour {
 		return byteArray;
 	}
 
-	void SendRecording()
+	public void SendRecording(string filename)
 	{
-//		UploadFile(url, Data.Instance.config.URL_SERVER+ "upload.php");
+		if (File.Exists (Path.Combine (Application.dataPath, filename))) {
+			string file = Path.Combine (Application.dataPath, filename);
+			UploadFile(file, Data.Instance.config.URL_SERVER+ "upload.php");
+		};
+
+//		string url = File.Exists (Path.Combine (Application.dataPath, filename));
+//		NetManager.UploadFile(url, Data.Instance.config.URL_SERVER+ "upload.php");
+	
 	}
 
 	void UploadFile(string localFileName, string uploadURL)
@@ -147,7 +154,41 @@ public class NetManager : MonoBehaviour {
 		StartCoroutine(UploadFileCo(localFileName, uploadURL));
 	}
 
-	IEnumerator UploadFileCo(string localFileName, string uploadURL)
+
+//	void UploadFile(string uploadURL)
+//	{
+//		StartCoroutine(UploadFileCo(uploadURL));
+//	}
+
+	IEnumerator UploadFileCo(string filename, string uploadURL)
+	{
+		WWW localFile = new WWW("file:///"+filename);
+		Debug.Log (localFile.url);
+		yield return localFile;
+		WWWForm postForm = new WWWForm();
+		postForm.AddBinaryData("file", localFile.bytes, filename);
+		Debug.Log (uploadURL);
+		WWW upload = new WWW(uploadURL, postForm);
+		yield return upload;
+		if (upload.error == null)
+		{
+			Debug.Log(upload.text);
+//			Debug.Log ("upload error null");
+		}
+		else
+		{
+			Debug.Log("Error during upload: " + upload.error);
+		}
+	}
+
+
+
+
+
+
+
+
+	IEnumerator UploadFileCos(string localFileName, string uploadURL)
 	{
 
 		Events.Log ("Upload:" + localFileName);

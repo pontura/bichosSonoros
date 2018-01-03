@@ -66,7 +66,7 @@ public class UIEditing : MonoBehaviour {
 		
 	public void SendRobot(Button b)
 	{
-		robotManager.getActiveRobot ().SendToServer ();
+		robotManager.SendToServer ();
 	}
 }
 
