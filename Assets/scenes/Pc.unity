@@ -273,10 +273,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 76985100}
-  - component: {fileID: 76985101}
   - component: {fileID: 76985102}
   - component: {fileID: 76985103}
-  - component: {fileID: 76985105}
+  - component: {fileID: 76985101}
   - component: {fileID: 76985099}
   m_Layer: 0
   m_Name: World
@@ -296,6 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e923b7625744f099bb4e721b3b43dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  net: {fileID: 76985101}
 --- !u!4 &76985100
 Transform:
   m_ObjectHideFlags: 0
@@ -321,17 +321,11 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 76985098}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65417a481eb0c5b48961738e5ffa35fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c3f5528ef3aa4998aa47da06de984c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  container: {fileID: 775329535}
-  robot_to_initialize: {fileID: 114067073146204934, guid: d4a197c71ad122648a41f0f8050bd9fd,
-    type: 2}
-  cameraFollow: {fileID: 460379257}
-  robots: []
-  totalRobots: 50
 --- !u!82 &76985102
 AudioSource:
   m_ObjectHideFlags: 0
@@ -425,20 +419,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldCamera: {fileID: 460379261}
   background: {fileID: 912275065}
---- !u!114 &76985105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 76985098}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3fc8ec8b9433824d99194af017054e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultAudioClip: {fileID: 8300000, guid: 83695bc5f8219fe48b980c649c1b399c, type: 3}
-  clips: []
-  field: {fileID: 803075592}
 --- !u!1 &132929876
 GameObject:
   m_ObjectHideFlags: 0

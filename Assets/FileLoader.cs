@@ -6,6 +6,8 @@ using System.IO;
 
 public class FileLoader : MonoBehaviour {
 
+	public NetManager net;
+
 	// Use this for initialization
 	void Start () {
 
@@ -27,6 +29,7 @@ public class FileLoader : MonoBehaviour {
 
 	void GetAllFiles()
 	{
+		Debug.Log ("GetAllFiles");
 		var url = Data.Instance.config.URL_SERVER + "load.php";
 		WWW www = new WWW(url);
 		StartCoroutine(WaitForRequest(www));
@@ -46,15 +49,44 @@ public class FileLoader : MonoBehaviour {
 
 	void ParseData(string data)
 	{
-		//Events.Log("Data Server Received");
 		string[] soundFiles = data.Split ("|"[0]);
-
 		foreach (string sound in soundFiles) {
 			if (sound.Length > 1 && sound != "./.DS_Store") {
-				Debug.Log (sound);
-//				string file = (URL + "sounds/" + imageName);
-//				StartCoroutine(LoadItem(file, imageName));
+//				StartCoroutine(LoadItem(sound));
+						net.GetRecording (sound);
+				var url = Data.Instance.config.URL_SERVER + "move.php?file=" + sound;
+							WWW www = new WWW (url);
 			}
 		}
 	}
+
+
+//	public IEnumerator LoadItem(string file)
+//	{
+
+//		net.GetRecording (file);
+
+
+
+//		string finalPath;
+//		WWW localFile;
+//		Texture texture;
+//		Sprite sprite;
+
+//		finalPath = absoluteImagePath;
+//		localFile = new WWW (finalPath);
+
+//		yield return localFile;
+
+//		print (imageName + " ___  " + localFile.url);
+
+//		Events.OnNewFile(imageName);
+
+//		if (Data.Instance.build != Data.builds.DEBUG) {
+//			Debug.Log("delete " + imageName);
+//			var url = URL + "delete.php?imageName=" + imageName;
+//			WWW www = new WWW (url);
+//		}
+//
+//	}
 }
