@@ -5,17 +5,61 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine.Assertions;
 using System;
+using UnityEngine.SceneManagement;
 public class NetManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-//		SaveAudioClipToDisk (newAudioClip, "demo");
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+	void Awake(){
+		Events.OnSettingsLoaded += OnSettingsLoaded;
+	}
+
+	void OnSettingsLoaded()
+	{
+		if (SceneManager.GetActiveScene ().name == "Pc") {
+			GetAllFiles ();
+		}
+
+	}
+
+	void GetAllFiles()
+	{
+		Debug.Log ("GetAllFiles");
+		var url = Data.Instance.config.URL_SERVER + "load.php";
+		WWW www = new WWW(url);
+		StartCoroutine(WaitForRequest(www));
+	}
+
+	IEnumerator WaitForRequest(WWW www)
+	{
+		yield return www;
+		if (www.error == null)
+		{
+			ParseData (www.text);
+		} else {
+			Debug.Log("WWW Error: "+ www.error);
+		}    
+	}
+
+	void ParseData(string data)
+	{
+		string[] soundFiles = data.Split ("|"[0]);
+		foreach (string sound in soundFiles) {
+			if (sound.Length > 1 && sound != "./.DS_Store") {
+				//				StartCoroutine(LoadItem(sound));
+				GetRecording (sound);
+
+			}
+		}
+	}
+
 
 	public void LoadAudioClipFromDisk(AudioSource audioSource, string filename)
 	{
@@ -136,6 +180,9 @@ public class NetManager : MonoBehaviour {
 	public AudioClip GetRecording(string filename)
 	{
 		string url = Data.Instance.config.URL_SERVER+filename;
+
+		var remove = Data.Instance.config.URL_SERVER + "move.php?file=" + filename;
+		WWW www = new WWW (remove);
 		Debug.Log (url);
 
 		return null;
