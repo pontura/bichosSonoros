@@ -124,17 +124,17 @@ public class Robot : MonoBehaviour {
 
 	public string pitch
 	{
-		get { return audioValues [0].ToString ("#.00"); }
+		get { return (audioValues [0]*100).ToString ("###"); }
 	}
 
 	public string inSample
 	{
-		get { return audioValues [1].ToString ("#.00"); }
+		get { return (audioValues [1]*100).ToString ("###"); }
 	}
 
 	public string outSample
 	{
-		get { return audioValues[2].ToString("#.00");}
+		get { return (audioValues [2]*100).ToString ("###"); }
 	}
 
 	public string loop

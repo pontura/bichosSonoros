@@ -47,7 +47,7 @@ public class FileLoader : MonoBehaviour {
 	void ParseData(string data)
 	{
 		//Events.Log("Data Server Received");
-		string[] soundFiles = data.Split ("_"[0]);
+		string[] soundFiles = data.Split ("|"[0]);
 
 		foreach (string sound in soundFiles) {
 			if (sound.Length > 1 && sound != "./.DS_Store") {
