@@ -3002,6 +3002,11 @@ Prefab:
       propertyPath: D.name
       value: equipo 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114782802869787614, guid: a047bc0bbcf21ef4b9c8d4d3a41647cb,
+        type: 2}
+      propertyPath: json
+      value: 
+      objectReference: {fileID: 4900000, guid: ef159823749794b37baca04f0d0fa8b7, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a047bc0bbcf21ef4b9c8d4d3a41647cb, type: 2}
   m_IsPrefabParent: 0

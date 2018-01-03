@@ -32,34 +32,46 @@ public class Config : MonoBehaviour
 	public float value2;
 	public float value3;
 
+	public TextAsset json;
 
 	void Start()
 	{		
-		StartCoroutine(LoadData());
+		StartCoroutine(LoadSettings());
+//		LoadSettings();
 	}
 
 
-	IEnumerator LoadData()
-	{
-		string settingsUrl = "file://" + Application.dataPath + "/../" + "settings.json";
-		WWW www = new WWW(settingsUrl);
-		yield return www;
-		LoadSettings(www.text);
-	}
+//	IEnumerator LoadData()
+//	{
+//		string settingsUrl = "file://" + Application.dataPath + "/../" + "settings.json";
+//		WWW www = new WWW(settingsUrl);
+//		yield return www;
+//		LoadSettings(www.text);
+//	}
 		
-	public void LoadSettings(string json_data)
+	IEnumerator LoadSettings()
 	{
-		var Json = SimpleJSON.JSON.Parse(json_data);
-		getDataFromJson(Json);
-	}
-
-	private void getDataFromJson(JSONNode content)
-	{		
-		URL_SERVER = content["server"]["url"];
-		Debug.Log ("getDataFromJson" + content["server"]["url"]);
+		var Json = JsonUtility.FromJson<settings> (json.ToString()); //SimpleJSON.JSON.Parse(json_data);
+		URL_SERVER = Json.server;
+		yield return json;
+		Debug.Log (URL_SERVER);
 		Events.OnSettingsLoaded ();
-
+//		getDataFromJson(Json);
 	}
+
+	[Serializable]
+	public class settings
+	{
+		public string server;	
+	}
+
+//	private void getDataFromJson(JSONNode content)
+//	{		
+//		URL_SERVER = content["server"]["url"];
+//		Debug.Log ("getDataFromJson" + content["server"]["url"]);
+//		Events.OnSettingsLoaded ();
+//
+//	}
 
 	public Bicho GetCurrentBicho()
 	{
