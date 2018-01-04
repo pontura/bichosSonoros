@@ -8,7 +8,7 @@ public class TabletRobotManager : MonoBehaviour {
 
 	public Transform container;
 	public Robot robot_to_initialize;
-	public CameraFollow cameraFollow;
+//	public CameraFollow cameraFollow;
 	public List<Robot> robots;
 	public int totalRobots = 2;
 	Robot newRobot;
@@ -33,7 +33,7 @@ public class TabletRobotManager : MonoBehaviour {
 		Vector3 pos = Vector3.zero;
 
 		newRobot.Init (audioClip, Data.Instance.bichoID, nodeID, values, pos);
-		cameraFollow.Init (newRobot);
+//		cameraFollow.Init (newRobot);
 		robots.Add (newRobot);
 		Events.OnRobotAdded (newRobot);
 		Events.OnShowRobot (currentRobotSelected);
