@@ -27,7 +27,7 @@ public class Robot : MonoBehaviour {
 
 	public void Awake()
 	{
-		audioValues = new Vector3(1.0f, 0.0f, 1.0f); 
+		audioValues = new Vector3(1.0f, 0.001f, 1.0f); 
 	}
 
 	public void Init(AudioClip audioClip, int type, int nodeID, Vector3 values, Vector3 pos) {
@@ -139,4 +139,7 @@ public class Robot : MonoBehaviour {
 	{	
 		get { return looped ? "y" : "n"; }
 	}
+
+
+
 }

@@ -24,16 +24,20 @@ public class TabletRobotManager : MonoBehaviour {
 		Events.OnShowRobot += OnShowRobot;
 	}
 
-	void OnCreateNewRobot (AudioClip audioClip, int type, int nodeID, Vector3 values) {
+	void OnCreateNewRobot (RobotDefinition rd) {
 
-		currentRobotSelected = nodeID;
+//		AudioClip audioClip, int type, int nodeID, Vector3 values
+//
+		currentRobotSelected = rd.node;
 		newRobot = Instantiate (robot_to_initialize);
 		newRobot.transform.SetParent (container);
-
+//
 		Vector3 pos = Vector3.zero;
 
-		newRobot.Init (audioClip, Data.Instance.bichoID, nodeID, values, pos);
+//		newRobot.Init (audioClip, type, nodeID, values, pos); //Data.Instance.bichoID
+		newRobot.Init (rd.ac, rd.type, rd.node, rd.values, pos); 
 //		cameraFollow.Init (newRobot);
+		newRobot.setLoop(rd.loop);
 		robots.Add (newRobot);
 		Events.OnRobotAdded (newRobot);
 		Events.OnShowRobot (currentRobotSelected);
@@ -98,7 +102,8 @@ public class TabletRobotManager : MonoBehaviour {
 		if (!canSend)
 			return;
 		canSend = false;
-		currentRecording = SystemInfo.deviceUniqueIdentifier + "_" + r.type + "_" + r.nodeID + "_" + r.pitch + "_" + r.inSample + "_" + r.outSample + "_" + r.loop;
+		Debug.Log (r.inSample);
+		currentRecording = SystemInfo.deviceUniqueIdentifier + "_" + r.type + "_" + r.nodeID + "_" + r.pitch + "_" + (0 + r.inSample) + "_" + r.outSample + "_" + r.loop;
 		NetManager.SaveAudioClipToDisk (r.audioSource.clip, currentRecording);
 		Invoke ("send", 3);
 	}

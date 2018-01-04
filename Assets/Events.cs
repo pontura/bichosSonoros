@@ -18,7 +18,8 @@ public static class Events {
 	public static System.Action OnCheckToDestroyRobot = delegate { };
 	public static System.Action OnDestroyRobots = delegate { };
 
-	public static System.Action<AudioClip, int, int, Vector3> OnCreateNewRobot = delegate { };
+//	public static System.Action<AudioClip, int, int, Vector3> OnCreateNewRobot = delegate { };
+	public static System.Action<RobotDefinition> OnCreateNewRobot = delegate { };
 
 	public static System.Action OnSettingsLoaded = delegate { };
 	public static System.Action<string> Log = delegate { };

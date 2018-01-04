@@ -544,7 +544,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1049256015}
   m_HandleRect: {fileID: 699893202}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
@@ -628,7 +628,6 @@ MonoBehaviour:
   container: {fileID: 775329535}
   robot_to_initialize: {fileID: 114067073146204934, guid: d4a197c71ad122648a41f0f8050bd9fd,
     type: 2}
-  cameraFollow: {fileID: 460379257}
   robots: []
   totalRobots: 2
   net: {fileID: 76985105}
@@ -5985,10 +5984,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 411948133}
   m_HandleRect: {fileID: 1765948780}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.01
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.01
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

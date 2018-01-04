@@ -61,9 +61,17 @@ public class NetManager : MonoBehaviour {
 												float.Parse(audioData [4]), 
 												float.Parse(audioData [5])
 				);
+				bool loop = audioData [6] == "y" ? true : false; 
 					
 				if (clip){
-					Events.OnCreateNewRobot(clip, Data.Instance.bichoID, nodeID, Vector3.zero);
+					RobotDefinition rd = new RobotDefinition ();
+					rd.ac = clip;
+					rd.type = bichoID;
+					rd.node = nodeID;
+					rd.values = values;
+					rd.loop = loop;
+//					Events.OnCreateNewRobot(clip, bichoID, nodeID, Vector3.zero, 
+					Events.OnCreateNewRobot(rd);
 				}
 			}
 		}
@@ -229,20 +237,11 @@ public class NetManager : MonoBehaviour {
 		//
 
 		if(newClip != null){
-//		if (File.Exists(filename)) //Application.persistentDataPath + "/" + filename
-//		{
-//
-
-//			//set to the AudioSource
-//			audioSource.clip = newClip;
-//			audioSource.Play();
-
 			Debug.Log("File Exists...");
 			return newClip;
 		}
 		else
 		{
-
 			Debug.Log("File Not Found!");
 			return null;
 		}

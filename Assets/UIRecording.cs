@@ -70,7 +70,16 @@ public class UIRecording : MonoBehaviour {
 	void OnNewAudioClip(AudioClip ac)
 	{	
 		catalogButtons.turnButtonOn(currentSamples);
-		Events.OnCreateNewRobot(ac, Data.Instance.bichoID, currentSamples, Vector3.zero);
+
+		RobotDefinition rd = new RobotDefinition ();
+		rd.ac = ac;
+		rd.type = Data.Instance.bichoID;
+		rd.node = currentSamples;
+		rd.values = Vector3.zero;
+		rd.loop = false;
+
+//		Events.OnCreateNewRobot(ac, Data.Instance.bichoID, currentSamples, Vector3.zero, false);
+		Events.OnCreateNewRobot(rd);
 		currentSamples++;
 	}
 }
