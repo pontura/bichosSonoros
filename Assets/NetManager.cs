@@ -27,7 +27,7 @@ public class NetManager : MonoBehaviour {
 		}
 	}
 
-	void GetAllFiles()
+	public void GetAllFiles()
 	{
 		Debug.Log ("GetAllFiles");
 		var url = Data.Instance.config.URL_SERVER + "load.php";
@@ -189,9 +189,9 @@ public class NetManager : MonoBehaviour {
 	public AudioClip GetRecording(string filename)
 	{
 		
-		string url = Data.Instance.config.URL_SERVER+filename;
+		string url = filename; //Data.Instance.config.URL_SERVER+ // el archivo lo levanto localmente no uso el server...
 		Debug.Log ("GetRecording " + url);
-		AudioClip clip = LoadAudioClipFromServer ( url );
+		AudioClip clip = LoadAudioClip ( url );
 
 		if (clip) {
 			var remove = Data.Instance.config.URL_SERVER + "move.php?file=" + filename;
@@ -203,21 +203,32 @@ public class NetManager : MonoBehaviour {
 		return null;
 	}
 
-	public AudioClip LoadAudioClipFromServer(string filename)
+	public AudioClip LoadAudioClip(string filename)
 	{
+		string url;
 
+		#if UNITY_ANDROID
+			url = Path.Combine(Application.persistentDataPath, filename);
+		#else
+			url = "./../../server/"+filename;
+		#endif
+		
+		//deserialize local binary file to AudioClipSample
+		BinaryFormatter bf = new BinaryFormatter();
+		FileStream file = File.Open(url, FileMode.Open);
+		AudioClipSample clipSample = (AudioClipSample) bf.Deserialize(file);
+		file.Close();
 
-		WWW file = new WWW (filename);
 
 		//create new AudioClip instance, and set the (name, samples, channels, frequency, [stream] play immediately without fully loaded)
-		AudioClip newClip = AudioClip.Create(filename, file.text.Length, 1, 44100, false);
+		AudioClip newClip = AudioClip.Create(filename, clipSample.samples, clipSample.channels, clipSample.frequency, false);
 
 
 		//set the acutal audio sample to the AudioClip (sample, offset)
-		newClip.SetData(file.text, 0);
+		newClip.SetData(clipSample.sample, 0);
 		//
 
-		if(file.error == null){
+		if(newClip != null){
 //		if (File.Exists(filename)) //Application.persistentDataPath + "/" + filename
 //		{
 //

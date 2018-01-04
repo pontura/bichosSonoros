@@ -57,8 +57,6 @@ public class Robot : MonoBehaviour {
 	public void setStart(float value)
 	{
 		audioValues[1] = value;
-//		Debug.Log ((int) (audioValues [1] * audioSource.clip.samples));
-//		Debug.Log (audioSource.clip.samples);
 		audioSource.timeSamples = (int)(audioValues [1] * audioSource.clip.samples);
 		audioSource.Play ();
 	}
