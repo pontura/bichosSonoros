@@ -8,23 +8,19 @@ public class UIEditing : MonoBehaviour {
 	public GameObject panel;
 	public TabletRobotManager robotManager;
 
-	Slider[] sliders;
+	public Slider slider1;
+	public Slider slider2;
+	public Slider slider3;
+	public Toggle loop;
+	public Button send;
+
+
+//	Slider[] sliders;
 
 	void Start()
 	{
 		panel.SetActive (false);
-		ColorBlock c = new ColorBlock ();
-		c.normalColor = Data.Instance.config.GetCurrentBicho().colors [0];
-		c.highlightedColor = Data.Instance.config.GetCurrentBicho().colors [1];
-		c.pressedColor = Data.Instance.config.GetCurrentBicho().colors [1];
-		c.disabledColor = Color.grey;
 
-		c.colorMultiplier = 1.0f;
-
-		sliders = GetComponents<Slider> ();
-		foreach (Slider s in sliders) {
-			s.colors = c;
-		}
 
 		Events.OnShowRobot += OnShowRobot;
 	}
@@ -33,6 +29,29 @@ public class UIEditing : MonoBehaviour {
 	{
 		panel.SetActive (true);
 		// RECALL
+
+		ColorBlock c = new ColorBlock ();
+		c.normalColor = Data.Instance.config.GetCurrentBicho().colors [0];
+		c.highlightedColor = Data.Instance.config.GetCurrentBicho().colors [1];
+		c.pressedColor = Data.Instance.config.GetCurrentBicho().colors [1];
+		c.disabledColor = Color.grey;
+
+		c.colorMultiplier = 1.0f;
+
+		setSliderColors (slider1, c);
+		setSliderColors (slider2, c);
+		setSliderColors (slider3, c);
+
+		loop.colors = c;
+		send.colors = c;
+	}
+
+	private void setSliderColors(Slider s, ColorBlock c)
+	{
+		s.GetComponentInChildren<Image>().color = c.normalColor;
+		s.fillRect.GetComponentInChildren<Image>().color = c.highlightedColor;
+		s.targetGraphic.color = c.highlightedColor;
+
 	}
 
 	public void OnPitchChange(Slider pitch)
