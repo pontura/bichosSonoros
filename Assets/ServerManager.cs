@@ -53,6 +53,7 @@ public class ServerManager : MonoBehaviour {
 			}
 		}
 	}
+
 	public IEnumerator LoadItem(string absoluteImagePath, string imageName)
 	{
 		Debug.Log (absoluteImagePath);

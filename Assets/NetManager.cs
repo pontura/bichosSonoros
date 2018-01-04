@@ -7,7 +7,6 @@ using UnityEngine.Assertions;
 using System;
 using UnityEngine.SceneManagement;
 public class NetManager : MonoBehaviour {
-
 	// Use this for initialization
 	void Start () {
 	}
@@ -26,7 +25,6 @@ public class NetManager : MonoBehaviour {
 		if (SceneManager.GetActiveScene ().name == "Pc") {
 			GetAllFiles ();
 		}
-
 	}
 
 	void GetAllFiles()
@@ -50,18 +48,29 @@ public class NetManager : MonoBehaviour {
 
 	void ParseData(string data)
 	{
+		Debug.Log ("ParseData");
 		string[] soundFiles = data.Split ("|"[0]);
 		foreach (string sound in soundFiles) {
 			if (sound.Length > 1 && sound != "./.DS_Store") {
-				//				StartCoroutine(LoadItem(sound));
-				GetRecording (sound);
+				AudioClip clip = GetRecording (sound);
 
+				string[] audioData = sound.Split ("_"[0]);
+				int bichoID = int.Parse (audioData [1]);
+				int nodeID = int.Parse (audioData [2]);
+				Vector3 values = new Vector3( 	float.Parse(audioData [3]),
+												float.Parse(audioData [4]), 
+												float.Parse(audioData [5])
+				);
+					
+				if (clip){
+					Events.OnCreateNewRobot(clip, Data.Instance.bichoID, nodeID, Vector3.zero);
+				}
 			}
 		}
 	}
 
 
-	public void LoadAudioClipFromDisk(AudioSource audioSource, string filename)
+	public void LoadAudioSourceFromDisk(AudioSource audioSource, string filename)
 	{
 		
 		if (File.Exists(filename)) //Application.persistentDataPath + "/" + filename
@@ -179,13 +188,52 @@ public class NetManager : MonoBehaviour {
 
 	public AudioClip GetRecording(string filename)
 	{
+		
 		string url = Data.Instance.config.URL_SERVER+filename;
+		Debug.Log ("GetRecording " + url);
+		AudioClip clip = LoadAudioClipFromServer ( url );
 
-		var remove = Data.Instance.config.URL_SERVER + "move.php?file=" + filename;
-		WWW www = new WWW (remove);
-		Debug.Log (url);
+		if (clip) {
+			var remove = Data.Instance.config.URL_SERVER + "move.php?file=" + filename;
+			WWW www = new WWW (remove);
+			Debug.Log ("clip created: " + url);
+			return clip;
+		}
 
 		return null;
+	}
 
+	public AudioClip LoadAudioClipFromServer(string filename)
+	{
+
+
+		WWW file = new WWW (filename);
+
+		//create new AudioClip instance, and set the (name, samples, channels, frequency, [stream] play immediately without fully loaded)
+		AudioClip newClip = AudioClip.Create(filename, file.text.Length, 1, 44100, false);
+
+
+		//set the acutal audio sample to the AudioClip (sample, offset)
+		newClip.SetData(file.text, 0);
+		//
+
+		if(file.error == null){
+//		if (File.Exists(filename)) //Application.persistentDataPath + "/" + filename
+//		{
+//
+
+//			//set to the AudioSource
+//			audioSource.clip = newClip;
+//			audioSource.Play();
+
+			Debug.Log("File Exists...");
+			return newClip;
+		}
+		else
+		{
+
+			Debug.Log("File Not Found!");
+			return null;
+		}
 	}
 }

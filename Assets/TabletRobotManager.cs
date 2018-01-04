@@ -121,7 +121,7 @@ public class TabletRobotManager : MonoBehaviour {
 			url = "./../../server/"+currentRecording;
 		#endif
 
-		net.LoadAudioClipFromDisk (getActiveRobot().audioSource, url );
+		net.LoadAudioSourceFromDisk (getActiveRobot().audioSource, url );
 		getActiveRobot().audioSource.Play ();
 	}
 }
