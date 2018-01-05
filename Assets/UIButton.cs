@@ -8,7 +8,7 @@ public class UIButton : MonoBehaviour {
 	public Button button;
 	public Text text;
 	// Use this for initialization
-	public void Init () {
+public void Init () {
 		Debug.Log ("UIButton: " + Data.Instance.bichoID);
 		ColorBlock c = new ColorBlock ();
 		c.normalColor = Data.Instance.config.GetBicho(Data.Instance.bichoID).colors[0];

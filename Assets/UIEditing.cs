@@ -12,7 +12,7 @@ public class UIEditing : MonoBehaviour {
 	public Slider slider2;
 	public Slider slider3;
 	public Toggle loop;
-	public Button send;
+
 
 
 //	Slider[] sliders;
@@ -28,11 +28,8 @@ public class UIEditing : MonoBehaviour {
 	void OnShowRobot(int robot)
 	{
 		panel.SetActive (true);
-		// RECALL
 		setColors();
-
 		recall ();
-
 	}
 
 	private void recall()
@@ -58,9 +55,8 @@ public class UIEditing : MonoBehaviour {
 		setSliderColors (slider2, c);
 		setSliderColors (slider3, c);
 		loop.colors = c;
-		send.colors = c;
 
-		Debug.Log ("setColors");
+
 	}
 
 	private void setSliderColors(Slider s, ColorBlock c)
@@ -68,7 +64,6 @@ public class UIEditing : MonoBehaviour {
 		s.GetComponentInChildren<Image>().color = c.normalColor;
 		s.fillRect.GetComponentInChildren<Image>().color = c.highlightedColor;
 		s.targetGraphic.color = c.highlightedColor;
-
 	}
 
 	public void OnPitchChange(Slider pitch)
@@ -100,10 +95,4 @@ public class UIEditing : MonoBehaviour {
 		panel.SetActive (false);
 	}
 		
-	public void SendRobot(Button b)
-	{
-		robotManager.SendToServer ();
-	}
 }
-
-//honorino 173

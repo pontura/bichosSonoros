@@ -1389,6 +1389,7 @@ RectTransform:
   - {fileID: 1342916434}
   - {fileID: 1067561625}
   - {fileID: 1843984830}
+  - {fileID: 1569899579}
   m_Father: {fileID: 1990844270}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1414,6 +1415,7 @@ MonoBehaviour:
   button: {fileID: 1342916433}
   label: {fileID: 109691117}
   robots: {fileID: 76985101}
+  send: {fileID: 1569899580}
 --- !u!114 &300302373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3951,7 +3953,6 @@ RectTransform:
   - {fileID: 2064704713}
   - {fileID: 69711282}
   - {fileID: 1387056344}
-  - {fileID: 1569899579}
   m_Father: {fileID: 1990844270}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4010,7 +4011,6 @@ MonoBehaviour:
   slider2: {fileID: 2064704714}
   slider3: {fileID: 69711283}
   loop: {fileID: 1387056345}
-  send: {fileID: 1569899580}
 --- !u!1 &1182865673
 GameObject:
   m_ObjectHideFlags: 0
@@ -5125,30 +5125,31 @@ GameObject:
   - component: {fileID: 1569899582}
   - component: {fileID: 1569899581}
   - component: {fileID: 1569899580}
+  - component: {fileID: 1569899583}
   m_Layer: 5
-  m_Name: Button
+  m_Name: send
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1569899579
 RectTransform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1569899578}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
+  m_LocalScale: {x: 0.19412133, y: 0.19412138, z: 1.2941425}
   m_Children:
   - {fileID: 437567230}
-  m_Father: {fileID: 1173088506}
-  m_RootOrder: 4
+  m_Father: {fileID: 300302371}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -204}
+  m_AnchoredPosition: {x: 64.77869, y: -258.75116}
   m_SizeDelta: {x: 512, y: 512}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1569899580
@@ -5190,7 +5191,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1173088509}
+      - m_Target: {fileID: 300302372}
         m_MethodName: SendRobot
         m_Mode: 2
         m_Arguments:
@@ -5236,6 +5237,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1569899578}
+--- !u!114 &1569899583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1569899578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 361ee4a8d020642bea451e7fe2fcbe55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1569899580}
+  text: {fileID: 437567231}
 --- !u!1 &1699279535
 GameObject:
   m_ObjectHideFlags: 0

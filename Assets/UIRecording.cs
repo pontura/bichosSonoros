@@ -12,6 +12,7 @@ public class UIRecording : MonoBehaviour {
 	public GameObject button;
 	public Text label;
 	public TabletRobotManager robots;
+	public Button send;
 
 	int currentSamples = 0;
 	int maxSamples = 4;
@@ -28,6 +29,8 @@ public class UIRecording : MonoBehaviour {
 		button.GetComponent<UIButton> ().Init ();
 		SetButton (false);
 		waveform.Init ();	
+//		send.GetComponent<UIButton> ().Init ();
+//		send.gameObject.SetActive = false;
 		Events.OnNewAudioClip += OnNewAudioClip;
 	}
 
@@ -81,5 +84,10 @@ public class UIRecording : MonoBehaviour {
 //		Events.OnCreateNewRobot(ac, Data.Instance.bichoID, currentSamples, Vector3.zero, false);
 		Events.OnCreateNewRobot(rd);
 		currentSamples++;
+	}
+
+	public void SendRobot(Button b)
+	{
+		Events.SendRecording ();
 	}
 }
