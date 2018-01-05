@@ -30,13 +30,15 @@ public class NetManager : MonoBehaviour {
 	public void GetAllFiles()
 	{
 		Debug.Log ("GetAllFiles");
-		var url = Data.Instance.config.URL_SERVER + "load.php";
-		WWW www = new WWW(url);
-		StartCoroutine(WaitForRequest(www));
+		StartCoroutine(WaitForRequest());
+
 	}
 
-	IEnumerator WaitForRequest(WWW www)
+	IEnumerator WaitForRequest()
 	{
+		var url = Data.Instance.config.URL_SERVER + "load.php";
+		WWW www = new WWW(url);
+
 		yield return www;
 		if (www.error == null)
 		{
@@ -44,6 +46,8 @@ public class NetManager : MonoBehaviour {
 		} else {
 			Debug.Log("WWW Error: "+ www.error);
 		}    
+
+		Invoke ("GetAllFiles", 1);
 	}
 
 	void ParseData(string data)
@@ -218,7 +222,8 @@ public class NetManager : MonoBehaviour {
 		#if UNITY_ANDROID
 			url = Path.Combine(Application.persistentDataPath, filename);
 		#else
-			url = "./../../server/"+filename;
+//			url = "./../../server/"+filename;
+		url = "/Users/diex/Documents/work/personas/MARZONI/123/software/server/"+filename;
 		#endif
 		
 		//deserialize local binary file to AudioClipSample

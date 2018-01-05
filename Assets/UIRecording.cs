@@ -29,8 +29,8 @@ public class UIRecording : MonoBehaviour {
 		button.GetComponent<UIButton> ().Init ();
 		SetButton (false);
 		waveform.Init ();	
-//		send.GetComponent<UIButton> ().Init ();
-//		send.gameObject.SetActive = false;
+		send.GetComponent<UIButton> ().Init ();
+		send.gameObject.SetActive(false);
 		Events.OnNewAudioClip += OnNewAudioClip;
 	}
 
@@ -80,14 +80,17 @@ public class UIRecording : MonoBehaviour {
 		rd.node = currentSamples;
 		rd.values = Vector3.zero;
 		rd.loop = false;
-
-//		Events.OnCreateNewRobot(ac, Data.Instance.bichoID, currentSamples, Vector3.zero, false);
 		Events.OnCreateNewRobot(rd);
 		currentSamples++;
+		if (currentSamples >= maxSamples) 
+		{
+			button.gameObject.SetActive (false);
+			send.gameObject.SetActive (true);
+		}
 	}
 
 	public void SendRobot(Button b)
 	{
-		Events.SendRecording ();
+		Events.OnSendRobot ();
 	}
 }

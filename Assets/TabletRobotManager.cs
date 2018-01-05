@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.Audio;
 using System.IO;
 using System;
+using UnityEngine.SceneManagement;
 public class TabletRobotManager : MonoBehaviour {
 
 	public Transform container;
 	public Robot robot_to_initialize;
-//	public CameraFollow cameraFollow;
 	public List<Robot> robots;
 	public int totalRobots = 2;
 	Robot newRobot;
@@ -22,6 +22,7 @@ public class TabletRobotManager : MonoBehaviour {
 		Events.OnCheckToDestroyRobot += OnCheckToDestroyRobot;
 		Events.OnDestroyRobot += OnDestroyRobot;
 		Events.OnShowRobot += OnShowRobot;
+		Events.OnSendRobot += OnSendRobot;
 	}
 
 	void OnCreateNewRobot (RobotDefinition rd) {
@@ -45,6 +46,14 @@ public class TabletRobotManager : MonoBehaviour {
 
 	public void OnShowRobot(int nodeID)
 	{
+		if (SceneManager.GetActiveScene ().name == "Pc") {
+			foreach (Robot r in robots) {
+				if (r.isActiveAndEnabled)
+					continue;
+				r.SetActive (true);
+			}
+			return;
+		}
 		currentRobotSelected = nodeID;
 		foreach (Robot r in robots) {
 			r.SetActive (false);
@@ -96,7 +105,7 @@ public class TabletRobotManager : MonoBehaviour {
 
 	string currentRecording = "";
 	bool canSend = true;
-	public void SendToServer()
+	public void OnSendRobot()
 	{		
 		Robot r = getActiveRobot ();
 		if (!canSend)

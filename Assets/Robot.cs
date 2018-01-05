@@ -76,7 +76,6 @@ public class Robot : MonoBehaviour {
 
 	public void SetActive(bool active)
 	{
-//		Debug.Log ("Play");
 		gameObject.SetActive (active);
 		audioSource.Play ();
 	}
@@ -105,21 +104,28 @@ public class Robot : MonoBehaviour {
 
 		if (audioSource.timeSamples >= audioValues [2] * audioSource.clip.samples) {
 			if (looped) {
-//				Debug.Log ("replay");
 				audioSource.Play ();
 			} else {
+				if (SceneManager.GetActiveScene ().name == "Pc") {
+					Invoke("replay", Random.Range(1, 10));
+				}
 				audioSource.Stop ();
 			}
 		}
 
 	}
 
+	void replay()
+	{
+		audioSource.Play ();
+		Events.OnCameraFollow (this);
+	}
 
 	void LoopAudio()
 	{
 		Invoke ("LoopAudio", Random.Range (8, 20));
 		audioSource.Play ();
-		Events.OnCameraFollow (this);
+
 	}
 
 	public string pitch
