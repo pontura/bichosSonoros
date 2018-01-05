@@ -30,6 +30,7 @@ public class UIConfig : MonoBehaviour {
 
 	public void onSubmit(string arg0){
 		Data.Instance.config.URL_SERVER = arg0;
+		PlayerPrefs.SetString ("URL_SERVER", Data.Instance.config.URL_SERVER);
 		context.ChangeState (GameController.states.INTRO);
 	}
 

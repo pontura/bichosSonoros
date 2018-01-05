@@ -39,8 +39,10 @@ public class Config : MonoBehaviour
 		
 	IEnumerator LoadSettings()
 	{
+		URL_SERVER = PlayerPrefs.GetString("URL_SERVER");
 		var Json = JsonUtility.FromJson<settings> (json.ToString()); //SimpleJSON.JSON.Parse(json_data);
-		URL_SERVER = Json.server;
+		URL_SERVER = URL_SERVER == "" ? Json.server : PlayerPrefs.GetString("URL_SERVER");
+		PlayerPrefs.SetString ("URL_SERVER", URL_SERVER);
 		yield return json;
 		Debug.Log (URL_SERVER);
 		Events.OnSettingsLoaded ();

@@ -22,8 +22,10 @@ public class Robot : MonoBehaviour {
 	public float smoothTransform = 40f;
 	public int nodes = 6;
 	bool audioExists;
-	bool looped;
-	private Vector3 audioValues;
+	[HideInInspector]
+	public bool looped;
+	[HideInInspector]
+	public Vector3 audioValues;
 
 	public void Awake()
 	{

@@ -29,11 +29,27 @@ public class UIEditing : MonoBehaviour {
 	{
 		panel.SetActive (true);
 		// RECALL
+		setColors();
+
+		recall ();
+
+	}
+
+	private void recall()
+	{
+		slider1.value = robotManager.getActiveRobot ().audioValues[0];
+		slider2.value = robotManager.getActiveRobot ().audioValues[1];
+		slider3.value = robotManager.getActiveRobot ().audioValues[2];
+		loop.isOn = robotManager.getActiveRobot ().looped;
+	}
+
+	private void setColors()
+	{
 
 		ColorBlock c = new ColorBlock ();
-		c.normalColor = Data.Instance.config.GetCurrentBicho().colors [0];
-		c.highlightedColor = Data.Instance.config.GetCurrentBicho().colors [1];
-		c.pressedColor = Data.Instance.config.GetCurrentBicho().colors [1];
+		c.normalColor = Data.Instance.config.GetCurrentBicho ().colors [0];
+		c.highlightedColor = Data.Instance.config.GetCurrentBicho ().colors [1];
+		c.pressedColor = Data.Instance.config.GetCurrentBicho ().colors [1];
 		c.disabledColor = Color.grey;
 
 		c.colorMultiplier = 1.0f;
@@ -41,9 +57,10 @@ public class UIEditing : MonoBehaviour {
 		setSliderColors (slider1, c);
 		setSliderColors (slider2, c);
 		setSliderColors (slider3, c);
-
 		loop.colors = c;
 		send.colors = c;
+
+		Debug.Log ("setColors");
 	}
 
 	private void setSliderColors(Slider s, ColorBlock c)
