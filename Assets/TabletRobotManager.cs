@@ -121,6 +121,7 @@ public class TabletRobotManager : MonoBehaviour {
 	{
 		net.SendRecording(currentRecording);
 		canSend = true;
+		Events.OnSendOk (true);
 		// TODO avisarle al usuario que ya se mandó...
 
 //		Invoke ("load", 3);  // for testing pourposes

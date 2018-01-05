@@ -91,6 +91,8 @@ public class UIRecording : MonoBehaviour {
 
 	public void SendRobot(Button b)
 	{
+		b.gameObject.SetActive (false);
+		Events.OnSendOk += b.gameObject.SetActive;
 		Events.OnSendRobot ();
 	}
 }

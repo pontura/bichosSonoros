@@ -1590,15 +1590,15 @@ RectTransform:
   m_GameObject: {fileID: 437567229}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 1569899579}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 414}
+  m_SizeDelta: {x: 512, y: 512}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &437567231
 MonoBehaviour:
@@ -1620,19 +1620,21 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
+    m_Font: {fileID: 12800000, guid: d50bba5f4a3b6451883099f4df40c794, type: 3}
+    m_FontSize: 24
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 'ENVIAR
+
+'
 --- !u!222 &437567232
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2267,7 +2269,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1182865675}
   m_HandleRect: {fileID: 1182865674}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3621,7 +3623,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -219, y: 50}
+  m_AnchoredPosition: {x: -219.64082, y: 50}
   m_SizeDelta: {x: 438, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1065444039
@@ -5507,8 +5509,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2029012155}
   m_HandleRect: {fileID: 2029012154}
   m_Direction: 2
-  m_Value: 0.5
-  m_Size: 0.89
+  m_Value: 0.50000346
+  m_Size: 0.88999975
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5889,8 +5891,8 @@ RectTransform:
   m_Father: {fileID: 1896740303}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.055000007}
-  m_AnchorMax: {x: 1, y: 0.945}
+  m_AnchorMin: {x: 0, y: 0.055000506}
+  m_AnchorMax: {x: 1, y: 0.94500023}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}

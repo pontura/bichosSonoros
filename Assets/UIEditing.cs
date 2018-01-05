@@ -94,5 +94,5 @@ public class UIEditing : MonoBehaviour {
 	{
 		panel.SetActive (false);
 	}
-		
+		 
 }

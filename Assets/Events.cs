@@ -28,6 +28,8 @@ public static class Events {
 
 
 	public static System.Action OnSendRobot = delegate { };
+	public static System.Action<bool> OnSendOk = delegate { };
+
 	public static System.Action<AudioFXManager.types, bool> TurnSoundFX = delegate { };
 
 	public static System.Action<string> OnNewFile = delegate { };
